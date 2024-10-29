@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.KernelMemory.Orchestration.AzureQueues</name>
+    </assembly>
+    <members>
+        <member name="P:Microsoft.KernelMemory.AzureQueuesConfig.PollDelayMsecs">
+            <summary>
+            How often to check if there are new messages.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AzureQueuesConfig.FetchBatchSize">
+            <summary>
+            How many messages to fetch at a time.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AzureQueuesConfig.FetchLockSeconds">
+            <summary>
+            How long to lock messages once fetched. Azure Queue default is 30 secs.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AzureQueuesConfig.MaxRetriesBeforePoisonQueue">
+            <summary>
+            How many times to dequeue a messages and process before moving it to a poison queue.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AzureQueuesConfig.PoisonQueueSuffix">
+            <summary>
+            Suffix used for the poison queues.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AzureQueuesConfig.Validate">
+            <summary>
+            Verify that the current state is valid.
+            </summary>
+        </member>
+        <member name="E:Microsoft.KernelMemory.Orchestration.AzureQueues.AzureQueuesPipeline.Received">
+            <summary>
+            Event triggered when a message is received
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Orchestration.AzureQueues.AzureQueuesPipeline.ConnectToQueueAsync(System.String,Microsoft.KernelMemory.Pipeline.Queue.QueueOptions,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.Orchestration.AzureQueues.AzureQueuesPipeline.EnqueueAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.Orchestration.AzureQueues.AzureQueuesPipeline.OnDequeue(System.Func{System.String,System.Threading.Tasks.Task{System.Boolean}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.Orchestration.AzureQueues.AzureQueuesPipeline.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.Orchestration.AzureQueues.AzureQueuesPipeline.DispatchMessages(System.Object,System.Timers.ElapsedEventArgs)">
+            <summary>
+            Fetch messages from the queue and dispatch them
+            </summary>
+        </member>
+        <member name="T:Microsoft.KernelMemory.KernelMemoryBuilderExtensions">
+            <summary>
+            Kernel Memory builder extensions
+            </summary>
+        </member>
+        <member name="T:Microsoft.KernelMemory.DependencyInjection">
+            <summary>
+            .NET IServiceCollection dependency injection extensions.
+            </summary>
+        </member>
+    </members>
+</doc>

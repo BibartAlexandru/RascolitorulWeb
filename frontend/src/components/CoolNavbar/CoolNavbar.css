@@ -1,0 +1,18 @@
+#cool-navbar {
+  position: sticky;
+  width: 100%;
+  top: 0;
+  left: 0;
+  border-bottom: var(--BORDER-NORMAL);
+  background-color: white;
+}
+
+#cool-navbar > .container {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+
+.logo-navbar {
+  transform: rotateY(180deg);
+}

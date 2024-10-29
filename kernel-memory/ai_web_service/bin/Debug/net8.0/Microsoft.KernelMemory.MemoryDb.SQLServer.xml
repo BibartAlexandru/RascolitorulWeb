@@ -1,0 +1,335 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.KernelMemory.MemoryDb.SQLServer</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.KernelMemory.KernelMemoryBuilderExtensions">
+            <summary>
+            Kernel Memory builder extensions
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryBuilderExtensions.WithSqlServerMemoryDb(Microsoft.KernelMemory.IKernelMemoryBuilder,Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerConfig)">
+            <summary>
+            Kernel Memory Builder extension method to add SQL Server memory connector.
+            </summary>
+            <param name="builder">KM builder instance</param>
+            <param name="config">SQL Server configuration</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryBuilderExtensions.WithSqlServerMemoryDb(Microsoft.KernelMemory.IKernelMemoryBuilder,System.String,System.Boolean)">
+            <summary>
+            Kernel Memory Builder extension method to add SQL Server memory connector.
+            </summary>
+            <param name="builder">KM builder instance</param>
+            <param name="connString">SQL Server connection string</param>
+            <param name="useNativeVectorSearch">Whether to use native vector search or not</param>
+        </member>
+        <member name="T:Microsoft.KernelMemory.DependencyInjection">
+            <summary>
+            .NET IServiceCollection dependency injection extensions.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.DependencyInjection.AddSqlServerAsMemoryDb(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerConfig)">
+            <summary>
+            Inject SQL Server as the default implementation of IMemoryDb
+            </summary>
+            <param name="services">Service collection</param>
+            <param name="config">SQL Server configuration</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.DependencyInjection.AddSqlServerAsMemoryDb(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Boolean)">
+            <summary>
+            Inject SQL Server as the default implementation of IMemoryDb
+            </summary>
+            <param name="services">Service collection</param>
+            <param name="connString">SQL Server connection string</param>
+            <param name="useNativeVectorSearch">Whether to use native vector search or not</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.QueryProviders.DefaultQueryProvider.PrepareCreateIndexQuery(System.Int32,System.String,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.QueryProviders.DefaultQueryProvider.PrepareDeleteRecordQuery(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.QueryProviders.DefaultQueryProvider.PrepareDeleteIndexQuery(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.QueryProviders.DefaultQueryProvider.PrepareGetIndexesQuery">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.QueryProviders.DefaultQueryProvider.PrepareGetRecordsListQuery(System.String,System.Collections.Generic.ICollection{Microsoft.KernelMemory.MemoryFilter},System.Boolean,Microsoft.Data.SqlClient.SqlParameterCollection)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.QueryProviders.DefaultQueryProvider.PrepareGetSimilarRecordsListQuery(System.String,System.Collections.Generic.ICollection{Microsoft.KernelMemory.MemoryFilter},System.Boolean,Microsoft.Data.SqlClient.SqlParameterCollection)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.QueryProviders.DefaultQueryProvider.PrepareUpsertRecordsBatchQuery(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.QueryProviders.DefaultQueryProvider.PrepareCreateAllSupportingTablesQuery">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.QueryProviders.ISqlServerQueryProvider.PrepareCreateIndexQuery(System.Int32,System.String,System.Int32)">
+            <summary>
+            Return SQL used to create a new index
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.QueryProviders.ISqlServerQueryProvider.PrepareGetIndexesQuery">
+            <summary>
+            Return SQL used to get a list of indexes
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.QueryProviders.ISqlServerQueryProvider.PrepareDeleteIndexQuery(System.String)">
+            <summary>
+            Return SQL used to delete an index
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.QueryProviders.ISqlServerQueryProvider.PrepareDeleteRecordQuery(System.String)">
+            <summary>
+            Return SQL used to delete a memory record
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.QueryProviders.ISqlServerQueryProvider.PrepareGetRecordsListQuery(System.String,System.Collections.Generic.ICollection{Microsoft.KernelMemory.MemoryFilter},System.Boolean,Microsoft.Data.SqlClient.SqlParameterCollection)">
+            <summary>
+            Return SQL used to get a list of memory records
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.QueryProviders.ISqlServerQueryProvider.PrepareGetSimilarRecordsListQuery(System.String,System.Collections.Generic.ICollection{Microsoft.KernelMemory.MemoryFilter},System.Boolean,Microsoft.Data.SqlClient.SqlParameterCollection)">
+            <summary>
+            Return SQL used to get a list of similar memory records
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.QueryProviders.ISqlServerQueryProvider.PrepareUpsertRecordsBatchQuery(System.String)">
+            <summary>
+            Return SQL used to upsert a batch of memory records
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.QueryProviders.ISqlServerQueryProvider.PrepareCreateAllSupportingTablesQuery">
+            <summary>
+            Return SQL used to create all supporting tables
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.QueryProviders.Utils.GetFullTableName(Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerConfig,System.String)">
+            <summary>
+            Gets the full table name with schema.
+            </summary>
+            <param name="config">Server settings</param>
+            <param name="tableName">The table name.</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.QueryProviders.Utils.GenerateFilters(Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerConfig,System.String,Microsoft.Data.SqlClient.SqlParameterCollection,System.Collections.Generic.ICollection{Microsoft.KernelMemory.MemoryFilter})">
+            <summary>
+            Generates the filters as SQL commands and sets the SQL parameters
+            </summary>
+            <param name="config">Server settings</param>
+            <param name="index">The index name.</param>
+            <param name="parameters">The SQL parameters to populate.</param>
+            <param name="filters">The filters to apply</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.QueryProviders.VectorQueryProvider.PrepareCreateIndexQuery(System.Int32,System.String,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.QueryProviders.VectorQueryProvider.PrepareDeleteRecordQuery(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.QueryProviders.VectorQueryProvider.PrepareDeleteIndexQuery(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.QueryProviders.VectorQueryProvider.PrepareGetIndexesQuery">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.QueryProviders.VectorQueryProvider.PrepareGetRecordsListQuery(System.String,System.Collections.Generic.ICollection{Microsoft.KernelMemory.MemoryFilter},System.Boolean,Microsoft.Data.SqlClient.SqlParameterCollection)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.QueryProviders.VectorQueryProvider.PrepareGetSimilarRecordsListQuery(System.String,System.Collections.Generic.ICollection{Microsoft.KernelMemory.MemoryFilter},System.Boolean,Microsoft.Data.SqlClient.SqlParameterCollection)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.QueryProviders.VectorQueryProvider.PrepareUpsertRecordsBatchQuery(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.QueryProviders.VectorQueryProvider.PrepareCreateAllSupportingTablesQuery">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerConfig">
+            <summary>
+            Configuration for the SQL Server memory store.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerConfig.DefaultMemoryCollectionTableName">
+            <summary>
+            The default SQL Server collections table name.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerConfig.DefaultMemoryTableName">
+            <summary>
+            The default SQL Server memories table name.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerConfig.DefaultEmbeddingsTableName">
+            <summary>
+            The default SQL Server embeddings table name.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerConfig.DefaultTagsTableName">
+            <summary>
+            The default SQL Server tags table name.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerConfig.DefaultSchema">
+            <summary>
+            The default schema used by the SQL Server memory store.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerConfig.ConnectionString">
+            <summary>
+            The connection string to the SQL Server database.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerConfig.Schema">
+            <summary>
+            The schema used by the SQL Server memory store.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerConfig.MemoryCollectionTableName">
+            <summary>
+            The SQL Server collections table name.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerConfig.MemoryTableName">
+            <summary>
+            The SQL Server memories table name.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerConfig.EmbeddingsTableName">
+            <summary>
+            The SQL Server embeddings table name.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerConfig.TagsTableName">
+            <summary>
+            The SQL Server tags table name.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerConfig.UseNativeVectorSearch">
+            <summary>
+            Whether to use native vector search or not.
+            </summary>
+            <remarks>
+            Currently, Vector Search supports only Azure SQL Database and can handle vectors up to 1998 dimensions.
+            See https://devblogs.microsoft.com/azure-sql/announcing-eap-native-vector-support-in-azure-sql-database for more information.
+            </remarks>
+        </member>
+        <member name="T:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerMemory">
+            <summary>
+            Represents a memory store implementation that uses a SQL Server database as its backing store.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerMemory._config">
+            <summary>
+            The SQL Server configuration.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerMemory._embeddingGenerator">
+            <summary>
+            The text embedding generator.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerMemory._log">
+            <summary>
+            The logger.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerMemory._isReady">
+            <summary>
+            Flag used to initialize the client on the first call
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerMemory._initSemaphore">
+            <summary>
+            Lock used to initialize the class instance
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerMemory._queryProvider">
+            <summary>
+            The interface that is responsible for getting queries against the SQL Server database.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerMemory._cachedServerVersion">
+            <summary>
+            SQL Server version, retrieved on the first connection
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerMemory.#ctor(Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerConfig,Microsoft.KernelMemory.AI.ITextEmbeddingGenerator,Microsoft.KernelMemory.MemoryDb.SQLServer.QueryProviders.ISqlServerQueryProvider,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerMemory"/> class.
+            </summary>
+            <param name="config">The SQL server instance configuration.</param>
+            <param name="embeddingGenerator">The text embedding generator.</param>
+            <param name="queryProvider">SQL queries provider</param>
+            <param name="loggerFactory">Application logger factory</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerMemory.CreateIndexAsync(System.String,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerMemory.DeleteAsync(System.String,Microsoft.KernelMemory.MemoryStorage.MemoryRecord,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerMemory.DeleteIndexAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerMemory.GetIndexesAsync(System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerMemory.GetListAsync(System.String,System.Collections.Generic.ICollection{Microsoft.KernelMemory.MemoryFilter},System.Int32,System.Boolean,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerMemory.GetSimilarListAsync(System.String,System.String,System.Collections.Generic.ICollection{Microsoft.KernelMemory.MemoryFilter},System.Double,System.Int32,System.Boolean,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerMemory.UpsertAsync(System.String,Microsoft.KernelMemory.MemoryStorage.MemoryRecord,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerMemory.UpsertBatchAsync(System.String,System.Collections.Generic.IEnumerable{Microsoft.KernelMemory.MemoryStorage.MemoryRecord},System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerMemory.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerMemory.InitAsync(System.Threading.CancellationToken)">
+            <summary>
+            Prepare instance, ensuring tables exist and reusable info is cached.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerMemory.CacheSqlServerMajorVersionNumberAsync(System.Threading.CancellationToken)">
+            <summary>
+            Cache SQL Server version
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerMemory.CreateTablesIfNotExistsAsync(System.Threading.CancellationToken)">
+            <summary>
+            Creates the SQL Server tables if they do not exist.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerMemory.DoesIndexExistsAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Checks if the index exists.
+            </summary>
+            <param name="indexName">The index name.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>True is the index exists</returns>
+        </member>
+        <member name="T:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerMemoryException">
+            <summary>
+            Represents a SQL Server memory store exception.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerMemoryException.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerMemoryException.#ctor(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.SQLServer.SqlServerMemoryException.#ctor(System.String,System.Exception)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

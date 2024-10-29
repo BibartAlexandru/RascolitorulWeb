@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\ai_web_service.props" />
+</Project>

@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.KernelMemory.MemoryDb.AzureAISearch</name>
+    </assembly>
+    <members>
+        <member name="P:Microsoft.KernelMemory.AzureAISearchConfig.UseHybridSearch">
+            <summary>
+            Important: when using hybrid search, relevance scores
+            are very different (e.g. lower) from when using just vector search.
+            </summary>
+        </member>
+        <member name="T:Microsoft.KernelMemory.MemoryDb.AzureAISearch.AzureAISearchMemory">
+            <summary>
+            Azure AI Search connector for Kernel Memory
+            TODO:
+            * support semantic search
+            * support custom schema
+            * support custom Azure AI Search logic
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.AzureAISearch.AzureAISearchMemory.#ctor(Microsoft.KernelMemory.AzureAISearchConfig,Microsoft.KernelMemory.AI.ITextEmbeddingGenerator,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Create a new instance
+            </summary>
+            <param name="config">Azure AI Search configuration</param>
+            <param name="embeddingGenerator">Text embedding generator</param>
+            <param name="loggerFactory">Application logger factory</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.AzureAISearch.AzureAISearchMemory.CreateIndexAsync(System.String,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.AzureAISearch.AzureAISearchMemory.GetIndexesAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.AzureAISearch.AzureAISearchMemory.DeleteIndexAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.AzureAISearch.AzureAISearchMemory.UpsertAsync(System.String,Microsoft.KernelMemory.MemoryStorage.MemoryRecord,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.AzureAISearch.AzureAISearchMemory.UpsertBatchAsync(System.String,System.Collections.Generic.IEnumerable{Microsoft.KernelMemory.MemoryStorage.MemoryRecord},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.AzureAISearch.AzureAISearchMemory.GetSimilarListAsync(System.String,System.String,System.Collections.Generic.ICollection{Microsoft.KernelMemory.MemoryFilter},System.Double,System.Int32,System.Boolean,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.AzureAISearch.AzureAISearchMemory.GetListAsync(System.String,System.Collections.Generic.ICollection{Microsoft.KernelMemory.MemoryFilter},System.Int32,System.Boolean,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.AzureAISearch.AzureAISearchMemory.DeleteAsync(System.String,Microsoft.KernelMemory.MemoryStorage.MemoryRecord,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryDb.AzureAISearch.AzureAISearchMemory.s_replaceIndexNameCharsRegex">
+            <summary>
+            Index names cannot contain special chars. We use this rule to replace a few common ones
+            with an underscore and reduce the chance of errors. If other special chars are used, we leave it
+            to the service to throw an error.
+            Note:
+            - replacing chars introduces a small chance of conflicts, e.g. "the-user" and "the_user".
+            - we should consider whether making this optional and leave it to the developer to handle.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.AzureAISearch.AzureAISearchMemory.GetSearchClient(System.String)">
+            <summary>
+            Get a search client for the index specified.
+            Note: the index might not exist, but we avoid checking everytime and the extra latency.
+            </summary>
+            <param name="index">Index name</param>
+            <returns>Search client ready to read/write</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.AzureAISearch.AzureAISearchMemory.GetClientOptions">
+            <summary>
+            Options used by the Azure AI Search client, e.g. User Agent.
+            See also https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/src/DiagnosticsOptions.cs
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.AzureAISearch.AzureAISearchMemory.NormalizeIndexName(System.String)">
+            <summary>
+            Normalize index name to match Azure AI Search rules.
+            The method doesn't handle all the error scenarios, leaving it to the service
+            to throw an error for edge cases not handled locally.
+            </summary>
+            <param name="index">Value to normalize</param>
+            <returns>Normalized name</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.AzureAISearch.AzureAISearchMemoryException.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.AzureAISearch.AzureAISearchMemoryException.#ctor(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.AzureAISearch.AzureAISearchMemoryException.#ctor(System.String,System.Exception)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.AzureAISearch.AzureAISearchFiltering.BuildSearchFilter(System.Collections.Generic.IEnumerable{Microsoft.KernelMemory.MemoryFilter})">
+            <summary>
+            Build a search query optimized to scale for in case a key has several (hundreds+) values
+            Note:
+            * One filter can have multiple key-values: these are combined with AND conditions
+            * Multiple filters are combined using OR
+            * Multiple filters can apply to the same key:
+                * if filters have only one condition, these are rendered using "search.in"
+                * if filters have multiple conditions, the values are combined with OR
+            </summary>
+            <param name="filters">List of filters</param>
+            <returns>Query string for Azure AI Search</returns>
+        </member>
+        <member name="T:Microsoft.KernelMemory.KernelMemoryBuilderExtensions">
+            <summary>
+            Kernel Memory builder extensions
+            </summary>
+        </member>
+        <member name="T:Microsoft.KernelMemory.DependencyInjection">
+            <summary>
+            .NET IServiceCollection dependency injection extensions.
+            </summary>
+        </member>
+    </members>
+</doc>

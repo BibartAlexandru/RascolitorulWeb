@@ -1,0 +1,295 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.KernelMemory.MemoryDb.Qdrant</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.KernelMemory.KernelMemoryBuilderExtensions">
+            <summary>
+            Kernel Memory builder extensions
+            </summary>
+        </member>
+        <member name="T:Microsoft.KernelMemory.DependencyInjection">
+            <summary>
+            .NET IServiceCollection dependency injection extensions.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.Http.CreateCollectionRequest.Settings">
+            <summary>
+            Collection settings consisting of a common vector length and vector distance calculation standard
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.Http.GetVectorsRequest.Consistency">
+            <summary>
+            Read consistency guarantees for the operation
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.Http.GetVectorsRequest.PointIds">
+            <summary>
+            Array of vector IDs to retrieve
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.Http.GetVectorsRequest.WithPayload">
+            <summary>
+            Select which payload to return with the response. Default: All
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.Http.GetVectorsRequest.WithVector">
+            <summary>
+            Options for specifying which vector to include
+            true - return all vector
+            false - do not return vector
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.Http.GetVectorsResponse`1.Results">
+            <summary>
+            Array of vectors and their associated metadata
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.Http.ListCollectionsResponse.CollectionResult.CollectionDescription.Name">
+            <summary>
+            The name of a collection
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.Http.ListCollectionsResponse.CollectionResult.Collections">
+            <summary>
+            List of the collection names that the qdrant database contains.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.Http.ListCollectionsResponse.Result">
+            <summary>
+            Result containing a list of collection names
+            </summary>
+        </member>
+        <member name="T:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.Http.QdrantResponse">
+            <summary>
+            Base class for Qdrant response schema.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.Http.QdrantResponse.Status">
+            <summary>
+            Response status
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.Http.QdrantResponse.Time">
+            <summary>
+            Response time
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.Http.UpsertVectorResponse.UpdateResult.OperationId">
+            <summary>
+            Sequential Number of the Operation
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.Http.UpsertVectorResponse.UpdateResult.Status">
+            <summary>
+            acknowledged - Request is saved to WAL and will be process in a queue.
+            completed - Request is completed, changes are actual.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.Http.UpsertVectorResponse.Result">
+            <summary>
+            Upsert result information object
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.Http.UpsertVectorResponse.#ctor(Microsoft.KernelMemory.MemoryDb.Qdrant.Client.Http.UpsertVectorResponse.UpdateResult)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="result"></param>
+        </member>
+        <member name="T:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.QdrantClient`1">
+            <summary>
+            An implementation of a client for the Qdrant Vector Database. This class is used to
+            connect, create, delete, and get embeddings data from a Qdrant Vector Database instance.
+            </summary>
+        </member>
+        <member name="T:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.QdrantClient`1.NonDisposableHttpClientHandler">
+            <summary>
+            Represents a singleton implementation of <see cref="T:System.Net.Http.HttpClientHandler"/> that is not disposable.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.QdrantClient`1.NonDisposableHttpClientHandler.Instance">
+            <summary>
+            Gets the singleton instance of <see cref="T:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.QdrantClient`1.NonDisposableHttpClientHandler"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.QdrantClient`1.NonDisposableHttpClientHandler.#ctor">
+            <summary>
+            Private constructor to prevent direct instantiation of the class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.QdrantClient`1.NonDisposableHttpClientHandler.Dispose(System.Boolean)">
+            <summary>
+            Disposes the underlying resources.
+            This implementation does nothing to prevent unintended disposal, as it may affect all references.
+            </summary>
+            <param name="disposing">True if called from <see cref="M:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.QdrantClient`1.NonDisposableHttpClientHandler.Dispose(System.Boolean)"/>, false if called from a finalizer.</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.QdrantClient`1.#ctor(System.String,System.String,System.Net.Http.HttpClient,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Initializes a new instance of this class.
+            </summary>
+            <param name="endpoint">The Qdrant Vector Database endpoint</param>
+            <param name="apiKey">API key for Qdrant cloud</param>
+            <param name="httpClient">Optional HTTP client override</param>
+            <param name="loggerFactory">Application logger factory</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.QdrantClient`1.CreateCollectionAsync(System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Create a new collection
+            </summary>
+            <param name="collectionName">Collection name</param>
+            <param name="vectorSize">Size of the vectors stored</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.QdrantClient`1.DeleteCollectionAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Delete a collection.
+            </summary>
+            <param name="collectionName">Collection name</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.QdrantClient`1.UpsertVectorsAsync(System.String,System.Collections.Generic.IEnumerable{Microsoft.KernelMemory.MemoryDb.Qdrant.Client.QdrantPoint{`0}},System.Threading.CancellationToken)">
+            <summary>
+            Write a set of vectors. Existing vectors ar updated.
+            </summary>
+            <param name="collectionName">Collection name</param>
+            <param name="vectors">List of vectors to write</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.QdrantClient`1.GetVectorByPayloadIdAsync(System.String,System.String,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Fetch a vector by payload ID (string).
+            Qdrant vector ID (int/guid) is not used.
+            </summary>
+            <param name="collectionName">Collection name</param>
+            <param name="payloadId">Unique ID stored in the payload</param>
+            <param name="withVector">Whether to include vectors</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>Vector matching the given ID</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.QdrantClient`1.DeleteVectorsAsync(System.String,System.Collections.Generic.IList{System.Guid},System.Threading.CancellationToken)">
+            <summary>
+            Delete a list of vectors
+            </summary>
+            <param name="collectionName">Collection name</param>
+            <param name="vectorIds">List of vector IDs</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.QdrantClient`1.GetListAsync(System.String,System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{System.String}},System.Int32,System.Int32,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Fetch a list of vectors
+            </summary>
+            <param name="collectionName">Collection name</param>
+            <param name="requiredTags">Optional filtering rules</param>
+            <param name="offset">Pagination offset</param>
+            <param name="limit">Max number of vectors to return</param>
+            <param name="withVectors">Whether to include vectors</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>List of vectors</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.QdrantClient`1.GetSimilarListAsync(System.String,Microsoft.KernelMemory.Embedding,System.Double,System.Int32,System.Boolean,System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{System.String}},System.Threading.CancellationToken)">
+            <summary>
+            Find similar vectors
+            TODO: return IAsyncEnumerable
+            </summary>
+            <param name="collectionName">Collection name</param>
+            <param name="target">Vector to compare to</param>
+            <param name="scoreThreshold">Minimum similarity required to be included in the results</param>
+            <param name="limit">Max number of vectors to return</param>
+            <param name="withVectors">Whether to include vectors</param>
+            <param name="requiredTags">Optional filtering rules</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>List of vectors</returns>
+        </member>
+        <member name="T:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.QdrantDistanceType">
+            <summary>
+            The vector distance type used by Qdrant.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.QdrantDistanceType.Cosine">
+            <summary>
+            Cosine of the angle between vectors, aka dot product scaled by magnitude. Cares only about angle difference.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.QdrantDistanceType.DotProduct">
+            <summary>
+            Consider angle and distance (magnitude) of vectors.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.QdrantDistanceType.Euclidean">
+            <summary>
+            Pythagorean(theorem) distance of 2 multidimensional points.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.QdrantDistanceType.Manhattan">
+            <summary>
+            Sum of absolute differences between points across all the dimensions.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.QdrantDistanceType.Chebyshev">
+            <summary>
+            Assuming only the most significant dimension is relevant.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.QdrantDistanceType.Minkowski">
+            <summary>
+            Generalization of Euclidean and Manhattan.
+            </summary>
+        </member>
+        <member name="T:Microsoft.KernelMemory.MemoryDb.Qdrant.Client.QdrantPoint`1">
+            <summary>
+            A record structure used by Qdrant that contains an embedding and metadata.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Qdrant.QdrantException.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Qdrant.QdrantException.#ctor(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Qdrant.QdrantException.#ctor(System.String,System.Exception)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.KernelMemory.MemoryDb.Qdrant.QdrantMemory">
+            <summary>
+            Qdrant connector for Kernel Memory
+            TODO:
+            * allow using more Qdrant specific filtering logic
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Qdrant.QdrantMemory.#ctor(Microsoft.KernelMemory.QdrantConfig,Microsoft.KernelMemory.AI.ITextEmbeddingGenerator,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Create new instance
+            </summary>
+            <param name="config">Qdrant connector configuration</param>
+            <param name="embeddingGenerator">Text embedding generator</param>
+            <param name="loggerFactory">Application logger factory</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Qdrant.QdrantMemory.CreateIndexAsync(System.String,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Qdrant.QdrantMemory.GetIndexesAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Qdrant.QdrantMemory.DeleteIndexAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Qdrant.QdrantMemory.UpsertAsync(System.String,Microsoft.KernelMemory.MemoryStorage.MemoryRecord,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Qdrant.QdrantMemory.UpsertBatchAsync(System.String,System.Collections.Generic.IEnumerable{Microsoft.KernelMemory.MemoryStorage.MemoryRecord},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Qdrant.QdrantMemory.GetSimilarListAsync(System.String,System.String,System.Collections.Generic.ICollection{Microsoft.KernelMemory.MemoryFilter},System.Double,System.Int32,System.Boolean,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Qdrant.QdrantMemory.GetListAsync(System.String,System.Collections.Generic.ICollection{Microsoft.KernelMemory.MemoryFilter},System.Int32,System.Boolean,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Qdrant.QdrantMemory.DeleteAsync(System.String,Microsoft.KernelMemory.MemoryStorage.MemoryRecord,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

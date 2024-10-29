@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "tB5RooirnlB6FFVjMQ4beZTYVkPLrsCNJJqGvlSPimI=",
+  "Source": "ai_web_service",
+  "BasePath": "_content/ai_web_service",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
