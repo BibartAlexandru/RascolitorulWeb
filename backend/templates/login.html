@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+        body {
+            font-size: 120%;
+            background: whitesmoke;
+        }
+        .header {
+            width: 30%;
+            margin: 50px auto 0px;
+            color: white;
+            background: #5F9EA0;
+            text-align: center;
+            border: 1px solid #B0C4DE;
+            border-bottom: none;
+            border-radius: 10px 10px 0px 0px;
+            padding: 20px;
+            margin-left: 550px;
+        }
+        form, .content {
+            width: 30%;
+            margin: 0px auto;
+            padding: 20px;
+            border: 1px solid #B0C4DE;
+            background: white;
+            border-radius: 0px 0px 10px 10px;
+            margin-left: 550px;
+        }
+        .btn {
+            padding: 10px;
+            font-size: 15px;
+            color: white;
+            border: none;
+            background: #5F9EA0;
+            border-radius: 5px;
+        }
+        .error {
+            width: 92%;
+            margin: 0px auto;
+            padding: 10px;
+            border: 1px solid #a94442;
+            background: #f2dede;
+            text-align: left;
+            border-radius: 5px;
+        }
+        .success {
+            color: #3c763d;
+            background: #dff0d8;
+            border: 1px solid #3c763d;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h2>Login</h2>
+    </div>
+    <form method="post" action="/prajitura/login">
+        <div class="input-group">
+            <label>Username</label>
+            <input type="text" name="username" required>
+        </div>
+        <div class="input-group">
+            <label>Password</label>
+            <input type="password" name="password" required>
+        </div>
+        <div class="input-group">
+            <button type="submit" class="btn">Login</button>
+        </div>
+        <p>Not yet a member? <a href="/prajitura/signup">Sign up</a></p>
+    </form>
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+</body>
+<script>
+    if (window.performance && window.performance.navigation.type === 2) {
+        window.location.href = '/logout';
+    }
+</script>
+</html>

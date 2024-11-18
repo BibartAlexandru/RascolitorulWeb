@@ -15,8 +15,8 @@
     </style>
 </head>
 <body>
-   <h1>Hello User!</h1>
-   <p>Please write your searched word</p>
+   <h1>Hello dear User!</h1>
+   <p>Please write your word for which would you like to find information</p>
    <form method="GET" action="https://ro.wikipedia.org/wiki/Pisic%C4%83_de_cas%C4%83">
        <label name="string">Your word:</label>
        <input type="string" value=""><br>
@@ -25,4 +25,11 @@
 
    </form>
 </body>
+<script>
+    window.addEventListener('pageshow', function (event) {
+        if (event.persisted || window.performance && window.performance.navigation.type === 2) {
+            window.location.href = '/logout';
+        }
+    });
+</script>
 </html>
