@@ -10,7 +10,8 @@
 #cool-navbar > .container {
   width: 100%;
   max-width: none;
-  margin: 0;
+  margin-left: 550px;
+
 }
 
 .logo-navbar {

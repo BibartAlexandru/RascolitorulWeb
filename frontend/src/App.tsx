@@ -1,4 +1,4 @@
-import { useState } from "react";
+//import { useState } from "react";
 import "./App.css";
 import CoolNavbar from "./components/CoolNavbar/CoolNavbar";
 
@@ -7,7 +7,7 @@ function App() {
     <>
       <CoolNavbar></CoolNavbar>
       <section className="search-section mt-5">
-        <h1>Rascolitorul Web</h1>
+        <h1>Web Crawler</h1>
         <div className="input-row">
           <img
             src="/search.svg"
@@ -18,7 +18,7 @@ function App() {
             type="text"
             name="searchbar"
             id="searchbar"
-            placeholder="search something!"
+            placeholder="Type what would you like to search!"
             className="search-input"
           />
         </div>
