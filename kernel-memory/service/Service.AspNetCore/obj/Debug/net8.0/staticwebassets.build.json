@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "c8b+wmFq+3Vhdw0jICeWo/pnRBdGEJCdcmXdg6TBW5Q=",
+  "Source": "Microsoft.KernelMemory.Service.AspNetCore",
+  "BasePath": "_content/Microsoft.KernelMemory.Service.AspNetCore",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

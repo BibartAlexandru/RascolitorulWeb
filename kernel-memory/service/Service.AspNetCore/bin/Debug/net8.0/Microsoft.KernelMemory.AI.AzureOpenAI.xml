@@ -1,0 +1,213 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.KernelMemory.AI.AzureOpenAI</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.KernelMemory.AzureOpenAIConfig">
+            <summary>
+            Azure OpenAI settings.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AzureOpenAIConfig.APIType">
+            <summary>
+            OpenAI API type, e.g. text completion, chat completion, image generation, etc.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AzureOpenAIConfig.Auth">
+            <summary>
+            Azure authentication type
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AzureOpenAIConfig.APIKey">
+            <summary>
+            API key, required if Auth == APIKey
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AzureOpenAIConfig.Endpoint">
+            <summary>
+            Azure OpenAI endpoint URL
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AzureOpenAIConfig.Deployment">
+            <summary>
+            Azure OpenAI deployment name
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AzureOpenAIConfig.MaxTokenTotal">
+            <summary>
+            The max number of tokens supported by model deployed.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AzureOpenAIConfig.EmbeddingDimensions">
+            <summary>
+            The number of dimensions output embeddings should have.
+            Only supported in "text-embedding-3" and later models developed with
+            MRL, see https://arxiv.org/abs/2205.13147
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AzureOpenAIConfig.MaxEmbeddingBatchSize">
+             <summary>
+             Some models like ada have different limits on the batch size. The value can vary
+             from 1 to several dozens depending on platform settings.
+             See https://learn.microsoft.com/azure/ai-services/openai/reference#embeddings
+            
+             The default value is 1 to avoid errors. Set the value accordingly to your resource capacity.
+             </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AzureOpenAIConfig.MaxRetries">
+            <summary>
+            How many times to retry in case of throttling.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AzureOpenAIConfig.SetCredential(Azure.Core.TokenCredential)">
+            <summary>
+            Set credentials manually from code
+            </summary>
+            <param name="credential">Token credentials</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AzureOpenAIConfig.GetTokenCredential">
+            <summary>
+            Fetch the credentials passed manually from code.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AzureOpenAIConfig.Validate">
+            <summary>
+            Verify that the current state is valid.
+            </summary>
+        </member>
+        <member name="T:Microsoft.KernelMemory.AI.AzureOpenAI.AzureOpenAITextEmbeddingGenerator">
+             <summary>
+             Azure OpenAI connector
+            
+             Note: does not support model name override via request context
+                   see https://github.com/microsoft/semantic-kernel/issues/9337
+             </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AI.AzureOpenAI.AzureOpenAITextEmbeddingGenerator.MaxTokens">
+            <inheritdoc/>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AI.AzureOpenAI.AzureOpenAITextEmbeddingGenerator.MaxBatchSize">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.AzureOpenAI.AzureOpenAITextEmbeddingGenerator.#ctor(Microsoft.KernelMemory.AzureOpenAIConfig,Microsoft.KernelMemory.AI.ITextTokenizer,Microsoft.Extensions.Logging.ILoggerFactory,System.Net.Http.HttpClient)">
+            <summary>
+            Create a new instance.
+            </summary>
+            <param name="config">Client and service configuration</param>
+            <param name="textTokenizer">Text tokenizer, possibly matching the model used</param>
+            <param name="loggerFactory">App logger factory</param>
+            <param name="httpClient">Optional HTTP client with custom settings</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.AzureOpenAI.AzureOpenAITextEmbeddingGenerator.#ctor(Microsoft.KernelMemory.AzureOpenAIConfig,Azure.AI.OpenAI.AzureOpenAIClient,Microsoft.KernelMemory.AI.ITextTokenizer,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Create a new instance.
+            </summary>
+            <param name="config">Client and service configuration</param>
+            <param name="azureClient">Azure OpenAI client with custom settings</param>
+            <param name="textTokenizer">Text tokenizer, possibly matching the model used</param>
+            <param name="loggerFactory">App logger factory</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.AzureOpenAI.AzureOpenAITextEmbeddingGenerator.#ctor(Microsoft.KernelMemory.AzureOpenAIConfig,Microsoft.SemanticKernel.Connectors.AzureOpenAI.AzureOpenAITextEmbeddingGenerationService,Microsoft.KernelMemory.AI.ITextTokenizer,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Create a new instance.
+            </summary>
+            <param name="config"></param>
+            <param name="skClient"></param>
+            <param name="textTokenizer"></param>
+            <param name="loggerFactory"></param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.AzureOpenAI.AzureOpenAITextEmbeddingGenerator.CountTokens(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.AzureOpenAI.AzureOpenAITextEmbeddingGenerator.GetTokens(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.AzureOpenAI.AzureOpenAITextEmbeddingGenerator.GenerateEmbeddingAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.AzureOpenAI.AzureOpenAITextEmbeddingGenerator.GenerateEmbeddingBatchAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.KernelMemory.AI.AzureOpenAI.AzureOpenAITextGenerator">
+             <summary>
+             Azure OpenAI connector
+            
+             Note: does not support model name override via request context
+                   see https://github.com/microsoft/semantic-kernel/issues/9337
+             </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AI.AzureOpenAI.AzureOpenAITextGenerator.MaxTokenTotal">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.AzureOpenAI.AzureOpenAITextGenerator.#ctor(Microsoft.KernelMemory.AzureOpenAIConfig,Microsoft.KernelMemory.AI.ITextTokenizer,Microsoft.Extensions.Logging.ILoggerFactory,System.Net.Http.HttpClient)">
+            <summary>
+            Create a new instance.
+            </summary>
+            <param name="config">Client and service configuration</param>
+            <param name="textTokenizer">Text tokenizer, possibly matching the model used</param>
+            <param name="loggerFactory">App logger factory</param>
+            <param name="httpClient">Optional HTTP client with custom settings</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.AzureOpenAI.AzureOpenAITextGenerator.#ctor(Microsoft.KernelMemory.AzureOpenAIConfig,Azure.AI.OpenAI.AzureOpenAIClient,Microsoft.KernelMemory.AI.ITextTokenizer,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Create a new instance.
+            </summary>
+            <param name="config">Client and service configuration</param>
+            <param name="azureClient">Azure OpenAI client with custom settings</param>
+            <param name="textTokenizer">Text tokenizer, possibly matching the model used</param>
+            <param name="loggerFactory">App logger factory</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.AzureOpenAI.AzureOpenAITextGenerator.#ctor(Microsoft.KernelMemory.AzureOpenAIConfig,Microsoft.SemanticKernel.Connectors.AzureOpenAI.AzureOpenAIChatCompletionService,Microsoft.KernelMemory.AI.ITextTokenizer,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Create a new instance.
+            </summary>
+            <param name="config"></param>
+            <param name="skClient"></param>
+            <param name="textTokenizer"></param>
+            <param name="loggerFactory"></param>
+            <exception cref="T:Microsoft.KernelMemory.ConfigurationException"></exception>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.AzureOpenAI.AzureOpenAITextGenerator.CountTokens(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.AzureOpenAI.AzureOpenAITextGenerator.GetTokens(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.AzureOpenAI.AzureOpenAITextGenerator.GenerateTextAsync(System.String,Microsoft.KernelMemory.AI.TextGenerationOptions,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.KernelMemory.KernelMemoryBuilderExtensions">
+            <summary>
+            Kernel Memory builder extensions
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryBuilderExtensions.WithAzureOpenAITextEmbeddingGeneration(Microsoft.KernelMemory.IKernelMemoryBuilder,Microsoft.KernelMemory.AzureOpenAIConfig,Microsoft.KernelMemory.AI.ITextTokenizer,Microsoft.Extensions.Logging.ILoggerFactory,System.Boolean,System.Net.Http.HttpClient)">
+            <summary>
+            Use Azure OpenAI to generate text embeddings.
+            </summary>
+            <param name="builder">Kernel Memory builder</param>
+            <param name="config">Azure OpenAI settings</param>
+            <param name="textTokenizer">Tokenizer used to count tokens sent to the embedding generator</param>
+            <param name="loggerFactory">.NET Logger factory</param>
+            <param name="onlyForRetrieval">Whether to use this embedding generator only during data ingestion, and not for retrieval (search and ask API)</param>
+            <param name="httpClient">Custom <see cref="T:System.Net.Http.HttpClient"/> for HTTP requests.</param>
+            <returns>KM builder instance</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryBuilderExtensions.WithAzureOpenAITextGeneration(Microsoft.KernelMemory.IKernelMemoryBuilder,Microsoft.KernelMemory.AzureOpenAIConfig,Microsoft.KernelMemory.AI.ITextTokenizer,System.Net.Http.HttpClient)">
+            <summary>
+            Use Azure OpenAI to generate text, e.g. answers and summaries.
+            </summary>
+            <param name="builder">Kernel Memory builder</param>
+            <param name="config">Azure OpenAI settings</param>
+            <param name="textTokenizer">Tokenizer used to count tokens used by prompts</param>
+            <param name="httpClient">Custom <see cref="T:System.Net.Http.HttpClient"/> for HTTP requests.</param>
+            <returns>KM builder instance</returns>
+        </member>
+        <member name="T:Microsoft.KernelMemory.DependencyInjection">
+            <summary>
+            .NET IServiceCollection dependency injection extensions.
+            </summary>
+        </member>
+    </members>
+</doc>

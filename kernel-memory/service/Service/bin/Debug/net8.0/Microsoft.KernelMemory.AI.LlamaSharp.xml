@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.KernelMemory.AI.LlamaSharp</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.KernelMemory.KernelMemoryBuilderExtensions">
+            <summary>
+            Kernel Memory builder extensions
+            </summary>
+        </member>
+        <member name="T:Microsoft.KernelMemory.DependencyInjection">
+            <summary>
+            .NET IServiceCollection dependency injection extensions.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.LlamaSharpConfig.ModelPath">
+            <summary>
+            Path to the *.gguf file.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.LlamaSharpConfig.MaxTokenTotal">
+            <summary>
+            Max number of tokens supported by the model.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.LlamaSharpConfig.GpuLayerCount">
+            <summary>
+            Optional, number of GPU layers
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.LlamaSharpConfig.Validate(System.Boolean)">
+            <summary>
+            Verify that the current state is valid.
+            </summary>
+        </member>
+        <member name="T:Microsoft.KernelMemory.AI.LlamaSharp.LlamaSharpTextGenerator">
+            <summary>
+            Text generator based on LLama models, via LLamaSharp / llama.cpp
+            See https://github.com/SciSharp/LLamaSharp
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.LlamaSharp.LlamaSharpTextGenerator.#ctor(Microsoft.KernelMemory.LlamaSharpConfig,Microsoft.KernelMemory.AI.ITextTokenizer,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Create new instance
+            </summary>
+            <param name="config">Configuration settings</param>
+            <param name="textTokenizer">Optional text tokenizer, replacing the one provided by the model</param>
+            <param name="loggerFactory">Application logger instance</param>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AI.LlamaSharp.LlamaSharpTextGenerator.MaxTokenTotal">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.LlamaSharp.LlamaSharpTextGenerator.CountTokens(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.LlamaSharp.LlamaSharpTextGenerator.GetTokens(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.LlamaSharp.LlamaSharpTextGenerator.GenerateTextAsync(System.String,Microsoft.KernelMemory.AI.TextGenerationOptions,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.LlamaSharp.LlamaSharpTextGenerator.Dispose">
+            <inheritdoc/>
+        </member>
+    </members>
+</doc>

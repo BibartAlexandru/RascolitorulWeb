@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.KernelMemory.Safety.AzureAIContentSafety</name>
+    </assembly>
+    <members>
+        <member name="M:Microsoft.KernelMemory.Safety.AzureAIContentSafety.AzureAIContentSafetyModeration.IsSafeAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Safety.AzureAIContentSafety.AzureAIContentSafetyModeration.IsSafeAsync(System.String,System.Double,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.KernelMemory.KernelMemoryBuilderExtensions">
+            <summary>
+            Kernel Memory builder extensions
+            </summary>
+        </member>
+        <member name="T:Microsoft.KernelMemory.DependencyInjection">
+            <summary>
+            .NET IServiceCollection dependency injection extensions.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,2009 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.KernelMemory.Abstractions</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.KernelMemory.Embedding">
+            <summary>
+            Note: use Embedding.JsonConverter to serialize objects using this type.
+            Example:
+                [JsonPropertyName("vector")]
+                [JsonConverter(typeof(Embedding.JsonConverter))]
+                public Embedding Vector { get; set; }
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Embedding.Data">
+            <summary>
+            Note: use Embedding.JsonConverter to serialize objects using this type.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Embedding.Length">
+            <summary>
+            Note: use Embedding.JsonConverter to serialize objects using this type.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Embedding.FromDoubles(System.Double[])">
+            <summary>
+            This is not a ctor on purpose so we can use collections syntax with
+            the main ctor, and surface the extra casting cost when not using floats.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Embedding.op_Implicit(System.ReadOnlyMemory{System.Single})~Microsoft.KernelMemory.Embedding">
+            <summary>
+            Convert Semantic Kernel data type
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Embedding.op_Implicit(System.Single[])~Microsoft.KernelMemory.Embedding">
+            <summary>
+            Allows simple embedding definition using float[]
+            </summary>
+        </member>
+        <member name="T:Microsoft.KernelMemory.Embedding.JsonConverter">
+            <summary>
+            Note: use Embedding.JsonConverter to serialize objects using
+            the Embedding type, for example:
+                [JsonPropertyName("vector")]
+                [JsonConverter(typeof(Embedding.JsonConverter))]
+                public Embedding Vector { get; set; }
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.Embedding.JsonConverter.s_converter">
+            <summary>An instance of a converter for float[] that all operations delegate to</summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.IContentModeration.IsSafeAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Check if the input text is safe
+            </summary>
+            <param name="text">Input text</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>True if the input text is safe</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.IContentModeration.IsSafeAsync(System.String,System.Double,System.Threading.CancellationToken)">
+            <summary>
+            Check if the input text is safe
+            </summary>
+            <param name="text">Input text</param>
+            <param name="threshold">Safety threshold</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>True if the input text is safe</returns>
+        </member>
+        <member name="T:Microsoft.KernelMemory.AI.ITextEmbeddingBatchGenerator">
+            <summary>
+            Interface to generate a list of embedding vectors, used by LLMs that support batch requests.
+            This is used to limit the number of API calls, making the process faster and reduce the risk of throttling.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AI.ITextEmbeddingBatchGenerator.MaxBatchSize">
+            <summary>
+            The maximum number of elements that can be processed in a single batch.
+            Some services and old models can process only one string at a time, others can process many more.
+            The value depends on the service and the model used, and is configurable on each class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.ITextEmbeddingBatchGenerator.GenerateEmbeddingBatchAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
+            <summary>
+            Generates embeddings for a list of text chunks.
+            </summary>
+            <param name="textList">The list of text chunks to process.</param>
+            <param name="cancellationToken"></param>
+            <returns>Array of embedding vectors</returns>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AI.ITextEmbeddingGenerator.MaxTokens">
+            <summary>
+            Max size of the LLM attention window, ie max tokens that can be processed.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.ITextEmbeddingGenerator.GenerateEmbeddingAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Generate the embedding vector for a given text
+            </summary>
+            <param name="text">Text to analyze</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>Embedding vector</returns>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AI.ITextGenerator.MaxTokenTotal">
+            <summary>
+            Max size of the LLM attention window, considering both input and output tokens.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.ITextGenerator.GenerateTextAsync(System.String,Microsoft.KernelMemory.AI.TextGenerationOptions,System.Threading.CancellationToken)">
+            <summary>
+            Generate text for the given prompt, aka generate a text completion.
+            </summary>
+            <param name="prompt">Prompt text</param>
+            <param name="options">Options for the LLM request</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>Text generated, returned as a stream of strings/tokens</returns>
+        </member>
+        <member name="T:Microsoft.KernelMemory.AI.ITextTokenizer">
+            <summary>
+            Text tokenization interface.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.ITextTokenizer.CountTokens(System.String)">
+            <summary>
+            Count the number of tokens contained in the given text.
+            </summary>
+            <param name="text">Text to analyze</param>
+            <returns>Number of tokens</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.ITextTokenizer.GetTokens(System.String)">
+            <summary>
+            Return tokens
+            </summary>
+            <param name="text">Text to parse</param>
+            <returns>Collection of tokens</returns>
+        </member>
+        <member name="T:Microsoft.KernelMemory.AI.TextGenerationOptions">
+            <summary>
+            Settings for a text completion request.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AI.TextGenerationOptions.Temperature">
+            <summary>
+            Temperature controls the randomness of the completion.
+            The higher the temperature, the more random the completion.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AI.TextGenerationOptions.NucleusSampling">
+            <summary>
+            TopP, also known as nucleus sampling, controls the diversity of the completion.
+            The lower the value, the less diverse and more focused the completion.
+            A higher value allows for more diverse completions by considering a larger set of possible tokens.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AI.TextGenerationOptions.PresencePenalty">
+            <summary>
+            Number between -2.0 and 2.0. Positive values penalize new tokens
+            based on whether they appear in the text so far, increasing the
+            model's likelihood to talk about new topics.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AI.TextGenerationOptions.FrequencyPenalty">
+            <summary>
+            Number between -2.0 and 2.0. Positive values penalize new tokens
+            based on their existing frequency in the text so far, decreasing
+            the model's likelihood to repeat the same line verbatim.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AI.TextGenerationOptions.MaxTokens">
+            <summary>
+            The maximum number of tokens to generate in the completion.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AI.TextGenerationOptions.StopSequences">
+            <summary>
+            Sequences where the completion will stop generating further tokens.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AI.TextGenerationOptions.ResultsPerPrompt">
+            <summary>
+            How many completions to generate for each prompt. Default is 1.
+            Note: Because this parameter generates many completions, it can quickly consume your token quota.
+            Use carefully and ensure that you have reasonable settings for max_tokens and stop.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AI.TextGenerationOptions.TokenSelectionBiases">
+            <summary>
+            Modify the likelihood of specified tokens appearing in the completion.
+            </summary>
+        </member>
+        <member name="T:Microsoft.KernelMemory.AppBuilders.ServiceCollectionPool">
+             <summary>
+             Represents a collection of service collections, so that DI helpers
+             like `WithX` act on multiple service collections, e.g. the one used
+             by KernelMemoryBuilder and the one used by end user application.
+            
+             The pool is meant to have a "primary" that contains all services,
+             so that it's possible to look up the aggregate, e.g. check if
+             a dependency exists in any of the collections, and to loop
+             through the complete list of service descriptors.
+             </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.AppBuilders.ServiceCollectionPool._pool">
+            <summary>
+            Collection of service collections, ie the pool.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.AppBuilders.ServiceCollectionPool._primaryCollection">
+            <summary>
+            Primary collection used for read and iteration calls
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.AppBuilders.ServiceCollectionPool._poolSizeLocked">
+            <summary>
+            Flag indicating whether the list of collections is readonly.
+            The list becomes readonly as soon as service descriptors are added.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AppBuilders.ServiceCollectionPool.Count">
+            <summary>
+            The total number of service descriptors registered
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AppBuilders.ServiceCollectionPool.IsReadOnly">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AppBuilders.ServiceCollectionPool.#ctor(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Create a new instance, passing in the primary list of services
+            </summary>
+            <param name="primaryCollection">The primary service collection</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AppBuilders.ServiceCollectionPool.AddServiceCollection(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Add one more service collection to the pool
+            </summary>
+            <param name="serviceCollection">Service collection</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AppBuilders.ServiceCollectionPool.Add(Microsoft.Extensions.DependencyInjection.ServiceDescriptor)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AppBuilders.ServiceCollectionPool.Contains(Microsoft.Extensions.DependencyInjection.ServiceDescriptor)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AppBuilders.ServiceCollectionPool.System#Collections#IEnumerable#GetEnumerator">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AppBuilders.ServiceCollectionPool.GetEnumerator">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AppBuilders.ServiceCollectionPool.Remove(Microsoft.Extensions.DependencyInjection.ServiceDescriptor)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AppBuilders.ServiceCollectionPool.Clear">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AppBuilders.ServiceCollectionPool.CopyTo(Microsoft.Extensions.DependencyInjection.ServiceDescriptor[],System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AppBuilders.ServiceCollectionPool.Insert(System.Int32,Microsoft.Extensions.DependencyInjection.ServiceDescriptor)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AppBuilders.ServiceCollectionPool.IndexOf(Microsoft.Extensions.DependencyInjection.ServiceDescriptor)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AppBuilders.ServiceCollectionPool.RemoveAt(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AppBuilders.ServiceCollectionPool.Item(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AppBuilders.ServiceCollectionPool.AccessByPositionNotAllowed">
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Microsoft.KernelMemory.ConfigurationException.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.ConfigurationException.#ctor(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.ConfigurationException.#ctor(System.String,System.Exception)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.KernelMemory.Configuration.TextPartitioningOptions">
+            <summary>
+            Represents options for text partitioning.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Configuration.TextPartitioningOptions.MaxTokensPerParagraph">
+            <summary>
+            The maximum number of tokens per paragraph.
+            When partitioning a document, each partition usually contains one paragraph.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Configuration.TextPartitioningOptions.MaxTokensPerLine">
+            <summary>
+            The maximum number of tokens per line, aka per sentence.
+            When partitioning a block of text, the text will be split into sentences, that are then grouped into paragraphs.
+            Note that this applies to any text format, including tables, code, chats, log files, etc.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Configuration.TextPartitioningOptions.OverlappingTokens">
+            <summary>
+            The number of overlapping tokens between paragraphs.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Configuration.TextPartitioningOptions.Validate">
+            <summary>
+            Verify that the current state is valid.
+            </summary>
+        </member>
+        <member name="T:Microsoft.KernelMemory.DependencyInjection">
+            <summary>
+            .NET IServiceCollection dependency injection extensions.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Context.CustomContextExtensions.GetCustomTextGenerationModelNameOrDefault(Microsoft.KernelMemory.Context.IContext,System.String)">
+            <summary>
+            Extensions supported:
+            - Ollama
+            - Anthropic
+            Extensions not supported:
+            - Azure OpenAI
+            - ONNX
+            - OpenAI
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Context.CustomContextExtensions.GetCustomEmbeddingGenerationModelNameOrDefault(Microsoft.KernelMemory.Context.IContext,System.String)">
+            <summary>
+            Extensions supported:
+            - Ollama
+            - Anthropic
+            Extensions not supported:
+            - Azure OpenAI
+            - ONNX
+            - OpenAI
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Context.IContextProvider.GetContext">
+            <summary>
+            Return the full context object.
+            </summary>
+            <returns>Context instance</returns>
+        </member>
+        <member name="T:Microsoft.KernelMemory.Context.RequestContextProvider">
+            <summary>
+            Allows to store data contextual to the current asynchronous context, e.g. the current HTTP request.
+            Similar to HttpContext Items, without taking a dependency on ASP.NET Core libraries
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Context.RequestContextProvider.GetContext">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.KernelMemory.DataFormats.FileSection.Number">
+            <summary>
+            Text page number/Audio segment number/Video scene number
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.DataFormats.FileSection.SentencesAreComplete">
+            <summary>
+            Whether the first/last sentence may continue from the previous/into
+            the next section (e.g. like PDF docs).
+            true: the first/last sentence do not cross over, the first doesn't
+                  continue from the previous section, and the last sentence ends
+                  where the section ends (e.g. Powerpoint, Excel).
+            false: the first sentence may be a continuation from the previous section,
+                   and the last sentence may continue into the next section.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.DataFormats.FileSection.Content">
+            <summary>
+            Page text content
+            </summary>
+        </member>
+        <member name="T:Microsoft.KernelMemory.DataFormats.IContentDecoder">
+            <summary>
+            Interface for content decoders
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.DataFormats.IContentDecoder.SupportsMimeType(System.String)">
+            <summary>
+            Returns true if the decoder supports the given MIME type
+            </summary>
+            <param name="mimeType">MIME type string (e.g. content type without encoding details)</param>
+            <returns>Whether the MIME type is supported</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.DataFormats.IContentDecoder.DecodeAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Extract content from the given file.
+            </summary>
+            <param name="filename">Full path to the file to process</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>Content extracted from the file</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.DataFormats.IContentDecoder.DecodeAsync(System.BinaryData,System.Threading.CancellationToken)">
+            <summary>
+            Extract content from the given file.
+            </summary>
+            <param name="data">File content</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>Content extracted from the file</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.DataFormats.IContentDecoder.DecodeAsync(System.IO.Stream,System.Threading.CancellationToken)">
+            <summary>
+            Extract content from the given file.
+            </summary>
+            <param name="data">File content to process</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>Content extracted from the file</returns>
+        </member>
+        <member name="T:Microsoft.KernelMemory.DataFormats.IOcrEngine">
+            <summary>
+            An OCR engine that can read in text from image files.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.DataFormats.IOcrEngine.ExtractTextFromImageAsync(System.IO.Stream,System.Threading.CancellationToken)">
+            <summary>
+            Reads all text from the image.
+            </summary>
+            <param name="imageContent">The image content stream.</param>
+            <param name="cancellationToken">Task cancellation token</param>
+        </member>
+        <member name="T:Microsoft.KernelMemory.DataFormats.WebPages.IWebScraper">
+            <summary>
+            Interface used by web scraper classes used to fetch external web pages.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.DataFormats.WebPages.IWebScraper.GetContentAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Fetch the content of a web page
+            </summary>
+            <param name="url">Web page URL</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>Web page content</returns>
+        </member>
+        <member name="T:Microsoft.KernelMemory.Diagnostics.DefaultLogger`1">
+            <summary>
+            Create and cache a logger instance using the same
+            configuration sources supported by Kernel Memory config.
+            </summary>
+            <typeparam name="T">Type of the class using the logger. The type name
+            is used to decorate log entries, providing information about the log source.</typeparam>
+        </member>
+        <member name="T:Microsoft.KernelMemory.Diagnostics.DefaultLogger">
+            <summary>
+            Either create a local default log factory, or allow an external
+            application to set the log factory to be used to instantiate loggers.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.Diagnostics.Telemetry.TelemetryDisabledEnvVar">
+            <summary>
+            Env var used in Azure to enable/disable telemetry
+            See: https://learn.microsoft.com/en-us/dotnet/api/azure.core.diagnosticsoptions.istelemetryenabled?view=azure-dotnet
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.Diagnostics.Telemetry.HttpUserAgent">
+            <summary>
+            HTTP User Agent
+            Note: Azure max length 24 chars
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Diagnostics.Telemetry.IsTelemetryEnabled">
+            <summary>
+            Source: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/src/DiagnosticsOptions.cs
+            Azure customers setting AZURE_TELEMETRY_DISABLED=1 expect telemetry to be disabled.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Diagnostics.Telemetry.GetBoolEnvVar(System.String)">
+            <summary>
+            Source: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/src/DiagnosticsOptions.cs
+            Values: https://learn.microsoft.com/en-us/dotnet/api/azure.core.diagnosticsoptions.istelemetryenabled?view=azure-dotnet
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.DocumentStorage.DocumentStorageException.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.DocumentStorage.DocumentStorageException.#ctor(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.DocumentStorage.DocumentStorageException.#ctor(System.String,System.Exception)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.DocumentStorage.DocumentStorageFileNotFoundException.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.DocumentStorage.DocumentStorageFileNotFoundException.#ctor(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.DocumentStorage.DocumentStorageFileNotFoundException.#ctor(System.String,System.Exception)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.DocumentStorage.IDocumentStorage.CreateIndexDirectoryAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Create a new container (aka index), if it doesn't exist already
+            </summary>
+            <param name="index">Index name</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.DocumentStorage.IDocumentStorage.DeleteIndexDirectoryAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Delete a container (aka index)
+            </summary>
+            <param name="index">Index name</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.DocumentStorage.IDocumentStorage.CreateDocumentDirectoryAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Create a new container, if it doesn't exist already
+            </summary>
+            <param name="index">Index name</param>
+            <param name="documentId">Document ID</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.DocumentStorage.IDocumentStorage.EmptyDocumentDirectoryAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Delete all artifacts of a document, except for the status file
+            </summary>
+            <param name="index">Index name</param>
+            <param name="documentId">Document ID</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.DocumentStorage.IDocumentStorage.DeleteDocumentDirectoryAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Delete all artifacts of a document, including status file and the containing folder
+            </summary>
+            <param name="index">Index name</param>
+            <param name="documentId">Document ID</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.DocumentStorage.IDocumentStorage.WriteFileAsync(System.String,System.String,System.String,System.IO.Stream,System.Threading.CancellationToken)">
+            <summary>
+            Create/Overwrite a file
+            </summary>
+            <param name="index">Index name</param>
+            <param name="documentId">Document ID</param>
+            <param name="fileName">Name of the file</param>
+            <param name="streamContent">File content</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.DocumentStorage.IDocumentStorage.ReadFileAsync(System.String,System.String,System.String,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Fetch a file from storage
+            </summary>
+            <param name="index">Index name</param>
+            <param name="documentId">Document ID</param>
+            <param name="fileName"></param>
+            <param name="logErrIfNotFound">Whether to log an error if the file does not exist. An exception will be raised anyway.</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>File content</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.IKernelMemory.ImportDocumentAsync(Microsoft.KernelMemory.Document,System.String,System.Collections.Generic.IEnumerable{System.String},Microsoft.KernelMemory.Context.IContext,System.Threading.CancellationToken)">
+            <summary>
+            Import a document into memory. The document can contain one or more files, can have tags and other details.
+            </summary>
+            <param name="document">Details of the files to import</param>
+            <param name="index">Optional index name</param>
+            <param name="steps">Ingestion pipeline steps, optional override to the system default</param>
+            <param name="context">Unstructured data supporting custom business logic in the current request.</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>Document ID</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.IKernelMemory.ImportDocumentAsync(System.String,System.String,Microsoft.KernelMemory.TagCollection,System.String,System.Collections.Generic.IEnumerable{System.String},Microsoft.KernelMemory.Context.IContext,System.Threading.CancellationToken)">
+            <summary>
+            Import a file from disk into memory, with details such as tags and user ID.
+            </summary>
+            <param name="filePath">Path and name of the file to import</param>
+            <param name="documentId">Document ID</param>
+            <param name="tags">Optional tags to apply to the memories generated by the document</param>
+            <param name="index">Optional index name</param>
+            <param name="steps">Ingestion pipeline steps, optional override to the system default</param>
+            <param name="context">Unstructured data supporting custom business logic in the current request.</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>Document ID</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.IKernelMemory.ImportDocumentAsync(Microsoft.KernelMemory.DocumentUploadRequest,Microsoft.KernelMemory.Context.IContext,System.Threading.CancellationToken)">
+            <summary>
+            Import a document into memory. The document can contain one or more files, can have tags and other details.
+            </summary>
+            <param name="uploadRequest">Upload request containing the document files and details</param>
+            <param name="context">Not used. Context arguments are passed via 'uploadRequest'.</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>Document ID</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.IKernelMemory.ImportDocumentAsync(System.IO.Stream,System.String,System.String,Microsoft.KernelMemory.TagCollection,System.String,System.Collections.Generic.IEnumerable{System.String},Microsoft.KernelMemory.Context.IContext,System.Threading.CancellationToken)">
+            <summary>
+            Import any stream from memory, e.g. text or binary data, with details such as tags and user ID.
+            </summary>
+            <param name="content">Content stream to import</param>
+            <param name="fileName">File name to assign to the stream, used to detect the file type</param>
+            <param name="documentId">Document ID</param>
+            <param name="tags">Optional tags to apply to the memories generated by the document</param>
+            <param name="index">Optional index name</param>
+            <param name="steps">Ingestion pipeline steps, optional override to the system default</param>
+            <param name="context">Unstructured data supporting custom business logic in the current request.</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>Document ID</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.IKernelMemory.ImportTextAsync(System.String,System.String,Microsoft.KernelMemory.TagCollection,System.String,System.Collections.Generic.IEnumerable{System.String},Microsoft.KernelMemory.Context.IContext,System.Threading.CancellationToken)">
+            <summary>
+            Import any stream from memory, e.g. text or binary data, with details such as tags and user ID.
+            </summary>
+            <param name="text">Text content to import</param>
+            <param name="documentId">Document ID</param>
+            <param name="tags">Optional tags to apply to the memories generated by the document</param>
+            <param name="index">Optional index name</param>
+            <param name="steps">Ingestion pipeline steps, optional override to the system default</param>
+            <param name="context">Unstructured data supporting custom business logic in the current request.</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>Document ID</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.IKernelMemory.ImportWebPageAsync(System.String,System.String,Microsoft.KernelMemory.TagCollection,System.String,System.Collections.Generic.IEnumerable{System.String},Microsoft.KernelMemory.Context.IContext,System.Threading.CancellationToken)">
+            <summary>
+            Import memories from a web page
+            </summary>
+            <param name="url">Web page URL</param>
+            <param name="documentId">Document ID</param>
+            <param name="tags">Optional tags to apply to the memories generated by the document</param>
+            <param name="index">Optional index name</param>
+            <param name="steps">Ingestion pipeline steps, optional override to the system default</param>
+            <param name="context">Unstructured data supporting custom business logic in the current request.</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>Document ID</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.IKernelMemory.ListIndexesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Returns a list of the indexes available in memory.
+            </summary>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>List of indexes</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.IKernelMemory.DeleteIndexAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Delete an entire index.
+            </summary>
+            <param name="index">Optional index name, when empty the default index is deleted</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.IKernelMemory.DeleteDocumentAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Delete a specified document from memory, and update all derived memories.
+            </summary>
+            <param name="documentId">Document ID</param>
+            <param name="index">Optional index name</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.IKernelMemory.IsDocumentReadyAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Check if a document ID exists in the given index and is ready for usage.
+            The logic checks if the uploaded document has been fully processed.
+            When the document exists in storage but is not processed yet, the method returns False.
+            </summary>
+            <param name="documentId">Document ID</param>
+            <param name="index">Optional index name</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>True if the document has been successfully uploaded and imported</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.IKernelMemory.GetDocumentStatusAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get information about an uploaded document
+            </summary>
+            <param name="documentId">Document ID (aka pipeline ID)</param>
+            <param name="index">Optional index name</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>Information about an uploaded document</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.IKernelMemory.ExportFileAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Export a file from document storage
+            </summary>
+            <param name="documentId">ID of the document containing the file</param>
+            <param name="fileName">File name</param>
+            <param name="index">Index containing the document</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>File content</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.IKernelMemory.SearchAsync(System.String,System.String,Microsoft.KernelMemory.MemoryFilter,System.Collections.Generic.ICollection{Microsoft.KernelMemory.MemoryFilter},System.Double,System.Int32,Microsoft.KernelMemory.Context.IContext,System.Threading.CancellationToken)">
+            <summary>
+            Search the given index for a list of relevant documents for the given query.
+            </summary>
+            <param name="query">Query to filter memories</param>
+            <param name="index">Optional name of the index where to search</param>
+            <param name="filter">Filter to match</param>
+            <param name="filters">Filters to match (using inclusive OR logic). If 'filter' is provided too, the value is merged into this list.</param>
+            <param name="minRelevance">Minimum Cosine Similarity required</param>
+            <param name="limit">Max number of results to return</param>
+            <param name="context">Unstructured data supporting custom business logic in the current request.</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>Answer to the query, if possible</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.IKernelMemory.AskAsync(System.String,System.String,Microsoft.KernelMemory.MemoryFilter,System.Collections.Generic.ICollection{Microsoft.KernelMemory.MemoryFilter},System.Double,Microsoft.KernelMemory.Context.IContext,System.Threading.CancellationToken)">
+            <summary>
+            Search the given index for an answer to the given query.
+            </summary>
+            <param name="question">Question to answer</param>
+            <param name="index">Optional index name</param>
+            <param name="filter">Filter to match</param>
+            <param name="filters">Filters to match (using inclusive OR logic). If 'filter' is provided too, the value is merged into this list.</param>
+            <param name="minRelevance">Minimum Cosine Similarity required</param>
+            <param name="context">Unstructured data supporting custom business logic in the current request.</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>Answer to the query, if possible</returns>
+        </member>
+        <member name="T:Microsoft.KernelMemory.IKernelMemoryBuilder">
+            <summary>
+            Kernel Memory Builder interface.
+            Use this interface to add custom dependency injection extension methods.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.IKernelMemoryBuilder.Services">
+            <summary>
+            Pool of service collections.
+            Normally this consists of a single service collection used internally
+            by the builder. However, one can share the hosting application service
+            collection, for the builder to share internal dependencies out into
+            the hosting application. In such case the pool contains two service
+            collections, the memory builder's and the hosting application builder's.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.IKernelMemoryBuilder.Build">
+            <summary>
+            Build the memory instance, using defaults and the provided dependencies
+            and overrides. Depending on the dependencies provided, the resulting
+            memory might use either an synchronous or asynchronous pipeline.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.IKernelMemoryBuilder.Build``1">
+            <summary>
+            Build a specific type of memory instance, e.g. explicitly choosing
+            between synchronous or asynchronous (queue based) pipeline.
+            </summary>
+            <typeparam name="T">Type of memory derived from IKernelMemory</typeparam>
+            <returns>A memory instance</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.IKernelMemoryBuilder.AddSingleton``1(``0)">
+            <summary>
+            Add a singleton to the builder service collection pool.
+            </summary>
+            <param name="implementationInstance">Singleton instance</param>
+            <typeparam name="TService">Singleton type</typeparam>
+        </member>
+        <member name="M:Microsoft.KernelMemory.IKernelMemoryBuilder.AddSingleton``2">
+            <summary>
+            Add a singleton to the builder service collection pool.
+            </summary>
+            <typeparam name="TService">Singleton type, e.g. interface</typeparam>
+            <typeparam name="TImplementation">Singleton implementation type</typeparam>
+        </member>
+        <member name="M:Microsoft.KernelMemory.IKernelMemoryBuilder.WithoutDefaultHandlers">
+            <summary>
+            Remove the default pipeline handlers from the builder, allowing to specify
+            a completely custom list of handlers.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.IKernelMemoryBuilder.AddIngestionMemoryDb(Microsoft.KernelMemory.MemoryStorage.IMemoryDb)">
+            <summary>
+            Add a memory DB to the list of DBs used during the ingestion.
+            Note: it's possible writing to multiple DBs, all of them are used during the ingestion.
+            </summary>
+            <param name="service">Memory DB instance</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.IKernelMemoryBuilder.AddIngestionEmbeddingGenerator(Microsoft.KernelMemory.AI.ITextEmbeddingGenerator)">
+            <summary>
+            Add an embedding generator to the list of generators used during the ingestion.
+            Note: it's possible using multiple generators, all of them are used during the ingestion.
+            </summary>
+            <param name="service">Embedding generator instance</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.IKernelMemoryBuilder.GetOrchestrator">
+            <summary>
+            Return an instance of the pipeline orchestrator, usually required by custom handlers.
+            </summary>
+        </member>
+        <member name="T:Microsoft.KernelMemory.KernelMemoryBuilderExtensions">
+            <summary>
+            Kernel Memory builder extensions.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryBuilderExtensions.Configure(Microsoft.KernelMemory.IKernelMemoryBuilder,System.Action{Microsoft.KernelMemory.IKernelMemoryBuilder})">
+            <summary>
+            Configure the builder
+            </summary>
+            <param name="builder">KM builder instance</param>
+            <param name="action">Action to use to configure the builder</param>
+            <returns>Builder instance</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryBuilderExtensions.Configure(Microsoft.KernelMemory.IKernelMemoryBuilder,System.Boolean,System.Action{Microsoft.KernelMemory.IKernelMemoryBuilder},System.Action{Microsoft.KernelMemory.IKernelMemoryBuilder})">
+            <summary>
+            Configure the builder in one of two ways, depending on a condition
+            </summary>
+            <param name="builder">KM builder instance</param>
+            <param name="condition">Condition to check</param>
+            <param name="actionIfTrue">How to configure the builder when the condition is true</param>
+            <param name="actionIfFalse">Optional, how to configure the builder when the condition is false</param>
+            <returns>Builder instance</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryBuilderExtensions.With``1(Microsoft.KernelMemory.IKernelMemoryBuilder,``0)">
+            <summary>
+            Allows to inject any dependency into the builder, e.g. options for handlers
+            and custom components used by the system
+            </summary>
+            <param name="builder">KM builder instance</param>
+            <param name="dependency">Dependency. Can be NULL.</param>
+            <typeparam name="T">Type of dependency</typeparam>
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryBuilderExtensions.WithCustomTextPartitioningOptions(Microsoft.KernelMemory.IKernelMemoryBuilder,Microsoft.KernelMemory.Configuration.TextPartitioningOptions)">
+            <summary>
+            Customize how text extracted from documents is partitioned in smaller chunks.
+            </summary>
+            <param name="builder">KM builder instance</param>
+            <param name="options">Partitioning options</param>
+        </member>
+        <member name="T:Microsoft.KernelMemory.KernelMemoryException">
+            <summary>
+            Provides the base exception from which all Kernel Memory exceptions derive.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.KernelMemory.KernelMemoryException"/> class with a default message.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.KernelMemory.KernelMemoryException"/> class with its message set to <paramref name="message"/>.
+            </summary>
+            <param name="message">A string that describes the error.</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.KernelMemory.KernelMemoryException"/> class with its message set to <paramref name="message"/>.
+            </summary>
+            <param name="message">A string that describes the error.</param>
+            <param name="innerException">The exception that is the cause of the current exception.</param>
+        </member>
+        <member name="T:Microsoft.KernelMemory.KernelMemoryExtensions">
+            <summary>
+            Kernel Memory API extensions
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryExtensions.SearchSyntheticsAsync(Microsoft.KernelMemory.IKernelMemory,System.String,System.String,Microsoft.KernelMemory.MemoryFilter,System.Collections.Generic.ICollection{Microsoft.KernelMemory.MemoryFilter},System.Threading.CancellationToken)">
+            <summary>
+            Return a list of synthetic memories of the specified type
+            </summary>
+            <param name="memory">Memory instance</param>
+            <param name="syntheticType">Type of synthetic data to return</param>
+            <param name="index">Optional name of the index where to search</param>
+            <param name="filter">Filter to match</param>
+            <param name="filters">Filters to match (using inclusive OR logic). If 'filter' is provided too, the value is merged into this list.</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>List of search results</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryExtensions.SearchSummariesAsync(Microsoft.KernelMemory.IKernelMemory,System.String,Microsoft.KernelMemory.MemoryFilter,System.Collections.Generic.ICollection{Microsoft.KernelMemory.MemoryFilter},System.Threading.CancellationToken)">
+            <summary>
+            Return a list of summaries matching the given filters
+            </summary>
+            <param name="memory">Memory instance</param>
+            <param name="index">Optional name of the index where to search</param>
+            <param name="filter">Filter to match</param>
+            <param name="filters">Filters to match (using inclusive OR logic). If 'filter' is provided too, the value is merged into this list.</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>List of search results</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryWebException.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryWebException.#ctor(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryWebException.#ctor(System.String,System.Exception)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.KernelMemory.MemoryStorage.IMemoryDb">
+            <summary>
+            Common interface with all Memory API methods.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryStorage.IMemoryDb.CreateIndexAsync(System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Create an index/collection
+            </summary>
+            <param name="index">Index/Collection name</param>
+            <param name="vectorSize">Index/Collection vector size</param>
+            <param name="cancellationToken">Task cancellation token</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryStorage.IMemoryDb.GetIndexesAsync(System.Threading.CancellationToken)">
+            <summary>
+            List indexes from the memory DB
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns>List of indexes</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryStorage.IMemoryDb.DeleteIndexAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Delete an index/collection
+            </summary>
+            <param name="index">Index/Collection name</param>
+            <param name="cancellationToken">Task cancellation token</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryStorage.IMemoryDb.UpsertAsync(System.String,Microsoft.KernelMemory.MemoryStorage.MemoryRecord,System.Threading.CancellationToken)">
+            <summary>
+            Insert/Update a vector + payload.
+            </summary>
+            <param name="index">Index/Collection name</param>
+            <param name="record">Vector + payload to save</param>
+            <param name="cancellationToken">Task cancellation token</param>
+            <returns>Record ID</returns>
+            <exception cref="T:Microsoft.KernelMemory.MemoryStorage.IndexNotFoundException">Error returned if the index where to write doesn't exist</exception>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryStorage.IMemoryDb.GetSimilarListAsync(System.String,System.String,System.Collections.Generic.ICollection{Microsoft.KernelMemory.MemoryFilter},System.Double,System.Int32,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Get list of similar vectors (+payload)
+            </summary>
+            <param name="index">Index/Collection name</param>
+            <param name="text">Text being searched</param>
+            <param name="filters">Values to match in the field used for tagging records (the field must be a list of strings)</param>
+            <param name="minRelevance">Minimum Cosine Similarity required</param>
+            <param name="limit">Max number of results</param>
+            <param name="withEmbeddings">Whether to include vector in the result</param>
+            <param name="cancellationToken">Task cancellation token</param>
+            <returns>List of similar vectors, starting from the most similar</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryStorage.IMemoryDb.GetListAsync(System.String,System.Collections.Generic.ICollection{Microsoft.KernelMemory.MemoryFilter},System.Int32,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Get list of records having a field matching a given value.
+            E.g. searching vectors by tag, for deletions.
+            </summary>
+            <param name="index">Index/Collection name</param>
+            <param name="filters">Values to match in the field used for tagging records (the field must be a list of strings)</param>
+            <param name="limit">Max number of records to return</param>
+            <param name="withEmbeddings">Whether to include vector in the result</param>
+            <param name="cancellationToken">Task cancellation token</param>
+            <returns>List of records</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryStorage.IMemoryDb.DeleteAsync(System.String,Microsoft.KernelMemory.MemoryStorage.MemoryRecord,System.Threading.CancellationToken)">
+            <summary>
+            Delete a memory record
+            </summary>
+            <param name="index">Index/Collection name</param>
+            <param name="record">Record to delete. Most memory DBs require only the record ID to be set.</param>
+            <param name="cancellationToken">Task cancellation token</param>
+        </member>
+        <member name="T:Microsoft.KernelMemory.MemoryStorage.IMemoryDbUpsertBatch">
+            <summary>
+            Interface for memory DB adapters supporting batch upsert.
+            The interface is not mandatory and not implemented by all connectors.
+            Handlers/Clients should check if the interface is available and leverage it to optimize throughput.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryStorage.IMemoryDbUpsertBatch.UpsertBatchAsync(System.String,System.Collections.Generic.IEnumerable{Microsoft.KernelMemory.MemoryStorage.MemoryRecord},System.Threading.CancellationToken)">
+            <summary>
+            Insert/Update a list of vectors + payload.
+            </summary>
+            <param name="index">Index/Collection name</param>
+            <param name="records">Vectors + payload to save</param>
+            <param name="cancellationToken">Task cancellation token</param>
+            <returns>Record IDs</returns>
+            <exception cref="T:Microsoft.KernelMemory.MemoryStorage.IndexNotFoundException">Error returned if the index where to write doesn't exist</exception>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryStorage.IndexNotFoundException.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryStorage.IndexNotFoundException.#ctor(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryStorage.IndexNotFoundException.#ctor(System.String,System.Exception)">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryStorage.MemoryRecord.Id">
+            <summary>
+            Unique record ID
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryStorage.MemoryRecord.Vector">
+            <summary>
+            Embedding vector
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryStorage.MemoryRecord.Tags">
+             <summary>
+             Optional Searchable Key=Value tags (string => string[] collection)
+            
+             Multiple values per keys are supported.
+             e.g. [ "Collection=Work", "Project=1", "Project=2", "Project=3", "Type=Chat", "LLM=AzureAda2" ]
+            
+             Use cases:
+              * collections, e.g. [ "Collection=Project1", "Collection=Work" ]
+              * folders, e.g. [ "Folder=Inbox", "Folder=Spam" ]
+              * content types, e.g. [ "Type=Chat" ]
+              * versioning, e.g. [ "LLM=AzureAda2", "Schema=1.0" ]
+              * etc.
+             </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryStorage.MemoryRecord.Payload">
+             <summary>
+             Optional Non-Searchable payload processed client side.
+            
+             Use cases:
+              * citations
+              * original text
+              * descriptions
+              * embedding generator name
+              * URLs
+              * content type
+              * timestamps
+              * etc.
+             </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryStorage.MemoryRecord.UpgradeRequired">
+            <summary>
+            Check if the current state requires an upgrade
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryStorage.MemoryRecord.Upgrade">
+            <summary>
+            Upgrade the record to the latest schema
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Citation.Link">
+            <summary>
+            Link to the source, if available.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Citation.Index">
+            <summary>
+            Link to the source, if available.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Citation.DocumentId">
+            <summary>
+            Link to the source, if available.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Citation.FileId">
+            <summary>
+            Link to the source, if available.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Citation.SourceContentType">
+            <summary>
+            Type of source, e.g. PDF, Word, Chat, etc.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Citation.SourceName">
+            <summary>
+            Name of the source, e.g. file name.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Citation.SourceUrl">
+            <summary>
+            URL of the source, used for web pages and external data
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Citation.Partitions">
+            <summary>
+            List of chunks/blocks of text used.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Citation.Partition.Text">
+            <summary>
+            Content of the document partition, aka chunk/block of text.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Citation.Partition.Relevance">
+            <summary>
+            Relevance of this partition against the given query.
+            Value usually is between 0 and 1, when using cosine similarity.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Citation.Partition.PartitionNumber">
+            <summary>
+            Partition number, zero based
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Citation.Partition.SectionNumber">
+            <summary>
+            Text page number / Audio segment number / Video scene number
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Citation.Partition.LastUpdate">
+            <summary>
+            Timestamp about the file/text partition.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Citation.Partition.Tags">
+            <summary>
+            List of document tags
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.DataPipelineStatus.Empty">
+            <summary>
+            Currently used to track deleted documents.
+            TODO: replace with "isDeleting" and "Deleted"
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.DataPipelineStatus.DocumentId">
+            <summary>
+            Unique Id
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.DataPipelineStatus.Steps">
+            <summary>
+            Full list of the steps in this pipeline.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.DataPipelineStatus.RemainingSteps">
+            <summary>
+            List of the steps remaining.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.DataPipelineStatus.CompletedSteps">
+            <summary>
+            List of steps already completed.
+            </summary>
+        </member>
+        <member name="T:Microsoft.KernelMemory.Document">
+            <summary>
+            A document is a collection of one or multiple files, with additional
+            metadata such as tags and ownership.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Document.Id">
+            <summary>
+            Document ID, used also as Pipeline ID.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Document.Files">
+            <summary>
+            Files to process
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Document.Tags">
+            <summary>
+            Tags to apply to the memories extracted from the files uploaded.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Document.AddFile(System.String)">
+            <summary>
+            Add a file to the internal collection. If the file path is already in the list, the call is ignored.
+            If a file with the same name (ignoring the path) already exists, the system generates a new unique
+            file name, using the path string, anonymizing the path with a SHA algorithm.
+            </summary>
+            <param name="filePath">Full file path</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Document.AddFiles(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Add a list of files to the internal collection. If any of file paths is already in the list, such file is ignored.
+            If a file with the same name (ignoring the path) already exists, the system generates a new unique
+            file name, using the path string, anonymizing the path with a SHA algorithm.
+            </summary>
+            <param name="filePaths">List of paths</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Document.AddFiles(System.String[])">
+            <summary>
+            Add a list of files to the internal collection. If any of file paths is already in the list, such file is ignored.
+            If a file with the same name (ignoring the path) already exists, the system generates a new unique
+            file name, using the path string, anonymizing the path with a SHA algorithm.
+            </summary>
+            <param name="filePaths">List of paths</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Document.AddStream(System.String,System.IO.Stream)">
+            <summary>
+            Add a stream content to the list of files to upload. If the file name already exists,
+            a new name is generated, keeping both streams.
+            </summary>
+            <param name="fileName">Name of the stream</param>
+            <param name="content">Stream content</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Document.ValidateId(System.String)">
+            <summary>
+            Check for special chars to ensure the identifier is valid across multiple storage solutions.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Document.ReplaceInvalidChars(System.String)">
+            <summary>
+            Remove invalid chars from the input, replacing them with underscore.
+            For compatibility with most storage engines, only alphanumeric chars,
+            minus "-" and underscore "_" are considered valid.
+            </summary>
+            <param name="value">Value to sanitize</param>
+            <returns>Sanitized value</returns>
+        </member>
+        <member name="P:Microsoft.KernelMemory.DocumentUploadRequest.UploadedFile.FileName">
+            <summary>
+            Name of the file, without path.
+            Note: the file name can be useful for RAG, so it's better to persist original file names to provide context to LLMs.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.DocumentUploadRequest.UploadedFile.FileContent">
+            <summary>
+            File content
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.DocumentUploadRequest.Index">
+            <summary>
+            Name of the index where to store memories generated by the files uploaded.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.DocumentUploadRequest.DocumentId">
+            <summary>
+            Unique ID used for import pipeline and document ID.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.DocumentUploadRequest.Tags">
+            <summary>
+            Tags to apply to the memories extracted from the files uploaded.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.DocumentUploadRequest.Files">
+            <summary>
+            Files to process
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.DocumentUploadRequest.Steps">
+            <summary>
+            How to process the files, e.g. how to extract/chunk etc.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.DocumentUploadRequest.#ctor">
+            <summary>
+            Normal ctor
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.DocumentUploadRequest.#ctor(Microsoft.KernelMemory.Document,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Ctor used to translate a <see cref="T:Microsoft.KernelMemory.Document"/> instance to an upload request.
+            </summary>
+            <param name="document">Details about the document, e.g. IDs, names, content</param>
+            <param name="index">Index where to store the memories extracted from the document</param>
+            <param name="steps">How to process the files, e.g. how to extract/chunk etc.</param>
+        </member>
+        <member name="T:Microsoft.KernelMemory.Models.FileCollection">
+            <summary>
+            A list of files and streams, organized to guarantee a unique name, and ready for upload.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.Models.FileCollection._filePaths">
+            <summary>
+            List of files (to upload).
+            Key = unique file name, including path.
+            Value = file name without path, can be different from the original if different folders contain a file with the same name.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.Models.FileCollection._streams">
+            <summary>
+            List of streams to upload.
+            Key = unique file name, no path.
+            Value = content.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.Models.FileCollection._fileNames">
+            <summary>
+            List of unique file names, without path
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Models.FileCollection.CalculateSHA256(System.String)">
+            <summary>
+            .NET Core 2.0 SHA256 string generator
+            </summary>
+            <param name="value">String to hash</param>
+            <returns>Hash value</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Models.FileCollection.ToHexString(System.Byte[])">
+            <summary>
+            .NET Core 2.0 equivalent of Convert.ToHexString
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryAnswer.Question">
+            <summary>
+            Client question.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryAnswer.NoResultReason">
+            <summary>
+            Content of the answer.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryAnswer.Result">
+            <summary>
+            Content of the answer.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryAnswer.RelevantSources">
+            <summary>
+            List of the relevant sources used to produce the answer.
+            Key = Document ID
+            Value = List of partitions used from the document.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryAnswer.ToJson(System.Boolean)">
+            <summary>
+            Serialize using .NET JSON serializer, e.g. to avoid ambiguity
+            with other serializers and other options
+            </summary>
+            <param name="indented">Whether to keep the JSON readable, e.g. for debugging and views</param>
+            <returns>JSON serialization</returns>
+        </member>
+        <member name="T:Microsoft.KernelMemory.MemoryFilters">
+            <summary>
+            Factory for <see cref="T:Microsoft.KernelMemory.MemoryFilter"/>, to allow for a simpler syntax
+            Instead of: new MemoryFilter().ByDocument(id).ByTag(k, v)
+            Recommended: MemoryFilters.ByDocument(id).ByTag(k, v)
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.SearchResult.Query">
+            <summary>
+            Client question.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.SearchResult.NoResult">
+            <summary>
+            Whether the search didn't return any result
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.SearchResult.Results">
+            <summary>
+            List of the relevant sources used to produce the answer.
+            Key = Document ID
+            Value = List of partitions used from the document.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.SearchResult.ToJson(System.Boolean)">
+            <summary>
+            Serialize using .NET JSON serializer, e.g. to avoid ambiguity
+            with other serializers and other options
+            </summary>
+            <param name="indented">Whether to keep the JSON readable, e.g. for debugging and views</param>
+            <returns>JSON serialization</returns>
+        </member>
+        <member name="T:Microsoft.KernelMemory.TagCollectionExtensions">
+            <summary>
+            Extensions of the TagCollection class
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.TagCollectionExtensions.Clone(Microsoft.KernelMemory.TagCollection)">
+            <summary>
+            Return a copy of the tag collection, de-referenced from the source.
+            </summary>
+            <param name="tagCollection">Tag collection to clone</param>
+            <returns>New tag collection instance</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.TagCollectionExtensions.AddSyntheticTag(Microsoft.KernelMemory.TagCollection,System.String)">
+            <summary>
+            Add special tag for synthetic data generated by the pipeline.
+            </summary>
+            <param name="tagCollection">Tag collection to update</param>
+            <param name="value">Value of the synthetic tag, e.g. 'summary', 'whiteboard', etc.</param>
+            <returns>The tag collection instance</returns>
+        </member>
+        <member name="T:Microsoft.KernelMemory.Pipeline.DataPipeline">
+            <summary>
+            DataPipeline representation.
+            Note: this object could be generalized to support any kind of pipeline, for now it's tailored
+                  to specific design of SK memory indexer. You can use 'CustomData' to extend the logic.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Pipeline.DataPipeline.FileDetailsBase.Id">
+            <summary>
+            Unique Id
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Pipeline.DataPipeline.FileDetailsBase.Name">
+            <summary>
+            File name
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Pipeline.DataPipeline.FileDetailsBase.Size">
+            <summary>
+            File size
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Pipeline.DataPipeline.FileDetailsBase.MimeType">
+            <summary>
+            File (MIME) type
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Pipeline.DataPipeline.FileDetailsBase.ArtifactType">
+            <summary>
+            File (MIME) type
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Pipeline.DataPipeline.FileDetailsBase.PartitionNumber">
+            <summary>
+            If the file is a partition, which partition number in the list of partitions extracted from a file.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Pipeline.DataPipeline.FileDetailsBase.SectionNumber">
+            <summary>
+            If the file is a partition, from which document page/audio segment/video scene is it from.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Pipeline.DataPipeline.FileDetailsBase.Tags">
+            <summary>
+            File tags. Note, the data structure allows file tags to differ from the document tags.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Pipeline.DataPipeline.FileDetailsBase.ProcessedBy">
+            <summary>
+            List of handlers who have already processed this file
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Pipeline.DataPipeline.FileDetailsBase.LogEntries">
+            <summary>
+            Optional log describing how the file has been processed.
+            The list is meant to contain only important details, avoiding excessive/verbose
+            information that could affect the async queue performance.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.DataPipeline.FileDetailsBase.AlreadyProcessedBy(Microsoft.KernelMemory.Pipeline.IPipelineStepHandler,System.String)">
+            <summary>
+            Check whether this file has already been processed by the given handler
+            </summary>
+            <param name="handler">Handler instance</param>
+            <param name="subStep">Optional value used by handlers that process the same file multiple times, to distinguish each pass</param>
+            <returns>True if the handler already processed the file</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.DataPipeline.FileDetailsBase.MarkProcessedBy(Microsoft.KernelMemory.Pipeline.IPipelineStepHandler,System.String)">
+            <summary>
+            Mark the file as already processed by the given handler
+            </summary>
+            <param name="handler">Handler instance</param>
+            <param name="subStep">Optional value used by handlers that process the same file multiple times, to distinguish each pass</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.DataPipeline.FileDetailsBase.Log(Microsoft.KernelMemory.Pipeline.IPipelineStepHandler,System.String)">
+            <summary>
+            Add a new log entry, with some important information for the end user.
+            DO NOT STORE PII OR SECRETS here.
+            </summary>
+            <param name="handler">Handler sending the information to log</param>
+            <param name="text">Text to store for the end user</param>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Pipeline.DataPipeline.GeneratedFileDetails.ParentId">
+            <summary>
+            Unique Id
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Pipeline.DataPipeline.GeneratedFileDetails.SourcePartitionId">
+            <summary>
+            ID of the partition used to generate this file (if the file is derived from a partition)
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Pipeline.DataPipeline.GeneratedFileDetails.ContentSHA256">
+            <summary>
+            Deduplication hash used for consolidation tasks
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Pipeline.DataPipeline.FileDetails.GeneratedFiles">
+            <summary>
+            List of files generated of the main file
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Pipeline.DataPipeline.Index">
+            <summary>
+            Index where the data ingestion pipeline is working.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Pipeline.DataPipeline.DocumentId">
+            <summary>
+            Id of the document and the pipeline instance.
+            This value will persist throughout the execution and in the final data lineage used for citations.
+            The value can be empty, e.g. when the pipeline is used to act on an entire index.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Pipeline.DataPipeline.ExecutionId">
+            <summary>
+            Unique execution id. If the pipeline is executed again, this value will change.
+            A pipeline can be executed multiple time, e.g. to update a document, and each
+            execution has a different ID, which is used for consolidation tasks.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Pipeline.DataPipeline.Steps">
+            <summary>
+            Full list of the steps in this pipeline.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Pipeline.DataPipeline.RemainingSteps">
+            <summary>
+            List of the steps remaining.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Pipeline.DataPipeline.CompletedSteps">
+            <summary>
+            List of steps already completed.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Pipeline.DataPipeline.Tags">
+            <summary>
+            Document tags
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Pipeline.DataPipeline.ContextArguments">
+            <summary>
+            Unstructured dictionary available to support custom tasks and business logic.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Pipeline.DataPipeline.PreviousExecutionsToPurge">
+            <summary>
+            When uploading over an existing upload, we temporarily capture
+            here the previous data, which could be a list in case of several
+            concurrent updates. The data is eventually used to consolidate memory,
+            e.g. deleting deprecated memory records. During the consolidation
+            process the list is progressively emptied.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.DataPipeline.MoveToNextStep">
+            <summary>
+            Change the pipeline to the next step, returning the name of the next step to execute.
+            The name returned is used to choose the queue where the pipeline will be set.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.DataPipeline.RollbackToPreviousStep">
+            <summary>
+            Change the pipeline to the previous step, returning the name of the step to execute
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Pipeline.DataPipelinePointer.Index">
+            <summary>
+            Index where the data ingestion pipeline is working.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Pipeline.DataPipelinePointer.DocumentId">
+            <summary>
+            Id of the document and the pipeline instance.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Pipeline.DataPipelinePointer.ExecutionId">
+            <summary>
+            Id of the pipeline execution. When updating a document a new execution ID is generated,
+            and potential work left on the previous execution is abandoned.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Pipeline.DataPipelinePointer.Steps">
+            <summary>
+            List of all steps to be executed. Having a copy of the list allows to better handle
+            concurrent operations and scenarios where the pipeline file is corrupted/lost.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Pipeline.IPipelineOrchestrator.HandlerNames">
+            <summary>
+            List of handlers available.
+            The list might be populated asynchronously during the service bootstrap.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.IPipelineOrchestrator.AddHandlerAsync(Microsoft.KernelMemory.Pipeline.IPipelineStepHandler,System.Threading.CancellationToken)">
+            <summary>
+            Attach a handler for a specific task
+            </summary>
+            <param name="handler">Handler instance</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.IPipelineOrchestrator.TryAddHandlerAsync(Microsoft.KernelMemory.Pipeline.IPipelineStepHandler,System.Threading.CancellationToken)">
+            <summary>
+            Attach a handler for a specific task
+            </summary>
+            <param name="handler">Handler instance</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.IPipelineOrchestrator.ImportDocumentAsync(System.String,Microsoft.KernelMemory.DocumentUploadRequest,Microsoft.KernelMemory.Context.IContext,System.Threading.CancellationToken)">
+            <summary>
+            Upload a file and start the processing pipeline
+            </summary>
+            <param name="index">Index where memory is stored</param>
+            <param name="uploadRequest">Details about the file and how to import it</param>
+            <param name="context">Unstructured data supporting custom business logic in the current request.</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>Pipeline/Document ID</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.IPipelineOrchestrator.PrepareNewDocumentUpload(System.String,System.String,Microsoft.KernelMemory.TagCollection,System.Collections.Generic.IEnumerable{Microsoft.KernelMemory.DocumentUploadRequest.UploadedFile},System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Create a new pipeline value object for files upload
+            </summary>
+            <param name="index">Index where memory is stored</param>
+            <param name="documentId">Id of the pipeline instance. This value will persist throughout the pipeline and final data lineage used for citations.</param>
+            <param name="tags">List of key-value pairs, used to organize and label the memories. E.g. "type", "category", etc. Multiple values per key are allowed.</param>
+            <param name="contextArgs">Optional data to pass into pipeline handlers, mirroring IContext.Arguments used during web requests</param>
+            <param name="filesToUpload">List of files provided before starting the pipeline, to be uploaded into the container before starting.</param>
+            <returns>Pipeline representation</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.IPipelineOrchestrator.RunPipelineAsync(Microsoft.KernelMemory.Pipeline.DataPipeline,System.Threading.CancellationToken)">
+            <summary>
+            Start a new data pipeline execution
+            </summary>
+            <param name="pipeline">Pipeline to execute</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.IPipelineOrchestrator.ReadPipelineStatusAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Fetch the pipeline status from storage
+            </summary>
+            <param name="index">Index where memory is stored</param>
+            <param name="documentId">Id of the document and pipeline execution instance</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>Pipeline status if available</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.IPipelineOrchestrator.ReadPipelineSummaryAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Fetch the pipeline status from storage
+            </summary>
+            <param name="index">Index where memory is stored</param>
+            <param name="documentId">Id of the document and pipeline execution instance</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>Pipeline status if available</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.IPipelineOrchestrator.IsDocumentReadyAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Check if a document ID exists in a user memory and is ready for usage.
+            The logic checks if the uploaded document has been fully processed.
+            When the document exists in storage but is not processed yet, the method returns False.
+            </summary>
+            <param name="index">Index where memory is stored</param>
+            <param name="documentId">Document ID</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>True if the document has been successfully uploaded and imported</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.IPipelineOrchestrator.StopAllPipelinesAsync">
+            <summary>
+            Stop all the pipelines in progress
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.IPipelineOrchestrator.ReadFileAsStreamAsync(Microsoft.KernelMemory.Pipeline.DataPipeline,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Fetch a file from document storage, streaming its content and details
+            </summary>
+            <param name="pipeline">Pipeline containing the file</param>
+            <param name="fileName">Name of the file to fetch</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>File data</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.IPipelineOrchestrator.ReadFileAsync(Microsoft.KernelMemory.Pipeline.DataPipeline,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Fetch a file from document storage
+            </summary>
+            <param name="pipeline">Pipeline containing the file</param>
+            <param name="fileName">Name of the file to fetch</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.IPipelineOrchestrator.ReadTextFileAsync(Microsoft.KernelMemory.Pipeline.DataPipeline,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Fetch a file from document storage
+            </summary>
+            <param name="pipeline">Pipeline containing the file</param>
+            <param name="fileName">Name of the file to fetch</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.IPipelineOrchestrator.WriteTextFileAsync(Microsoft.KernelMemory.Pipeline.DataPipeline,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Write a text file from document storage
+            </summary>
+            <param name="pipeline">Pipeline containing the file</param>
+            <param name="fileName">Name of the file to fetch</param>
+            <param name="fileContent">File content</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.IPipelineOrchestrator.WriteFileAsync(Microsoft.KernelMemory.Pipeline.DataPipeline,System.String,System.BinaryData,System.Threading.CancellationToken)">
+            <summary>
+            Write a file from document storage
+            </summary>
+            <param name="pipeline">Pipeline containing the file</param>
+            <param name="fileName">Name of the file to fetch</param>
+            <param name="fileContent">File content</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Pipeline.IPipelineOrchestrator.EmbeddingGenerationEnabled">
+            <summary>
+            Whether the pipeline generates and saves the vectors/embeddings in the memory DBs.
+            When using a memory DB that automatically generates embeddings internally,
+            or performs semantic search internally anyway, this should be False,
+            and avoid generating embeddings that are not used.
+            Examples:
+            * you are using Azure AI Search "semantic search" without "vector search": in this
+              case you don't need embeddings because Azure AI Search uses a more advanced approach
+              internally.
+            * you are using a custom Memory DB connector that generates embeddings on the fly
+              when writing records and when searching: in this case you don't need the pipeline
+              to calculate embeddings, because your connector does all the work.
+            * you are using a basic "text search" and a DB without "vector search": in this case
+              embeddings would be unused, so it's better to disable them to save cost and latency.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.IPipelineOrchestrator.GetEmbeddingGenerators">
+            <summary>
+            Get list of embedding generators to use during the ingestion, e.g. to create
+            multiple vectors.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.IPipelineOrchestrator.GetMemoryDbs">
+            <summary>
+            Get list of memory DBs where to store embeddings.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.IPipelineOrchestrator.GetTextGenerator">
+            <summary>
+            Get the text generator used for prompts, synthetic data, answer generation, etc.
+            TODO: remove and inject dependency to handlers who need this
+            TODO: support multiple generators, for different tasks, with different cost/quality.
+            </summary>
+            <returns>Instance of the text generator</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.IPipelineOrchestrator.StartIndexDeletionAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Start an asynchronous job, via handlers, to delete a specified index
+            from vector and document storage. This might be a long-running
+            operation, hence the use of queue/handlers.
+            </summary>
+            <param name="index">Optional index name</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.IPipelineOrchestrator.StartDocumentDeletionAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Start an asynchronous job, via handlers, to delete a specified document
+            from memory, and update all derived memories. This might be a long running
+            operation, hence the use of queue/handlers.
+            </summary>
+            <param name="documentId">Document ID</param>
+            <param name="index">Optional index name</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Pipeline.IPipelineStepHandler.StepName">
+            <summary>
+            Name of the pipeline step assigned to the handler
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.IPipelineStepHandler.InvokeAsync(Microsoft.KernelMemory.Pipeline.DataPipeline,System.Threading.CancellationToken)">
+            <summary>
+            Method invoked by kernel memory orchestrators to process a pipeline.
+            The method is invoked only when the next step in the pipeline matches
+            with the name handled by the handler. See <see cref="M:Microsoft.KernelMemory.Pipeline.IPipelineOrchestrator.AddHandlerAsync(Microsoft.KernelMemory.Pipeline.IPipelineStepHandler,System.Threading.CancellationToken)"/>
+            </summary>
+            <param name="pipeline">Pipeline status</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>Whether the pipeline step has been processed successfully, and the new pipeline status to use moving forward</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.OrchestrationException.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.OrchestrationException.#ctor(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.OrchestrationException.#ctor(System.String,System.Exception)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.KernelMemory.Pipeline.PipelineException">
+            <summary>
+            Generic pipeline exception
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.PipelineException.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.PipelineException.#ctor(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.PipelineException.#ctor(System.String,System.Exception)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.KernelMemory.Pipeline.InvalidPipelineDataException">
+            <summary>
+            The pipeline data, e.g. the file storing the pipeline information, is invalid, corrupt
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.InvalidPipelineDataException.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.InvalidPipelineDataException.#ctor(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.InvalidPipelineDataException.#ctor(System.String,System.Exception)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.KernelMemory.Pipeline.PipelineNotFoundException">
+            <summary>
+            The pipeline data file doesn't exist. This might happen if the containing index is deleted.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.PipelineNotFoundException.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.PipelineNotFoundException.#ctor(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.PipelineNotFoundException.#ctor(System.String,System.Exception)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.Queue.IQueue.ConnectToQueueAsync(System.String,Microsoft.KernelMemory.Pipeline.Queue.QueueOptions,System.Threading.CancellationToken)">
+            <summary>
+            Connect to a queue and (optionally) start dispatching messages
+            </summary>
+            <param name="queueName">Name of the queue</param>
+            <param name="options">Options for the queue connection</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>Queue instance</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.Queue.IQueue.EnqueueAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Add a message to the queue
+            </summary>
+            <param name="message">Message content</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.Queue.IQueue.OnDequeue(System.Func{System.String,System.Threading.Tasks.Task{System.Boolean}})">
+            <summary>
+            Define the logic to execute when a new message is in the queue.
+            </summary>
+            <param name="processMessageAction">Async action to execute</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Pipeline.Queue.QueueClientFactory.Build">
+            <summary>
+            Connect to a new queue
+            </summary>
+            <returns>Queue instance</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Prompts.IPromptProvider.ReadPrompt(System.String)">
+            <summary>
+            Return a prompt content
+            </summary>
+            <param name="promptName">Prompt name</param>
+            <returns>Prompt string</returns>
+        </member>
+        <member name="T:Microsoft.KernelMemory.Search.ISearchClient">
+            <summary>
+            Common interface for the search client used by Kernel Memory
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Search.ISearchClient.SearchAsync(System.String,System.String,System.Collections.Generic.ICollection{Microsoft.KernelMemory.MemoryFilter},System.Double,System.Int32,Microsoft.KernelMemory.Context.IContext,System.Threading.CancellationToken)">
+            <summary>
+            Search for relevant memories, returning a list of partitions with details/citations.
+            </summary>
+            <param name="index">Index (aka collection) to search</param>
+            <param name="query">Query used to search</param>
+            <param name="filters">Additional filters</param>
+            <param name="minRelevance">Minimum relevance of the results to return</param>
+            <param name="limit">Max number of results to return</param>
+            <param name="context">Optional context carrying optional information used by internal logic</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>List of relevant results matching the search criteria</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Search.ISearchClient.AskAsync(System.String,System.String,System.Collections.Generic.ICollection{Microsoft.KernelMemory.MemoryFilter},System.Double,Microsoft.KernelMemory.Context.IContext,System.Threading.CancellationToken)">
+            <summary>
+            Answer the given question, if possible, grounding the response with relevant memories matching the given criteria.
+            </summary>
+            <param name="index">Index (aka collection) to search for grounding information</param>
+            <param name="question">Question to answer</param>
+            <param name="filters">Filtering criteria to select memories to consider</param>
+            <param name="minRelevance">Minimum relevance of the memories considered</param>
+            <param name="context">Optional context carrying optional information used by internal logic</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>Answer to the given question</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Search.ISearchClient.ListIndexesAsync(System.Threading.CancellationToken)">
+            <summary>
+            List the available memory indexes (aka collections).
+            </summary>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>List of index names</returns>
+        </member>
+        <member name="T:Microsoft.KernelMemory.SearchClientConfig">
+            <summary>
+            Settings used by the default SearchClient
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.SearchClientConfig.MaxAskPromptSize">
+            <summary>
+            Maximum number of tokens accepted by the LLM used to generate answers.
+            The number includes the tokens used for the answer, e.g. when using
+            GPT4-32k, set this number to 32768.
+            If the value is not set or less than one, SearchClient will use the
+            max amount of tokens supported by the model in use.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.SearchClientConfig.MaxMatchesCount">
+            <summary>
+            Maximum number of relevant sources to consider when generating an answer.
+            The value is also used as the max number of results returned by SearchAsync
+            when passing a limit less or equal to zero.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.SearchClientConfig.AnswerTokens">
+            <summary>
+            How many tokens to reserve for the answer generated by the LLM.
+            E.g. if the LLM supports max 4000 tokens, and AnswerTokens is 300, then
+            the prompt sent to LLM will contain max 3700 tokens, composed by
+            prompt + question + grounding information retrieved from memory.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.SearchClientConfig.EmptyAnswer">
+            <summary>
+            Text to return when the LLM cannot produce an answer.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.SearchClientConfig.FactTemplate">
+            <summary>
+            Template use to inject facts into the RAG prompt.
+            Available placeholders:
+            * {{$content}}  : text from memory, i.e. chunk of text extracted from the source
+            * {{$source}}   : name of the source file, or URL of the web page, where the content originated.
+            * {{$relevance}}: relevance score of the current chunk of text
+            * {{$memoryId}} : ID of the memory record
+            * {{$tags}}     : list of tags, excluding reserved/internal ones
+            * {{$tag[X]}}   : tag X value(s), replaced with "-" if the value is empty
+            * {{$meta[X]}}  : value of memory record payload X field (memory payload is also known as metadata), replaced with "-" if the value is empty
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.SearchClientConfig.Temperature">
+            <summary>
+            Number between 0.0 and 2.0. It controls the randomness of the completion.
+            The higher the temperature, the more random the completion.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.SearchClientConfig.TopP">
+            <summary>
+            Number between 0.0 and 2.0. It controls the diversity of the completion.
+            The higher the TopP, the more diverse the completion.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.SearchClientConfig.PresencePenalty">
+            <summary>
+            Number between -2.0 and 2.0. Positive values penalize new tokens based on whether
+            they appear in the text so far, increasing the model's likelihood to talk about
+            new topics.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.SearchClientConfig.FrequencyPenalty">
+            <summary>
+            Number between -2.0 and 2.0. Positive values penalize new tokens based on their
+            existing frequency in the text so far, decreasing the model's likelihood to repeat
+            the same line verbatim.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.SearchClientConfig.StopSequences">
+            <summary>
+            Up to 4 sequences where the completion will stop generating further tokens.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.SearchClientConfig.TokenSelectionBiases">
+            <summary>
+            Modify the likelihood of specified tokens appearing in the completion.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.SearchClientConfig.UseContentModeration">
+            <summary>
+            Whether to check is the generated answers are safe.
+            A content moderation service must be present in the system.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.SearchClientConfig.ModeratedAnswer">
+            <summary>
+            Answer to return when AI generates content considered unsafe by the
+            text moderation service.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.SearchClientConfig.Validate">
+            <summary>
+            Verify that the current state is valid.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions.HasService``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Check if the service collection contains a descriptor for the given type
+            </summary>
+            <param name="services">Service Collection</param>
+            <typeparam name="T">Type required</typeparam>
+            <returns>True when the service collection contains T</returns>
+        </member>
+        <member name="T:Microsoft.Extensions.Configuration.ConfigurationExtensions">
+            <summary>
+            Microsoft.Extensions.Configuration.IConfiguration extension methods.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.ConfigurationExtensions.BindSection(Microsoft.Extensions.Configuration.IConfiguration,System.String,System.Object)">
+            <summary>
+            Populate the instance with data from the configuration, at the given key,
+            returning the configuration instance to chain multiple calls.
+            </summary>
+            <param name="configuration">Configuration object</param>
+            <param name="key">Key pointing to the data to load</param>
+            <param name="instance">Object to populate</param>
+            <returns>Configuration instance</returns>
+        </member>
+        <member name="T:Microsoft.SemanticKernel.KernelFunctionExtensions">
+            <summary>
+            Semantic Kernel function extensions.
+            </summary>
+        </member>
+        <member name="M:Microsoft.SemanticKernel.KernelFunctionExtensions.InvokeAsync(Microsoft.SemanticKernel.KernelFunction,Microsoft.SemanticKernel.Kernel,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Invokes the semantic function passing a string in input.
+            </summary>
+            <param name="function">Function being invoked</param>
+            <param name="kernel">Semantic Kernel instance</param>
+            <param name="text">String input to pass to the function</param>
+            <param name="cancellationToken">Task cancellation token</param>
+            <returns>Result returned by the function call</returns>
+        </member>
+        <member name="T:Microsoft.SemanticKernel.AI.Embeddings.TextEmbeddingGenerationExtensions">
+            <summary>
+            Extension methods for ITextEmbeddingGeneration
+            </summary>
+        </member>
+        <member name="M:Microsoft.SemanticKernel.AI.Embeddings.TextEmbeddingGenerationExtensions.GenerateEmbeddingAsync(Microsoft.SemanticKernel.Embeddings.ITextEmbeddingGenerationService,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Generate the embedding vector for a single string
+            </summary>
+            <param name="generator">Embedding generator</param>
+            <param name="text">Text to calculate the embedding for</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>Embedding vector</returns>
+        </member>
+    </members>
+</doc>

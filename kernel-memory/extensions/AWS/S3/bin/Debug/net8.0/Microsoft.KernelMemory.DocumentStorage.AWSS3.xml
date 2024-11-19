@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.KernelMemory.DocumentStorage.AWSS3</name>
+    </assembly>
+    <members>
+        <member name="P:Microsoft.KernelMemory.AWSS3Config.AccessKey">
+            <summary>
+            AWS IAM Access Key (aka Key Name)
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AWSS3Config.SecretAccessKey">
+            <summary>
+            AWS IAM Secret Access Key (aka Password)
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AWSS3Config.Endpoint">
+            <summary>
+            AWS S3 endpoint, e.g. https://s3.us-west-2.amazonaws.com
+            You can use S3 compatible services and dev tools like S3 Ninja.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AWSS3Config.BucketName">
+            <summary>
+            S3 bucket name
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.DocumentStorage.AWSS3.AWSS3Storage.CreateIndexDirectoryAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.DocumentStorage.AWSS3.AWSS3Storage.DeleteIndexDirectoryAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.DocumentStorage.AWSS3.AWSS3Storage.CreateDocumentDirectoryAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.DocumentStorage.AWSS3.AWSS3Storage.EmptyDocumentDirectoryAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.DocumentStorage.AWSS3.AWSS3Storage.DeleteDocumentDirectoryAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.DocumentStorage.AWSS3.AWSS3Storage.WriteFileAsync(System.String,System.String,System.String,System.IO.Stream,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.DocumentStorage.AWSS3.AWSS3Storage.ReadFileAsync(System.String,System.String,System.String,System.Boolean,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.DocumentStorage.AWSS3.AWSS3Storage.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.KernelMemory.KernelMemoryBuilderExtensions">
+            <summary>
+            Kernel Memory builder extensions
+            </summary>
+        </member>
+        <member name="T:Microsoft.KernelMemory.DependencyInjection">
+            <summary>
+            .NET IServiceCollection dependency injection extensions.
+            </summary>
+        </member>
+    </members>
+</doc>

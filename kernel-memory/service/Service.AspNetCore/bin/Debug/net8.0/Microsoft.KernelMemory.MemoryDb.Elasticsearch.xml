@@ -1,0 +1,367 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.KernelMemory.MemoryDb.Elasticsearch</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.KernelMemory.KernelMemoryBuilderExtensions">
+            <summary>
+            Kernel Memory builder extensions
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryBuilderExtensions.WithElasticsearchMemoryDb(Microsoft.KernelMemory.IKernelMemoryBuilder,Microsoft.KernelMemory.ElasticsearchConfig)">
+            <summary>
+            Kernel Memory Builder extension method to add the Elasticsearch memory connector.
+            </summary>
+            <param name="builder">KM builder instance</param>
+            <param name="configuration">Elasticsearch configuration</param>"
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryBuilderExtensions.WithElasticsearch(Microsoft.KernelMemory.IKernelMemoryBuilder,System.Action{Microsoft.KernelMemory.MemoryDb.Elasticsearch.ElasticsearchConfigBuilder})">
+            <summary>
+            Extension method to add the Elasticsearch memory connector.
+            </summary>
+            <param name="builder">KM builder instance</param>
+            <param name="configure">Action to configure Elasticsearch</param>
+        </member>
+        <member name="T:Microsoft.KernelMemory.DependencyInjection">
+            <summary>
+            .NET IServiceCollection dependency injection extensions.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.DependencyInjection.AddElasticsearchAsMemoryDb(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.KernelMemory.ElasticsearchConfig)">
+            <summary>
+            Inject Elasticsearch as the default implementation of IMemoryDb
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.DependencyInjection.AddElasticsearchAsMemoryDb(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.KernelMemory.MemoryDb.Elasticsearch.ElasticsearchConfigBuilder})">
+            <summary>
+            Inject Elasticsearch as the default implementation of IMemoryDb
+            </summary>
+        </member>
+        <member name="T:Microsoft.KernelMemory.ElasticsearchConfig">
+            <summary>
+            The configuration for the Elasticsearch connector.
+            Use <see cref="T:Microsoft.KernelMemory.MemoryDb.Elasticsearch.ElasticsearchConfigBuilder"/> to instantiate and configure this class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.ElasticsearchConfig.CertificateFingerPrint">
+            <summary>
+            The certificate fingerprint for the Elasticsearch instance.
+            See <see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/configuring-stack-security.html#_use_the_ca_fingerprint_5"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.ElasticsearchConfig.Endpoint">
+            <summary>
+            The Elasticsearch endpoint.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.ElasticsearchConfig.UserName">
+            <summary>
+            The username used to connect to Elasticsearch.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.ElasticsearchConfig.Password">
+            <summary>
+            The password used to connect to Elasticsearch.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.ElasticsearchConfig.IndexPrefix">
+            <summary>
+            The prefix to be prepend to the index names in Elasticsearch.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.ElasticsearchConfig.ShardCount">
+            <summary>
+            The number of shards to use for the Elasticsearch index.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.ElasticsearchConfig.ReplicaCount">
+            <summary>
+            The number of replicas to use for the Elasticsearch index.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.ElasticsearchConfig.ConfigureProperties">
+            <summary>
+            A delegate to configure the Elasticsearch index properties.
+            </summary>
+        </member>
+        <member name="T:Microsoft.KernelMemory.MemoryDb.Elasticsearch.ElasticsearchConfigBuilder">
+            <summary>
+            The builder for ElasticsearchConfig.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryDb.Elasticsearch.ElasticsearchConfigBuilder.DefaultEndpoint">
+            <summary>
+            The default Elasticsearch endpoint.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryDb.Elasticsearch.ElasticsearchConfigBuilder.DefaultUserName">
+            <summary>
+            The default Elasticsearch username.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryDb.Elasticsearch.ElasticsearchConfigBuilder.DefaultSettingsSection">
+            <summary>
+            The name of the section that will contain the configuration for Elasticsearch
+            (e.g. appSettings.json, user secrets, etc.).
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryDb.Elasticsearch.ElasticsearchConfigBuilder.DefaultIndexPrefix">
+            <summary>
+            The default prefix to be prepend to the index names in Elasticsearch.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Elasticsearch.ElasticsearchConfigBuilder.#ctor">
+            <summary>
+            The default constructor.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Elasticsearch.ElasticsearchConfigBuilder.WithEndpoint(System.String)">
+            <summary>
+            Sets Elasticsearch endpoint to connect to.
+            </summary>
+            <param name="endpoint"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Elasticsearch.ElasticsearchConfigBuilder.WithUserNameAndPassword(System.String,System.String)">
+            <summary>
+            Sets the username and password used to connect to Elasticsearch.
+            </summary>
+            <param name="userName"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Elasticsearch.ElasticsearchConfigBuilder.WithCertificateFingerPrint(System.String)">
+            <summary>
+            Sets the certificate fingerprint used to communicate with Elasticsearch.
+            See <see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/configuring-stack-security.html#_use_the_ca_fingerprint_5"/>.
+            </summary>
+            <param name="certificateFingerPrint"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Elasticsearch.ElasticsearchConfigBuilder.WithIndexPrefix(System.String)">
+            <summary>
+            Sets the prefix to be prepend to the index names in Elasticsearch.
+            </summary>
+            <param name="indexPrefix"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Elasticsearch.ElasticsearchConfigBuilder.Validate">
+            <summary>
+            Validates the Elasticsearch configuration.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Elasticsearch.ElasticsearchConfigBuilder.WithConfiguration(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Reads the Elasticsearch configuration from the Services section of KernelMemory's configuration.
+            </summary>
+            <param name="configuration"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Elasticsearch.ElasticsearchConfigBuilder.WithShardsAndReplicas(System.Int32,System.Int32)">
+            <summary>
+            Sets the number of shards and replicas to use for the Elasticsearch index.
+            </summary>
+            <param name="shards"></param>
+            <param name="replicas"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Elasticsearch.ElasticsearchConfigBuilder.Build(System.Boolean)">
+            <summary>
+            Builds the ElasticsearchConfig.
+            </summary>
+            <param name="skipValidation">Indicates if validation should be skipped.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.KernelMemory.MemoryDb.Elasticsearch.ElasticsearchMemory">
+            <summary>
+            Elasticsearch connector for Kernel Memory.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Elasticsearch.ElasticsearchMemory.#ctor(Microsoft.KernelMemory.ElasticsearchConfig,Microsoft.KernelMemory.AI.ITextEmbeddingGenerator,Elastic.Clients.Elasticsearch.ElasticsearchClient,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Create a new instance of Elasticsearch KM connector
+            </summary>
+            <param name="config">Elasticsearch configuration</param>
+            <param name="embeddingGenerator">Embedding generator</param>
+            <param name="client">Elasticsearch client</param>
+            <param name="loggerFactory">Application logger factory</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Elasticsearch.ElasticsearchMemory.CreateIndexAsync(System.String,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Elasticsearch.ElasticsearchMemory.GetIndexesAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Elasticsearch.ElasticsearchMemory.DeleteIndexAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Elasticsearch.ElasticsearchMemory.DeleteAsync(System.String,Microsoft.KernelMemory.MemoryStorage.MemoryRecord,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Elasticsearch.ElasticsearchMemory.UpsertAsync(System.String,Microsoft.KernelMemory.MemoryStorage.MemoryRecord,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Elasticsearch.ElasticsearchMemory.GetSimilarListAsync(System.String,System.String,System.Collections.Generic.ICollection{Microsoft.KernelMemory.MemoryFilter},System.Double,System.Int32,System.Boolean,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Elasticsearch.ElasticsearchMemory.GetListAsync(System.String,System.Collections.Generic.ICollection{Microsoft.KernelMemory.MemoryFilter},System.Int32,System.Boolean,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.KernelMemory.MemoryDb.Elasticsearch.ElasticsearchException">
+            <summary>
+            Base exception for all the exceptions thrown by the Elasticsearch connector for KernelMemory
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Elasticsearch.ElasticsearchException.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Elasticsearch.ElasticsearchException.#ctor(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Elasticsearch.ElasticsearchException.#ctor(System.String,System.Exception)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.KernelMemory.MemoryDb.Elasticsearch.InvalidIndexNameException">
+            <summary>
+            Exception thrown when an index name does pass Elasticsearch validation.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Elasticsearch.InvalidIndexNameException.#ctor(System.String,System.Collections.Generic.IEnumerable{System.String},System.Exception)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Elasticsearch.InvalidIndexNameException.#ctor(System.ValueTuple{System.String,System.Collections.Generic.IEnumerable{System.String}},System.Exception)">
+            <inheritdoc/>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryDb.Elasticsearch.InvalidIndexNameException.IndexName">
+            <summary>
+            The index name that failed validation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryDb.Elasticsearch.InvalidIndexNameException.Errors">
+            <summary>
+            The list of errors that caused the validation to fail.
+            </summary>
+        </member>
+        <member name="T:Microsoft.KernelMemory.MemoryDb.Elasticsearch.Internals.ElasticsearchConfigExtensions">
+            <summary>
+            Elasticsearch configuration extensions.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Elasticsearch.Internals.ElasticsearchConfigExtensions.ToElasticsearchClientSettings(Microsoft.KernelMemory.ElasticsearchConfig)">
+            <summary>
+            Converts an ElasticsearchConfig to a ElasticsearchClientSettings that can be used
+            to instantiate <see cref="T:Elastic.Clients.Elasticsearch.ElasticsearchClient"/>.
+            </summary>
+        </member>
+        <member name="T:Microsoft.KernelMemory.MemoryDb.Elasticsearch.Internals.ElasticsearchMemoryRecord">
+            <summary>
+            Elasticsearch record.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryDb.Elasticsearch.Internals.ElasticsearchMemoryRecord.TagsField">
+            <inheritdoc/>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryDb.Elasticsearch.Internals.ElasticsearchMemoryRecord.TagsName">
+            <inheritdoc/>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryDb.Elasticsearch.Internals.ElasticsearchMemoryRecord.TagsValue">
+            <inheritdoc/>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryDb.Elasticsearch.Internals.ElasticsearchMemoryRecord.Id">
+            <summary>
+            TBC
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryDb.Elasticsearch.Internals.ElasticsearchMemoryRecord.Tags">
+            <summary>
+            TBC
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryDb.Elasticsearch.Internals.ElasticsearchMemoryRecord.Payload">
+            <summary>
+            TBC
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryDb.Elasticsearch.Internals.ElasticsearchMemoryRecord.Content">
+            <summary>
+            TBC
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryDb.Elasticsearch.Internals.ElasticsearchMemoryRecord.Vector">
+            <summary>
+            TBC
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Elasticsearch.Internals.ElasticsearchMemoryRecord.ToMemoryRecord(System.Boolean)">
+            <summary>
+            TBC
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Elasticsearch.Internals.ElasticsearchMemoryRecord.FromMemoryRecord(Microsoft.KernelMemory.MemoryStorage.MemoryRecord)">
+            <summary>
+            TBC
+            </summary>
+            <param name="record"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.KernelMemory.MemoryDb.Elasticsearch.Internals.ElasticsearchTag">
+            <summary>
+            An Elasticsearch tag.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Elasticsearch.Internals.ElasticsearchTag.#ctor(System.String,System.String)">
+            <summary>
+            Instantiates a new instance of <see cref="T:Microsoft.KernelMemory.MemoryDb.Elasticsearch.Internals.ElasticsearchTag"/>.
+            </summary>
+            <param name="name"></param>
+            <param name="value"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryDb.Elasticsearch.Internals.ElasticsearchTag.Name">
+            <summary>
+            The name of this tag.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MemoryDb.Elasticsearch.Internals.ElasticsearchTag.Value">
+            <summary>
+            The value of this tag.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Elasticsearch.Internals.ElasticsearchTag.ToString">
+            <inheritedDoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Elasticsearch.Internals.IndexNameHelper.TryConvert(System.String,Microsoft.KernelMemory.ElasticsearchConfig,System.ValueTuple{System.String,System.Collections.Generic.IEnumerable{System.String}}@)">
+            <summary>
+            Tries to convert the given index name to a valid Elasticsearch index name.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Elasticsearch.Internals.IndexNameHelper.Convert(System.String,Microsoft.KernelMemory.ElasticsearchConfig)">
+            <summary>
+            Converts the given index name to a valid Elasticsearch index name.
+            Throws an exception if the index name is invalid.
+            </summary>
+            <exception cref="T:Microsoft.KernelMemory.MemoryDb.Elasticsearch.InvalidIndexNameException"></exception>
+        </member>
+        <member name="T:Microsoft.KernelMemory.MemoryDb.Elasticsearch.Internals.MemoryFilterExtensions">
+            <summary>
+            Extensions methods for MemoryFilter.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Elasticsearch.Internals.MemoryFilterExtensions.ToDebugString(Microsoft.KernelMemory.MemoryFilter)">
+            <summary>
+            Displays the MemoryFilter in a human-readable format.
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Elasticsearch.Internals.MemoryFilterExtensions.ToDebugString(System.Collections.Generic.IEnumerable{Microsoft.KernelMemory.MemoryFilter})">
+            <summary>
+            Displays the MemoryFilter(s) in a human-readable format.
+            </summary>
+            <param name="filters"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

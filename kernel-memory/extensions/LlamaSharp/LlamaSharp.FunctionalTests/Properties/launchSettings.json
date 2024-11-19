@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "LlamaSharp.FunctionalTests": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:50247;http://localhost:50248"
+    }
+  }
+}

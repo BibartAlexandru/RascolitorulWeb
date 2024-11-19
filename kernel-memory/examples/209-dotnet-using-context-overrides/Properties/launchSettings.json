@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "209-dotnet-using-context-overrides": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:50277;http://localhost:50278"
+    }
+  }
+}

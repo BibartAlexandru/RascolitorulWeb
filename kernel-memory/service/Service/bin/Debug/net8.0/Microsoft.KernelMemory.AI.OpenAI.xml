@@ -1,0 +1,322 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.KernelMemory.AI.OpenAI</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.KernelMemory.KernelMemoryBuilderExtensions">
+            <summary>
+            Kernel Memory builder extensions
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryBuilderExtensions.WithOpenAIDefaults(Microsoft.KernelMemory.IKernelMemoryBuilder,System.String,System.String,Microsoft.KernelMemory.AI.ITextTokenizer,Microsoft.KernelMemory.AI.ITextTokenizer,Microsoft.Extensions.Logging.ILoggerFactory,System.Boolean,System.Net.Http.HttpClient)">
+            <summary>
+            Use default OpenAI models and settings for ingestion and retrieval.
+            </summary>
+            <param name="builder">Kernel Memory builder</param>
+            <param name="apiKey">OpenAI API Key</param>
+            <param name="organization">OpenAI Organization ID (usually not required)</param>
+            <param name="textGenerationTokenizer">Tokenizer used to count tokens used by prompts</param>
+            <param name="textEmbeddingTokenizer">Tokenizer used to count tokens sent to the embedding generator</param>
+            <param name="loggerFactory">.NET Logger factory</param>
+            <param name="onlyForRetrieval">Whether to use OpenAI defaults only for ingestion, and not for retrieval (search and ask API)</param>
+            <param name="httpClient">Custom <see cref="T:System.Net.Http.HttpClient"/> for HTTP requests.</param>
+            <returns>KM builder instance</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryBuilderExtensions.WithOpenAI(Microsoft.KernelMemory.IKernelMemoryBuilder,Microsoft.KernelMemory.OpenAIConfig,Microsoft.KernelMemory.AI.ITextTokenizer,Microsoft.KernelMemory.AI.ITextTokenizer,System.Boolean,System.Net.Http.HttpClient)">
+            <summary>
+            Use OpenAI models for ingestion and retrieval
+            </summary>
+            <param name="builder">Kernel Memory builder</param>
+            <param name="config">OpenAI settings</param>
+            <param name="textGenerationTokenizer">Tokenizer used to count tokens used by prompts</param>
+            <param name="textEmbeddingTokenizer">Tokenizer used to count tokens sent to the embedding generator</param>
+            <param name="onlyForRetrieval">Whether to use OpenAI only for ingestion, not for retrieval (search and ask API)</param>
+            <param name="httpClient">Custom <see cref="T:System.Net.Http.HttpClient"/> for HTTP requests.</param>
+            <returns>KM builder instance</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryBuilderExtensions.WithOpenAI(Microsoft.KernelMemory.IKernelMemoryBuilder,Microsoft.KernelMemory.OpenAIConfig,OpenAI.OpenAIClient,Microsoft.KernelMemory.AI.ITextTokenizer,Microsoft.KernelMemory.AI.ITextTokenizer,System.Boolean)">
+            <summary>
+            Use OpenAI models for ingestion and retrieval
+            </summary>
+            <param name="builder">Kernel Memory builder</param>
+            <param name="config">OpenAI settings</param>
+            <param name="openAIClient">Custom pre-configured OpenAI client</param>
+            <param name="textGenerationTokenizer">Tokenizer used to count tokens used by prompts</param>
+            <param name="textEmbeddingTokenizer">Tokenizer used to count tokens sent to the embedding generator</param>
+            <param name="onlyForRetrieval">Whether to use OpenAI only for ingestion, not for retrieval (search and ask API)</param>
+            <returns>KM builder instance</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryBuilderExtensions.WithOpenAITextEmbeddingGeneration(Microsoft.KernelMemory.IKernelMemoryBuilder,Microsoft.KernelMemory.OpenAIConfig,Microsoft.KernelMemory.AI.ITextTokenizer,System.Boolean,System.Net.Http.HttpClient)">
+            <summary>
+            Use OpenAI to generate text embedding.
+            </summary>
+            <param name="builder">Kernel Memory builder</param>
+            <param name="config">OpenAI settings</param>
+            <param name="textTokenizer">Tokenizer used to count tokens sent to the embedding generator</param>
+            <param name="onlyForRetrieval">Whether to use OpenAI only for ingestion, not for retrieval (search and ask API)</param>
+            <param name="httpClient">Custom <see cref="T:System.Net.Http.HttpClient"/> for HTTP requests.</param>
+            <returns>KM builder instance</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryBuilderExtensions.WithOpenAITextEmbeddingGeneration(Microsoft.KernelMemory.IKernelMemoryBuilder,Microsoft.KernelMemory.OpenAIConfig,OpenAI.OpenAIClient,Microsoft.KernelMemory.AI.ITextTokenizer,System.Boolean)">
+            <summary>
+            Use OpenAI to generate text embedding.
+            </summary>
+            <param name="builder">Kernel Memory builder</param>
+            <param name="config">OpenAI settings</param>
+            <param name="openAIClient">Custom pre-configured OpenAI client</param>
+            <param name="textTokenizer">Tokenizer used to count tokens sent to the embedding generator</param>
+            <param name="onlyForRetrieval">Whether to use OpenAI only for ingestion, not for retrieval (search and ask API)</param>
+            <returns>KM builder instance</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryBuilderExtensions.WithOpenAITextGeneration(Microsoft.KernelMemory.IKernelMemoryBuilder,Microsoft.KernelMemory.OpenAIConfig,Microsoft.KernelMemory.AI.ITextTokenizer,System.Net.Http.HttpClient)">
+            <summary>
+            Use OpenAI to generate text, e.g. answers and summaries.
+            </summary>
+            <param name="builder">Kernel Memory builder</param>
+            <param name="config">OpenAI settings</param>
+            <param name="textTokenizer">Tokenizer used to count tokens used by prompts</param>
+            <param name="httpClient">Custom <see cref="T:System.Net.Http.HttpClient"/> for HTTP requests.</param>
+            <returns>KM builder instance</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryBuilderExtensions.WithOpenAITextGeneration(Microsoft.KernelMemory.IKernelMemoryBuilder,Microsoft.KernelMemory.OpenAIConfig,OpenAI.OpenAIClient,Microsoft.KernelMemory.AI.ITextTokenizer)">
+            <summary>
+            Use OpenAI to generate text, e.g. answers and summaries.
+            </summary>
+            <param name="builder">Kernel Memory builder</param>
+            <param name="config">OpenAI settings</param>
+            <param name="openAIClient">Custom pre-configured OpenAI client</param>
+            <param name="textTokenizer">Tokenizer used to count tokens used by prompts</param>
+            <returns>KM builder instance</returns>
+        </member>
+        <member name="T:Microsoft.KernelMemory.DependencyInjection">
+            <summary>
+            .NET IServiceCollection dependency injection extensions.
+            </summary>
+        </member>
+        <member name="T:Microsoft.KernelMemory.AI.OpenAI.OpenAITextEmbeddingGenerator">
+             <summary>
+             Text embedding generator. The class can be used with any service
+             supporting OpenAI HTTP schema.
+            
+             Note: does not support model name override via request context
+                   see https://github.com/microsoft/semantic-kernel/issues/9337
+             </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AI.OpenAI.OpenAITextEmbeddingGenerator.MaxTokens">
+            <inheritdoc/>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AI.OpenAI.OpenAITextEmbeddingGenerator.MaxBatchSize">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.OpenAI.OpenAITextEmbeddingGenerator.#ctor(Microsoft.KernelMemory.OpenAIConfig,Microsoft.KernelMemory.AI.ITextTokenizer,Microsoft.Extensions.Logging.ILoggerFactory,System.Net.Http.HttpClient)">
+            <summary>
+            Create a new instance.
+            </summary>
+            <param name="config">Client and model configuration</param>
+            <param name="textTokenizer">Text tokenizer, possibly matching the model used</param>
+            <param name="loggerFactory">App logger factory</param>
+            <param name="httpClient">Optional HTTP client with custom settings</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.OpenAI.OpenAITextEmbeddingGenerator.#ctor(Microsoft.KernelMemory.OpenAIConfig,OpenAI.OpenAIClient,Microsoft.KernelMemory.AI.ITextTokenizer,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Create a new instance, using the given OpenAI pre-configured client.
+            This constructor allows to have complete control on the OpenAI client definition.
+            </summary>
+            <param name="config">Model configuration</param>
+            <param name="openAIClient">Custom OpenAI client, already configured</param>
+            <param name="textTokenizer">Text tokenizer, possibly matching the model used</param>
+            <param name="loggerFactory">App logger factory</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.OpenAI.OpenAITextEmbeddingGenerator.#ctor(Microsoft.KernelMemory.OpenAIConfig,Microsoft.SemanticKernel.Embeddings.ITextEmbeddingGenerationService,Microsoft.KernelMemory.AI.ITextTokenizer,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Create a new instance, using the given SK Embedding service.
+            This constructor allows to easily reuse SK embedding service definitions.
+            </summary>
+            <param name="config">Model configuration</param>
+            <param name="skService">SK embedding service</param>
+            <param name="textTokenizer">Text tokenizer, possibly matching the model used</param>
+            <param name="loggerFactory">App logger factory</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.OpenAI.OpenAITextEmbeddingGenerator.CountTokens(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.OpenAI.OpenAITextEmbeddingGenerator.GetTokens(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.OpenAI.OpenAITextEmbeddingGenerator.GenerateEmbeddingAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.OpenAI.OpenAITextEmbeddingGenerator.GenerateEmbeddingBatchAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.KernelMemory.AI.OpenAI.OpenAITextGenerator">
+             <summary>
+             Text generator, supporting OpenAI text and chat completion. The class can be used with any service
+             supporting OpenAI HTTP schema, such as LM Studio HTTP API.
+            
+             Note: does not support model name override via request context
+                   see https://github.com/microsoft/semantic-kernel/issues/9337
+             </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AI.OpenAI.OpenAITextGenerator.MaxTokenTotal">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.OpenAI.OpenAITextGenerator.#ctor(Microsoft.KernelMemory.OpenAIConfig,Microsoft.KernelMemory.AI.ITextTokenizer,Microsoft.Extensions.Logging.ILoggerFactory,System.Net.Http.HttpClient)">
+            <summary>
+            Create a new instance.
+            </summary>
+            <param name="config">Client and model configuration</param>
+            <param name="textTokenizer">Text tokenizer, possibly matching the model used</param>
+            <param name="loggerFactory">App logger factory</param>
+            <param name="httpClient">Optional HTTP client with custom settings</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.OpenAI.OpenAITextGenerator.#ctor(Microsoft.KernelMemory.OpenAIConfig,OpenAI.OpenAIClient,Microsoft.KernelMemory.AI.ITextTokenizer,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Create a new instance, using the given OpenAI pre-configured client
+            </summary>
+            <param name="config">Model configuration</param>
+            <param name="openAIClient">Custom OpenAI client, already configured</param>
+            <param name="textTokenizer">Text tokenizer, possibly matching the model used</param>
+            <param name="loggerFactory">App logger factory</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.OpenAI.OpenAITextGenerator.#ctor(Microsoft.KernelMemory.OpenAIConfig,Microsoft.SemanticKernel.Connectors.OpenAI.OpenAIChatCompletionService,Microsoft.KernelMemory.AI.ITextTokenizer,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Create a new instance, using the given OpenAI pre-configured client
+            </summary>
+            <param name="config">Model configuration</param>
+            <param name="skClient">Custom Semantic Kernel client, already configured</param>
+            <param name="textTokenizer">Text tokenizer, possibly matching the model used</param>
+            <param name="loggerFactory">App logger factory</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.OpenAI.OpenAITextGenerator.CountTokens(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.OpenAI.OpenAITextGenerator.GetTokens(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.OpenAI.OpenAITextGenerator.GenerateTextAsync(System.String,Microsoft.KernelMemory.AI.TextGenerationOptions,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.KernelMemory.AI.OpenAI.GPT2Tokenizer">
+            <summary>
+            TikToken GPT2 tokenizer (gpt2.tiktoken)
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.OpenAI.GPT2Tokenizer.CountTokens(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.OpenAI.GPT2Tokenizer.GetTokens(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.KernelMemory.AI.OpenAI.GPT3Tokenizer">
+            <summary>
+            TikToken GPT3 tokenizer (p50k_base.tiktoken)
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.OpenAI.GPT3Tokenizer.CountTokens(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.OpenAI.GPT3Tokenizer.GetTokens(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.KernelMemory.AI.OpenAI.GPT4oTokenizer">
+            <summary>
+            GPT 4o / 4o mini tokenizer (cl200k_base.tiktoken + special tokens)
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.OpenAI.GPT4oTokenizer.CountTokens(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.OpenAI.GPT4oTokenizer.GetTokens(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.KernelMemory.AI.OpenAI.GPT4Tokenizer">
+            <summary>
+            GPT 3.5 and GPT 4 tokenizer (cl100k_base.tiktoken + special tokens)
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.OpenAI.GPT4Tokenizer.CountTokens(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.OpenAI.GPT4Tokenizer.GetTokens(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.KernelMemory.OpenAIConfig">
+            <summary>
+            OpenAI settings.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.OpenAIConfig.TextGenerationType">
+            <summary>
+            The type of OpenAI completion to use, either Text (legacy) or Chat.
+            When using Auto, the client uses OpenAI model names to detect the correct protocol.
+            Most OpenAI models use Chat. If you're using a non-OpenAI model, you might want to set this manually.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.OpenAIConfig.APIKey">
+            <summary>
+            OpenAI API key.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.OpenAIConfig.OrgId">
+            <summary>
+            Optional OpenAI Organization ID.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.OpenAIConfig.Endpoint">
+            <summary>
+            OpenAI HTTP endpoint. You may need to override this to work with
+            OpenAI compatible services like LM Studio.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.OpenAIConfig.TextModel">
+            <summary>
+            Model used for text generation. Chat models can be used too.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.OpenAIConfig.TextModelMaxTokenTotal">
+            <summary>
+            The max number of tokens supported by the text model.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.OpenAIConfig.EmbeddingModel">
+            <summary>
+            Model used to embedding generation/
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.OpenAIConfig.EmbeddingModelMaxTokenTotal">
+            <summary>
+            The max number of tokens supported by the embedding model.
+            Default to OpenAI ADA2 settings.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.OpenAIConfig.EmbeddingDimensions">
+            <summary>
+            The number of dimensions output embeddings should have.
+            Only supported in "text-embedding-3" and later models developed with
+            MRL, see https://arxiv.org/abs/2205.13147
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.OpenAIConfig.MaxEmbeddingBatchSize">
+             <summary>
+             Per documentation the max value is 2048, however, the default is lower (100)
+             to avoid sending too many tokens and being throttled.
+            
+             You can increase the value in your local configuration if needed.
+            
+             See https://platform.openai.com/docs/api-reference/embeddings/create.
+             </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.OpenAIConfig.MaxRetries">
+            <summary>
+            How many times to retry in case of throttling.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.OpenAIConfig.Validate">
+            <summary>
+            Verify that the current state is valid.
+            </summary>
+        </member>
+    </members>
+</doc>

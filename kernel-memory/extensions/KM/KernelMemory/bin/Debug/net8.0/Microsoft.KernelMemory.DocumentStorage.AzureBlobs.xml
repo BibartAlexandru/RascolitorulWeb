@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.KernelMemory.DocumentStorage.AzureBlobs</name>
+    </assembly>
+    <members>
+        <member name="M:Microsoft.KernelMemory.DocumentStorage.AzureBlobs.AzureBlobsStorage.CreateIndexDirectoryAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.DocumentStorage.AzureBlobs.AzureBlobsStorage.DeleteIndexDirectoryAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.DocumentStorage.AzureBlobs.AzureBlobsStorage.CreateDocumentDirectoryAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.DocumentStorage.AzureBlobs.AzureBlobsStorage.EmptyDocumentDirectoryAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.DocumentStorage.AzureBlobs.AzureBlobsStorage.DeleteDocumentDirectoryAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.DocumentStorage.AzureBlobs.AzureBlobsStorage.WriteFileAsync(System.String,System.String,System.String,System.IO.Stream,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.DocumentStorage.AzureBlobs.AzureBlobsStorage.ReadFileAsync(System.String,System.String,System.String,System.Boolean,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.DocumentStorage.AzureBlobs.AzureBlobsStorage.JoinPaths(System.String,System.String)">
+            <summary>
+            Join index name and document ID, using the platform specific logic, to calculate the directory name
+            </summary>
+            <param name="index">Index name, left side of the path</param>
+            <param name="documentId">Document ID, right side of the path (appended to index)</param>
+            <returns>Index name concatenated with Document Id into a single path</returns>
+        </member>
+        <member name="T:Microsoft.KernelMemory.KernelMemoryBuilderExtensions">
+            <summary>
+            Kernel Memory builder extensions
+            </summary>
+        </member>
+        <member name="T:Microsoft.KernelMemory.DependencyInjection">
+            <summary>
+            .NET IServiceCollection dependency injection extensions.
+            </summary>
+        </member>
+    </members>
+</doc>

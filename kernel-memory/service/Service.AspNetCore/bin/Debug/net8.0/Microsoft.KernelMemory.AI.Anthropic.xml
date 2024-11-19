@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.KernelMemory.AI.Anthropic</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.KernelMemory.AI.Anthropic.AnthropicConfig">
+            <summary>
+            Configuration for Text Generation with Anthropic
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AI.Anthropic.AnthropicConfig.Endpoint">
+            <summary>
+            Anthropic web service endpoint
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AI.Anthropic.AnthropicConfig.EndpointVersion">
+            <summary>
+            Anthropic endpoint version
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AI.Anthropic.AnthropicConfig.ApiKey">
+            <summary>
+            Api key needed to access the Anthropic API
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AI.Anthropic.AnthropicConfig.TextModelName">
+             <summary>
+             Name of the model to use for text generation
+             See https://docs.anthropic.com/claude/docs/models-overview
+            
+             Opus: most powerful model.
+             Sonnet: most balanced model between intelligence and speed.
+             Haiku: fastest and most compact model.
+             </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AI.Anthropic.AnthropicConfig.MaxTokenIn">
+            <summary>
+            This allows configuring the maximum token total that can be generated.
+            Default is 200k.
+            See https://docs.anthropic.com/claude/docs/models-overview
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AI.Anthropic.AnthropicConfig.MaxTokenOut">
+            <summary>
+            This allows configuring the maximum token total that can be generated.
+            Default is 4096.
+            See https://docs.anthropic.com/claude/docs/models-overview
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AI.Anthropic.AnthropicConfig.DefaultSystemPrompt">
+            <summary>
+            System prompt used when generating text
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AI.Anthropic.AnthropicConfig.HttpClientName">
+            <summary>
+            Optional client name for IHttpClientFactory, allowing to
+            inject a pre-configured client if needed.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.Anthropic.AnthropicConfig.Validate">
+            <summary>
+            Validate the configuration
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="T:Microsoft.KernelMemory.AI.Anthropic.AnthropicTextGeneration">
+            <summary>
+            Anthropic LLMs text generation client
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.Anthropic.AnthropicTextGeneration.#ctor(Microsoft.KernelMemory.AI.Anthropic.AnthropicConfig,Microsoft.KernelMemory.AI.ITextTokenizer,System.Net.Http.IHttpClientFactory,Microsoft.KernelMemory.Context.IContextProvider,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Create new instance of Anthropic client
+            </summary>
+            <param name="config">Client configuration, including credentials and model details</param>
+            <param name="textTokenizer">Tokenizer used to count tokens</param>
+            <param name="httpClientFactory">Optional factory used to inject a pre-configured HTTP client for requests to Anthropic API</param>
+            <param name="contextProvider">Request context provider with runtime configuration overrides</param>
+            <param name="loggerFactory">Optional factory used to inject configured loggers</param>
+        </member>
+        <member name="P:Microsoft.KernelMemory.AI.Anthropic.AnthropicTextGeneration.MaxTokenTotal">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.Anthropic.AnthropicTextGeneration.CountTokens(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.Anthropic.AnthropicTextGeneration.GetTokens(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.Anthropic.AnthropicTextGeneration.GenerateTextAsync(System.String,Microsoft.KernelMemory.AI.TextGenerationOptions,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.AI.Anthropic.AnthropicTextGeneration.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="P:Microsoft.KernelMemory.AI.Anthropic.Client.CallClaudeStreamingParams.ModelName">
+            <summary>
+            Name of the model
+            </summary>
+        </member>
+        <member name="T:Microsoft.KernelMemory.KernelMemoryBuilderExtensions">
+            <summary>
+            Kernel Memory builder extensions
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryBuilderExtensions.WithAnthropicTextGeneration(Microsoft.KernelMemory.IKernelMemoryBuilder,Microsoft.KernelMemory.AI.Anthropic.AnthropicConfig,Microsoft.KernelMemory.AI.ITextTokenizer)">
+            <summary>
+            Configure Kernel Memory to use Anthropic text generation.
+            </summary>
+            <param name="builder">KernelMemory builder</param>
+            <param name="config">Anthropic configuration</param>
+            <param name="textTokenizer">Optional tokenizer, default one will be used if passed null.</param>
+        </member>
+        <member name="T:Microsoft.KernelMemory.DependencyInjection">
+            <summary>
+            .NET IServiceCollection dependency injection extensions.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.DependencyInjection.AddAnthropicTextGeneration(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.KernelMemory.AI.Anthropic.AnthropicConfig,Microsoft.KernelMemory.AI.ITextTokenizer)">
+            <summary>
+            Configure Kernel Memory to use Anthropic text generation.
+            </summary>
+            <param name="services">Application services collection</param>
+            <param name="config">Anthropic settings</param>
+            <param name="textTokenizer">Tokenizer to measure content size</param>
+        </member>
+    </members>
+</doc>

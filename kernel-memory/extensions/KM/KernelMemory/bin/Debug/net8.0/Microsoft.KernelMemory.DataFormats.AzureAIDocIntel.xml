@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.KernelMemory.DataFormats.AzureAIDocIntel</name>
+    </assembly>
+    <members>
+        <member name="M:Microsoft.KernelMemory.AzureAIDocIntelConfig.Validate">
+            <summary>
+            Verify that the current state is valid.
+            </summary>
+        </member>
+        <member name="T:Microsoft.KernelMemory.DataFormats.AzureAIDocIntel.AzureAIDocIntelEngine">
+            <summary>
+            OCR engine based on Azure AI Document Intelligence
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.DataFormats.AzureAIDocIntel.AzureAIDocIntelEngine.#ctor(Microsoft.KernelMemory.AzureAIDocIntelConfig,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Creates a new instance of the Azure AI Document Intelligence.
+            </summary>
+            <param name="config">Azure AI Document Intelligence settings</param>
+            <param name="loggerFactory">Application logger factory</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.DataFormats.AzureAIDocIntel.AzureAIDocIntelEngine.ExtractTextFromImageAsync(System.IO.Stream,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.KernelMemory.KernelMemoryBuilderExtensions">
+            <summary>
+            Kernel Memory builder extensions
+            </summary>
+        </member>
+        <member name="T:Microsoft.KernelMemory.DependencyInjection">
+            <summary>
+            .NET IServiceCollection dependency injection extensions.
+            </summary>
+        </member>
+    </members>
+</doc>

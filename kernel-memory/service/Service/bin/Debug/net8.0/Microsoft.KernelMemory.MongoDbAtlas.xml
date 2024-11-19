@@ -1,0 +1,330 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.KernelMemory.MongoDbAtlas</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.KernelMemory.KernelMemoryBuilderExtensions">
+            <summary>
+            Kernel Memory builder extensions
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryBuilderExtensions.WithMongoDbAtlasMemoryDb(Microsoft.KernelMemory.IKernelMemoryBuilder,Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasConfig)">
+            <summary>
+            Adds Mongodb as memory service, to store memory records.
+            </summary>
+            <param name="builder">The kernel builder</param>
+            <param name="config">Configuration for Mongodb</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryBuilderExtensions.WithMongoDbAtlasStorage(Microsoft.KernelMemory.IKernelMemoryBuilder,Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasConfig)">
+            <summary>
+            Adds Mongodb as document storage for files.
+            </summary>
+            <param name="builder">The kernel builder</param>
+            <param name="config">Configuration for Mongodb</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryBuilderExtensions.WithMongoDbAtlasMemoryDbAndDocumentStorage(Microsoft.KernelMemory.IKernelMemoryBuilder,Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasConfig)">
+            <summary>
+            Adds Mongodb as document storage and memory db, for both files and memory records.
+            </summary>
+            <param name="builder">The kernel builder</param>
+            <param name="config">Configuration for Mongodb</param>
+        </member>
+        <member name="T:Microsoft.KernelMemory.DependencyInjection">
+            <summary>
+            .NET IServiceCollection dependency injection extensions.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.DependencyInjection.AddMongoDbAtlasAsMemoryDb(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasConfig)">
+            <summary>
+            Adds MongoDbAtlasMemory as a service.
+            </summary>
+            <param name="services">The services collection</param>
+            <param name="config">Mongodb configuration.</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.DependencyInjection.AddMongoDbAtlasAsDocumentStorage(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasConfig)">
+            <summary>
+            Adds MongoDbAtlasStorage as a service.
+            </summary>
+            <param name="services">The services collection</param>
+            <param name="config">Mongodb configuration.</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.DependencyInjection.AddMongoDbAtlasAsMemoryDbAndDocumentStorage(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasConfig)">
+            <summary>
+            Adds MongoDbAtlasMemory and MongoDbAtlasStorage as services.
+            </summary>
+            <param name="services">The services collection</param>
+            <param name="config">Mongodb configuration.</param>
+        </member>
+        <member name="T:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasDatabaseHelper">
+            <summary>
+            Allow keeping a singleton for IMongoDatabase and MongoClient
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasDatabaseHelper.GetConnectionKey(System.String)">
+            <summary>
+            From a connection string to MongoDB it get a key that can uniquely identify the
+            connection. Usually the key is related to the host part of the connection string.
+            </summary>
+            <param name="connectionString"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasSearchHelper">
+            <summary>
+            <para>Wrapper for ATLAS search indexes stuff</para>
+            <para>
+            <ul>
+            <li>https://www.mongodb.com/docs/v7.0/reference/method/db.collection.createSearchIndex/</li>
+            <li>Normalizer (end of the page) https://www.mongodb.com/docs/atlas/atlas-search/analyzers/</li>
+            </ul>
+            </para>
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasSearchHelper.#ctor(System.String,System.String)">
+            <summary>
+            Construct helper to interact with atlas and create mappings etc.
+            </summary>
+            <param name="connection"></param>
+            <param name="dbName"></param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasSearchHelper.GetIndexName(System.String)">
+            <summary>
+            Get the name of the index to perform a $search aggregation
+            </summary>
+            <param name="collectionName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasSearchHelper.CreateIndexAsync(System.String,System.Int32)">
+            <summary>
+            Create an ATLAS index and return the id of the index. It also wait for the index to be
+            ready, and create the collection if needed.
+            </summary>
+            <param name="collectionName"></param>
+            <param name="embeddingDimension"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasSearchHelper.DeleteIndicesAsync(System.String)">
+            <summary>
+            Delete all the indices for a specific collection
+            </summary>
+            <param name="collectionName"></param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasSearchHelper.WaitForIndexToBeReadyAsync(System.String,System.Int32)">
+            <summary>
+            Simply wait for the index to be ready for a specific collection
+            </summary>
+            <param name="collectionName"></param>
+            <param name="secondsToWait"></param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasSearchHelper.CreateCreationCommand(System.String,System.Int32)">
+            <summary>
+            https://www.mongodb.com/docs/upcoming/reference/command/createSearchIndexes/
+            </summary>
+            <param name="collectionName"></param>
+            <param name="embeddingDimension"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasSearchHelper.DropDatabaseAsync">
+            <summary>
+            Utility function to drop the entire database with all search indexes created.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasSearchHelper.DropAllDocumentsFromCollectionsAsync">
+            <summary>
+            Utility function to delete all documents from all collections but leave search index
+            it is useful for tests.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasSearchHelper.GetAnalyzersList">
+            <summary>
+            Verify CreateIndexSettingsAnalysisDescriptor for mapper 7
+            </summary>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasSearchHelper.GetIndexInfoAsync(System.String)">
+            <summary>
+            Retrieve information about an MongoDB Atlas index for a specific
+            collection name. If the index does not exists it returns null
+            </summary>
+        </member>
+        <member name="T:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasBaseStorage">
+            <summary>
+            Base storage class for both memory and vector storage classes
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasBaseStorage.Database">
+            <summary>
+            Database instance
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasBaseStorage.Config">
+            <summary>
+            Configuration instance
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasBaseStorage.Collections">
+            <summary>
+            Keys are mongo collection of T but since we do not know T we cache them
+            as simple object then cast to the correct value.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasBaseStorage.#ctor(Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasConfig)">
+            <summary>
+            Create an instance of the storage based on configuration
+            </summary>
+            <param name="config"></param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasBaseStorage.GetCollection(System.String)">
+            <summary>
+            Get an instance of the collection given the collection name
+            </summary>
+            <param name="collectionName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasBaseStorage.GetBucketForIndex(System.String)">
+            <summary>
+            Get a reference to a GridFS bucket for a specific index. Remember that each
+            index has a different bucket.
+            </summary>
+            <param name="indexName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasBaseStorage.GetCollection``1(System.String)">
+            <summary>
+            Get a typed collection given the collection name, it uses a local cache to avoid
+            recreating the collection instance each call.
+            </summary>
+            <param name="collectionName"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasConfig">
+            <summary>
+            Represents configuration for MongoDB Atlas memory storage and vector storage.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasConfig.ConnectionString">
+            <summary>
+            Full connection string to a valid instance of MongoDB Atlas. It can contain
+            database name, but if <see cref="P:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasConfig.DatabaseName"/> is specified, it will override
+            the value in this connection string.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasConfig.DatabaseName">
+            <summary>
+            Allow to specify the database name, if not specified, it will be taken from the connection string.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasConfig.UseSingleCollectionForVectorSearch">
+            <summary>
+            To reduce the number of indexes in Atlas, we can use a single collection for all the vectors.
+            This option allows to use a single collection for all Kernel Memory indexes
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasConfig.AfterIndexCallbackAsync">
+            <summary>
+            A callback useful for tests, we need to wait that the index really indexed data after
+            we inserted into the collection so we need to wait a little bit.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasConfig.WithConnectionString(System.String)">
+            <summary>
+            Allows to specify connection string
+            </summary>
+            <param name="mongoConnection">Connection string</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasConfig.WithDatabaseName(System.String)">
+            <summary>
+            Allows to specify database name.
+            </summary>
+            <param name="databaseName">Name of the database</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasConfig.WithSingleCollectionForVectorSearch(System.Boolean)">
+            <summary>
+            If single collection for vector search is enabled, all the vectors will be stored in a single
+            collection, so we have only one search index in atlas. This can be useful to reduce index numbers.
+            </summary>
+            <param name="useSingleCollectionForVectorSearch"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasConfig.WithAfterIndexCallback(System.Func{System.Threading.Tasks.Task})">
+            <summary>
+            Allow passing a callback that will be called after data is indexed.
+            </summary>
+            <param name="afterIndexCallback"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasException.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasException.#ctor(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasException.#ctor(System.String,System.Exception)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasMemory">
+            <summary>
+            Implementation of <see cref="T:Microsoft.KernelMemory.MemoryStorage.IMemoryDb"/> based on MongoDB Atlas.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasMemory.#ctor(Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasConfig,Microsoft.KernelMemory.AI.ITextEmbeddingGenerator,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Create a new instance of MongoDbVectorMemory from configuration
+            </summary>
+            <param name="config">Configuration</param>
+            <param name="embeddingGenerator">Embedding generator</param>
+            <param name="loggerFactory">Application logger factory</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasMemory.CreateIndexAsync(System.String,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasMemory.DeleteIndexAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasMemory.GetIndexesAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasMemory.DeleteAsync(System.String,Microsoft.KernelMemory.MemoryStorage.MemoryRecord,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasMemory.GetListAsync(System.String,System.Collections.Generic.ICollection{Microsoft.KernelMemory.MemoryFilter},System.Int32,System.Boolean,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasMemory.GetSimilarListAsync(System.String,System.String,System.Collections.Generic.ICollection{Microsoft.KernelMemory.MemoryFilter},System.Double,System.Int32,System.Boolean,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasMemory.UpsertAsync(System.String,Microsoft.KernelMemory.MemoryStorage.MemoryRecord,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasMemory.CosineSim(Microsoft.KernelMemory.Embedding,System.Single[])">
+            <summary>
+            Due to different score system of MongoDB Atlas that normalized cosine
+            we need to manually recompute the cosine similarity distance manually
+            for each vector to have a real cosine similarity distance returned.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasStorage.DeleteIndexDirectoryAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasStorage.EmptyDocumentDirectoryAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasStorage.DeleteDocumentDirectoryAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasStorage.WriteFileAsync(System.String,System.String,System.String,System.IO.Stream,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasStorage.CreateDocumentDirectoryAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MongoDbAtlas.MongoDbAtlasStorage.ReadFileAsync(System.String,System.String,System.String,System.Boolean,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

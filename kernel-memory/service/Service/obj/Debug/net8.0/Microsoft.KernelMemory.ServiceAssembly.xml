@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.KernelMemory.ServiceAssembly</name>
+    </assembly>
+    <members>
+        <member name="M:Microsoft.KernelMemory.Service.Program.AddHandlersAsHostedServices(Microsoft.KernelMemory.KernelMemoryConfig,Microsoft.KernelMemory.IKernelMemoryBuilder,Microsoft.AspNetCore.Builder.WebApplicationBuilder)">
+            <summary>
+            Register handlers as asynchronous hosted services
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Service.Program.AddHandlersToServerlessMemory(Microsoft.KernelMemory.KernelMemoryConfig,Microsoft.KernelMemory.IKernelMemory)">
+            <summary>
+            Register handlers instances inside the synchronous orchestrator
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Service.ServiceConfiguration.MinimumConfigurationIsAvailable(System.Boolean)">
+            <summary>
+            Check the configuration for minimum requirements
+            </summary>
+            <param name="exitOnError">Whether to stop or return false when the config is incomplete</param>
+            <returns>Whether the configuration is valid</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Service.ServiceConfiguration.SetupForOpenAI">
+            <summary>
+            Rewrite configuration using OpenAI, if possible.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Service.ServiceConfiguration.GetServiceInstance``1(Microsoft.KernelMemory.IKernelMemoryBuilder,System.Action{Microsoft.Extensions.DependencyInjection.IServiceCollection})">
+            <summary>
+            Get an instance of T, using dependencies available in the builder,
+            except for existing service descriptors for T. Replace/Use the
+            given action to define T's implementation.
+            Return an instance of T built using the definition provided by
+            the action.
+            </summary>
+            <param name="builder">KM builder</param>
+            <param name="addCustomService">Action used to configure the service collection</param>
+            <typeparam name="T">Target type/interface</typeparam>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Service.ServiceConfiguration.GetServiceConfig``1(System.String)">
+            <summary>
+            Read a dependency configuration from IConfiguration
+            Data is usually retrieved from KernelMemory:Services:{serviceName}, e.g. when using appsettings.json
+            {
+              "KernelMemory": {
+                "Services": {
+                  "{serviceName}": {
+                    ...
+                    ...
+                  }
+                }
+              }
+            }
+            </summary>
+            <param name="serviceName">Name of the dependency</param>
+            <typeparam name="T">Type of configuration to return</typeparam>
+            <returns>Configuration instance, settings for the dependency specified</returns>
+        </member>
+        <member name="T:Microsoft.KernelMemory.KernelMemoryBuilderExtensions">
+            <summary>
+            Kernel Memory builder extensions for ASP.NET apps using settings in appsettings.json
+            and using IConfiguration. The following methods allow to fully configure KM via
+            IConfiguration, without having to change the code using KernelMemoryBuilder and recompile.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryBuilderExtensions.FromAppSettings(Microsoft.KernelMemory.IKernelMemoryBuilder,System.String)">
+            <summary>
+            Configure the builder using settings stored in the specified directory.
+            If the directory is empty, use the current assembly folder
+            </summary>
+            <param name="builder">KernelMemory builder instance</param>
+            <param name="settingsDirectory">Directory containing appsettings.json (incl. dev/prod)</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryBuilderExtensions.FromIConfiguration(Microsoft.KernelMemory.IKernelMemoryBuilder,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Configure the builder using settings from the given IConfiguration instance.
+            </summary>
+            <param name="builder">KernelMemory builder instance</param>
+            <param name="servicesConfiguration">KM configuration + Dependencies configuration</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryBuilderExtensions.FromMemoryConfiguration(Microsoft.KernelMemory.IKernelMemoryBuilder,Microsoft.KernelMemory.KernelMemoryConfig,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Configure the builder using settings from the given KernelMemoryConfig and IConfiguration instances.
+            </summary>
+            <param name="builder">KernelMemory builder instance</param>
+            <param name="memoryConfiguration">KM configuration</param>
+            <param name="servicesConfiguration">Dependencies configuration, e.g. queue, embedding, storage, etc.</param>
+        </member>
+    </members>
+</doc>

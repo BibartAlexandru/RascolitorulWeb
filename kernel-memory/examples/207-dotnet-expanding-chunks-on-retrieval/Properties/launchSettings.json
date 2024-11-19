@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "207-dotnet-expanding-chunks-on-retrieval": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:50236;http://localhost:50237"
+    }
+  }
+}

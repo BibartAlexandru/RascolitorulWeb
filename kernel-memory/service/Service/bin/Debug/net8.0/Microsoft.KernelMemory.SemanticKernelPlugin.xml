@@ -1,0 +1,261 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.KernelMemory.SemanticKernelPlugin</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.KernelMemory.SemanticKernelPlugin.Internals.TagCollectionWrapper">
+            <summary>
+            Type required by Semantic Kernel for mapping
+            </summary>
+        </member>
+        <member name="T:Microsoft.KernelMemory.SemanticKernelPlugin.Internals.ListOfStringsWrapper">
+            <summary>
+            Type required by Semantic Kernel for mapping
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.SemanticKernelPlugin.Internals.TypeConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)">
+            <summary>
+            This method is used to convert object from string to actual type. This will allow to pass object to
+            native function which requires it.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.SemanticKernelPlugin.Internals.TypeConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)">
+            <summary>
+            This method is used to convert actual type to string representation, so it can be passed to AI
+            for further processing.
+            </summary>
+        </member>
+        <member name="T:Microsoft.KernelMemory.MemoryPlugin">
+             <summary>
+             Kernel Memory Plugin
+            
+             Recommended name: "memory"
+            
+             Functions:
+             * memory.save
+             * memory.saveFile
+             * memory.saveWebPage
+             * memory.ask
+             * memory.search
+             * memory.delete
+            
+             </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryPlugin.IndexParam">
+            <summary>
+            Name of the input variable used to specify which memory index to use.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryPlugin.FilePathParam">
+            <summary>
+            Name of the input variable used to specify a file path.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryPlugin.DocumentIdParam">
+             <summary>
+             Name of the input variable used to specify a unique id associated with stored information.
+            
+             Important: the text is stored in memory over multiple records, using an internal format,
+             and Document ID is used across all the internal memory records generated. Each of these internal
+             records has an internal ID that is not exposed to memory clients. Document ID can be used
+             to ask questions about a specific text, to overwrite (update) the text, and to delete it.
+             </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryPlugin.UrlParam">
+            <summary>
+            Name of the input variable used to specify a web URL.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryPlugin.QueryParam">
+            <summary>
+            Name of the input variable used to specify a search query.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryPlugin.QuestionParam">
+            <summary>
+            Name of the input variable used to specify a question to answer.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryPlugin.TagsParam">
+             <summary>
+             Name of the input variable used to specify optional tags associated with stored information.
+            
+             Tags can be used to filter memories over one or multiple keys, e.g. userID, tenant, groups,
+             project ID, room number, content type, year, region, etc.
+             Each tag can have multiple values, e.g. to link a memory to multiple users.
+             </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryPlugin.StepsParam">
+            <summary>
+            Name of the input variable used to specify custom memory ingestion steps.
+            The list is usually: "extract", "partition", "gen_embeddings", "save_records"
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryPlugin.MinRelevanceParam">
+            <summary>
+            Name of the input variable used to specify custom minimum relevance for the memories to retrieve.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryPlugin.LimitParam">
+            <summary>
+            Name of the input variable used to specify the maximum number of items to return.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryPlugin._defaultIndex">
+            <summary>
+            Default index where to store and retrieve memory from. When null the service
+            will use a default index for all information.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryPlugin._defaultIngestionTags">
+            <summary>
+            Default collection of tags to add to information when ingesting.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryPlugin._defaultRetrievalTags">
+            <summary>
+            Default collection of tags required when retrieving memory (using filters).
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryPlugin._defaultIngestionSteps">
+            <summary>
+            Default ingestion steps when storing new memories.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryPlugin._waitForIngestionToComplete">
+            <summary>
+            Whether to wait for the asynchronous ingestion to be complete when storing new memories.
+            Note: the plugin will wait max <see cref="F:Microsoft.KernelMemory.MemoryPlugin._maxIngestionWait"/> seconds to avoid blocking callers for too long.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryPlugin._maxIngestionWait">
+            <summary>
+            Max time to wait for ingestion completion when <see cref="F:Microsoft.KernelMemory.MemoryPlugin._waitForIngestionToComplete"/> is set to True.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryPlugin._memory">
+            <summary>
+            Client to memory read/write. This is usually an instance of MemoryWebClient
+            but the plugin allows to inject any IKernelMemory, e.g. in case of custom
+            implementations and the embedded Serverless client.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryPlugin.#ctor(System.Uri,System.String,System.String,System.String,Microsoft.KernelMemory.TagCollection,Microsoft.KernelMemory.TagCollection,System.Collections.Generic.List{System.String},System.Boolean)">
+            <summary>
+            Create new instance using MemoryWebClient pointed at the given endpoint.
+            </summary>
+            <param name="endpoint">Memory Service endpoint</param>
+            <param name="apiKey">Memory Service authentication API Key</param>
+            <param name="apiKeyHeader">Name of the HTTP header used to send the Memory API Key</param>
+            <param name="defaultIndex">Default Memory Index to use when none is specified. Optional. Can be overridden on each call.</param>
+            <param name="defaultIngestionTags">Default Tags to add to memories when importing data. Optional. Can be overridden on each call.</param>
+            <param name="defaultRetrievalTags">Default Tags to require when searching memories. Optional. Can be overridden on each call.</param>
+            <param name="defaultIngestionSteps">Pipeline steps to use when importing memories. Optional. Can be overridden on each call.</param>
+            <param name="waitForIngestionToComplete">Whether to wait for the asynchronous ingestion to be complete when storing new memories.</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryPlugin.#ctor(System.String,System.String,System.Boolean)">
+            <summary>
+            Create new instance using MemoryWebClient pointed at the given endpoint.
+            </summary>
+            <param name="serviceUrl">Memory Service endpoint</param>
+            <param name="apiKey">Memory Service authentication API  Key</param>
+            <param name="waitForIngestionToComplete">Whether to wait for the asynchronous ingestion to be complete when storing new memories.</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryPlugin.#ctor(Microsoft.KernelMemory.IKernelMemory,System.String,Microsoft.KernelMemory.TagCollection,Microsoft.KernelMemory.TagCollection,System.Collections.Generic.List{System.String},System.Boolean)">
+            <summary>
+            Create a new instance using a custom IKernelMemory implementation.
+            </summary>
+            <param name="memoryClient">Custom IKernelMemory implementation</param>
+            <param name="defaultIndex">Default Memory Index to use when none is specified. Optional. Can be overridden on each call.</param>
+            <param name="defaultIngestionTags">Default Tags to add to memories when importing data. Optional. Can be overridden on each call.</param>
+            <param name="defaultRetrievalTags">Default Tags to require when searching memories. Optional. Can be overridden on each call.</param>
+            <param name="defaultIngestionSteps">Pipeline steps to use when importing memories. Optional. Can be overridden on each call.</param>
+            <param name="waitForIngestionToComplete">Whether to wait for the asynchronous ingestion to be complete when storing new memories.</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryPlugin.SaveAsync(System.String,System.String,System.String,Microsoft.KernelMemory.SemanticKernelPlugin.Internals.TagCollectionWrapper,Microsoft.KernelMemory.SemanticKernelPlugin.Internals.ListOfStringsWrapper,Microsoft.Extensions.Logging.ILoggerFactory,System.Threading.CancellationToken)">
+             <summary>
+             Store text information in long term memory.
+            
+             Usage from prompts: '{{memory.save ...}}'
+             </summary>
+             <example>
+             SKContext.Variables["input"] = "the capital of France is Paris"
+             {{memory.save $input }}
+             </example>
+             <example>
+             SKContext.Variables["input"] = "the capital of France is Paris"
+             SKContext.Variables[MemoryPlugin.IndexParam] = "geography"
+             {{memory.save $input }}
+             </example>
+             <example>
+             SKContext.Variables["input"] = "the capital of France is Paris"
+             SKContext.Variables[MemoryPlugin.DocumentIdParam] = "france001"
+             {{memory.save $input }}
+             </example>
+             <returns>Document ID</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryPlugin.SaveFileAsync(System.String,System.String,System.String,Microsoft.KernelMemory.SemanticKernelPlugin.Internals.TagCollectionWrapper,Microsoft.KernelMemory.SemanticKernelPlugin.Internals.ListOfStringsWrapper,Microsoft.Extensions.Logging.ILoggerFactory,System.Threading.CancellationToken)">
+             <summary>
+             Store a file content in long term memory.
+            
+             Usage from prompts: '{{memory.saveFile ...}}'
+             </summary>
+             <example>
+             SKContext.Variables["input"] = "C:\Documents\presentation.pptx"
+             {{memory.saveFile $input }}
+             </example>
+             <example>
+             SKContext.Variables["input"] = "C:\Documents\presentation.pptx"
+             SKContext.Variables[MemoryPlugin.IndexParam] = "work"
+             {{memory.saveFile $input }}
+             </example>
+             <example>
+             SKContext.Variables["input"] = "C:\Documents\presentation.pptx"
+             SKContext.Variables[MemoryPlugin.DocumentIdParam] = "presentation001"
+             {{memory.saveFile $input }}
+             </example>
+             <returns>Document ID</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryPlugin.SaveWebPageAsync(System.String,System.String,System.String,Microsoft.KernelMemory.SemanticKernelPlugin.Internals.TagCollectionWrapper,Microsoft.KernelMemory.SemanticKernelPlugin.Internals.ListOfStringsWrapper,Microsoft.Extensions.Logging.ILoggerFactory,System.Threading.CancellationToken)">
+            <summary>
+            Store in memory the information extracted from a web page
+            </summary>
+            <param name="url">Web page URL</param>
+            <param name="documentId">The document ID associated with the information to save</param>
+            <param name="index">Memories index containing the information to save</param>
+            <param name="tags">Tas/Labels associated with the information to save</param>
+            <param name="steps">Steps to parse the information and store in memory</param>
+            <param name="loggerFactory">Logging factory</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>Document ID</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryPlugin.SearchAsync(System.String,System.String,System.Double,System.Int32,Microsoft.KernelMemory.SemanticKernelPlugin.Internals.TagCollectionWrapper,System.Threading.CancellationToken)">
+            <summary>
+            Return up to N memories related to the input text
+            </summary>
+            <param name="query">The text to search in memory</param>
+            <param name="index">Memories index container to search for information</param>
+            <param name="minRelevance">Minimum relevance of the memories to return</param>
+            <param name="limit">Maximum number of memories to return</param>
+            <param name="tags">Memories key-value tags to filter information</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>JSON string containing the list of memories</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryPlugin.AskAsync(System.String,System.String,System.Double,Microsoft.KernelMemory.SemanticKernelPlugin.Internals.TagCollectionWrapper,Microsoft.Extensions.Logging.ILoggerFactory,System.Threading.CancellationToken)">
+             <summary>
+             Answer a question using the information stored in long term memory.
+            
+             Usage from prompts: '{{memory.ask ...}}'
+             </summary>
+             <returns>The answer returned by the memory.</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryPlugin.DeleteAsync(System.String,System.String,System.Threading.CancellationToken)">
+             <summary>
+             Remove from memory all the information extracted from the given document ID
+            
+             Usage from prompts: '{{memory.delete ...}}'
+             </summary>
+        </member>
+    </members>
+</doc>

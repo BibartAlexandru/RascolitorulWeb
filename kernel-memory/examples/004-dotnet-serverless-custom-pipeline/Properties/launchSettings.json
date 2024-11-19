@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "004-dotnet-serverless-custom-pipeline": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:50208;http://localhost:50209"
+    }
+  }
+}

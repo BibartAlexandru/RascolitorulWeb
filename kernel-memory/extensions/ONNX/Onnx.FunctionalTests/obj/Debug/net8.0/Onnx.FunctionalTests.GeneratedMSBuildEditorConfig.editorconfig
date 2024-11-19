@@ -1,0 +1,44 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = Microsoft.Onnx.FunctionalTests
+build_property.RootNamespace = Microsoft.Onnx.FunctionalTests
+build_property.ProjectDir = C:\Faculta\Licenta\PROIECT\kernel-memory\extensions\ONNX\Onnx.FunctionalTests\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Faculta\Licenta\PROIECT\kernel-memory\extensions\ONNX\Onnx.FunctionalTests
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 8.0
+
+[C:/Users/vaisp/.nuget/packages/microsoft.visualstudio.threading.analyzers/17.11.20/build/AdditionalFiles/vs-threading.LegacyThreadSwitchingMembers.txt]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vaisp/.nuget/packages/microsoft.visualstudio.threading.analyzers/17.11.20/build/AdditionalFiles/vs-threading.MainThreadAssertingMethods.txt]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vaisp/.nuget/packages/microsoft.visualstudio.threading.analyzers/17.11.20/build/AdditionalFiles/vs-threading.MainThreadSwitchingMethods.txt]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vaisp/.nuget/packages/microsoft.visualstudio.threading.analyzers/17.11.20/build/AdditionalFiles/vs-threading.MembersRequiringMainThread.txt]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.CssScope = 

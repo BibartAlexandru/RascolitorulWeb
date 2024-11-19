@@ -18,6 +18,10 @@ def init_db():
     conn.close()
 
 
+#o sa o implementez mai tarziu, content tre sa fie string
+def upload(searched_url, content):
+    pass
+
 @app.route('/prajitura', methods=['GET'])
 def say_hi():
     return jsonify({"message": "HI!"}), 200

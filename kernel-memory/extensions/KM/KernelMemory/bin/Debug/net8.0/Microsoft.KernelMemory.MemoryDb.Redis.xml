@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.KernelMemory.MemoryDb.Redis</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.KernelMemory.KernelMemoryBuilderExtensions">
+            <summary>
+            Kernel Memory builder extensions
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryBuilderExtensions.WithRedisMemoryDb(Microsoft.KernelMemory.IKernelMemoryBuilder,System.String)">
+            <summary>
+            Adds RedisMemory as a service.
+            </summary>
+            <param name="builder">The kernel builder</param>
+            <param name="connString">The Redis connection string based on <see href="https://stackexchange.github.io/StackExchange.Redis/Configuration">StackExchange.Redis' connection string</see></param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryBuilderExtensions.WithRedisMemoryDb(Microsoft.KernelMemory.IKernelMemoryBuilder,Microsoft.KernelMemory.RedisConfig)">
+            <summary>
+            Adds RedisMemory as a service.
+            </summary>
+            <param name="builder">The kernel builder</param>
+            <param name="redisConfig">Redis configuration.</param>
+        </member>
+        <member name="T:Microsoft.KernelMemory.DependencyInjection">
+            <summary>
+            .NET IServiceCollection dependency injection extensions.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.DependencyInjection.AddRedisAsMemoryDb(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.KernelMemory.RedisConfig)">
+            <summary>
+            Adds RedisMemory as a service.
+            </summary>
+            <param name="services">The services collection</param>
+            <param name="redisConfig">Redis configuration.</param>
+        </member>
+        <member name="T:Microsoft.KernelMemory.MemoryDb.Redis.RedisEmbeddingExtensions">
+            <summary>
+            Helper method for Embeddings.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryDb.Redis.Scripts.CheckIndexAndUpsert">
+            <summary>
+            Script to Upsert a Record. This script checks to see if the index exists
+            If the script does not exist, the script returns false
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Redis.RedisException.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Redis.RedisException.#ctor(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Redis.RedisException.#ctor(System.String,System.Exception)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.KernelMemory.MemoryDb.Redis.RedisMemory">
+            <summary>
+            Implementation of an IMemoryDb using Redis.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Redis.RedisMemory.#ctor(Microsoft.KernelMemory.RedisConfig,StackExchange.Redis.IConnectionMultiplexer,Microsoft.KernelMemory.AI.ITextEmbeddingGenerator,Microsoft.Extensions.Logging.ILogger{Microsoft.KernelMemory.MemoryDb.Redis.RedisMemory})">
+            <summary>
+            Initializes the <see cref="T:Microsoft.KernelMemory.MemoryDb.Redis.RedisMemory"/> instance
+            </summary>
+            <param name="multiplexer"></param>
+            <param name="config"></param>
+            <param name="embeddingGenerator"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Redis.RedisMemory.CreateIndexAsync(System.String,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Redis.RedisMemory.GetIndexesAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Redis.RedisMemory.DeleteIndexAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Redis.RedisMemory.UpsertAsync(System.String,Microsoft.KernelMemory.MemoryStorage.MemoryRecord,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Redis.RedisMemory.GetSimilarListAsync(System.String,System.String,System.Collections.Generic.ICollection{Microsoft.KernelMemory.MemoryFilter},System.Double,System.Int32,System.Boolean,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Redis.RedisMemory.GetListAsync(System.String,System.Collections.Generic.ICollection{Microsoft.KernelMemory.MemoryFilter},System.Int32,System.Boolean,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Redis.RedisMemory.DeleteAsync(System.String,Microsoft.KernelMemory.MemoryStorage.MemoryRecord,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryDb.Redis.RedisMemory.s_tagEscapeChars">
+            <summary>
+            Characters to escape when serializing a tag expression.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryDb.Redis.RedisMemory.s_replaceIndexNameCharsRegex">
+            <summary>
+            Special chars to specifically replace within index names to keep
+            index names consistent with other connectors.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.MemoryDb.Redis.RedisMemory.KmSeparator">
+            <summary>
+            Use designated KM separator
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Redis.RedisMemory.NormalizeIndexName(System.String,System.String)">
+            <summary>
+            Normalizes the provided index name to maintain consistent looking
+            index names across connections. Naturally Redis's index names
+            are binary safe so this is purely for consistency.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryDb.Redis.RedisMemory.EscapeTagField(System.String)">
+            <summary>
+            Escapes a tag field string.
+            </summary>
+            <param name="text">the text toe escape.</param>
+            <returns>The Escaped Text.</returns>
+        </member>
+        <member name="T:Microsoft.KernelMemory.RedisConfig">
+            <summary>
+            Lays out the tag fields that you want redis to index.
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.RedisConfig.DefaultIndexPrefix">
+            <summary>
+            The default prefix to be used for index names.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.RedisConfig.ConnectionString">
+            <summary>
+            Connection string required to connect to Redis
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.RedisConfig.AppPrefix">
+            <summary>
+            Gets the Prefix to use for prefix index names and all documents
+            inserted into Redis as part of Kernel Memory's operations.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.RedisConfig.VectorAlgorithm">
+            <summary>
+            Gets or sets the Vector Algorithm to use. Defaults to HNSW.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.RedisConfig.Tags">
+            <summary>
+            The Collection of tags that you want to be able to search on.
+            The Key is the tag name, and the char is the separator that you
+            want Redis to use to separate your tag fields. The default separator
+            is ','.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.RedisConfig.#ctor(System.String,System.Collections.Generic.Dictionary{System.String,System.Nullable{System.Char}})">
+            <summary>
+            Initializes an instance of RedisMemoryConfiguration.
+            </summary>
+            <param name="appPrefix">The prefix to use for the index name and all documents inserted into Redis.</param>
+            <param name="tags">The collection of tags you want to be able to search on. The key</param>
+        </member>
+    </members>
+</doc>

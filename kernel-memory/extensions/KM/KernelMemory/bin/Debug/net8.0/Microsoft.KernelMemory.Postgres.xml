@@ -1,0 +1,372 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.KernelMemory.Postgres</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.KernelMemory.KernelMemoryBuilderExtensions">
+            <summary>
+            Kernel Memory builder extensions
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryBuilderExtensions.WithPostgresMemoryDb(Microsoft.KernelMemory.IKernelMemoryBuilder,Microsoft.KernelMemory.PostgresConfig)">
+            <summary>
+            Kernel Memory Builder extension method to add Postgres memory connector.
+            </summary>
+            <param name="builder">KM builder instance</param>
+            <param name="config">Postgres configuration</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.KernelMemoryBuilderExtensions.WithPostgresMemoryDb(Microsoft.KernelMemory.IKernelMemoryBuilder,System.String)">
+            <summary>
+            Kernel Memory Builder extension method to add Postgres memory connector.
+            </summary>
+            <param name="builder">KM builder instance</param>
+            <param name="connString">Postgres connection string</param>
+        </member>
+        <member name="T:Microsoft.KernelMemory.DependencyInjection">
+            <summary>
+            .NET IServiceCollection dependency injection extensions.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.DependencyInjection.AddPostgresAsMemoryDb(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.KernelMemory.PostgresConfig)">
+            <summary>
+            Inject Postgres as the default implementation of IMemoryDb
+            </summary>
+            <param name="services">Service collection</param>
+            <param name="config">Postgres configuration</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.DependencyInjection.AddPostgresAsMemoryDb(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
+            <summary>
+            Inject Postgres as the default implementation of IMemoryDb
+            </summary>
+            <param name="services">Service collection</param>
+            <param name="connString">Postgres connection string</param>
+        </member>
+        <member name="T:Microsoft.KernelMemory.Postgres.PostgresDbClient">
+            <summary>
+            An implementation of a client for Postgres. This class is used to managing postgres database operations.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Postgres.PostgresDbClient.#ctor(Microsoft.KernelMemory.PostgresConfig,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.KernelMemory.Postgres.PostgresDbClient"/> class.
+            </summary>
+            <param name="config">Configuration</param>
+            <param name="loggerFactory">Application logger factory</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Postgres.PostgresDbClient.DoesTableExistAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Check if a table exists.
+            </summary>
+            <param name="tableName">The name assigned to a table of entries</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>True if the table exists</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Postgres.PostgresDbClient.CreateTableAsync(System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Create a table.
+            </summary>
+            <param name="tableName">The name assigned to a table of entries</param>
+            <param name="vectorSize">Embedding vectors dimension</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Postgres.PostgresDbClient.GetTablesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get all tables
+            </summary>
+            <param name="cancellationToken">Async task cancellation token</param>
+            <returns>A group of tables</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Postgres.PostgresDbClient.DeleteTableAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Delete a table.
+            </summary>
+            <param name="tableName">Name of the table to delete</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Postgres.PostgresDbClient.UpsertAsync(System.String,Microsoft.KernelMemory.Postgres.PostgresMemoryRecord,System.Threading.CancellationToken)">
+            <summary>
+            Upsert entry into a table.
+            </summary>
+            <param name="tableName">The name assigned to a table of entries</param>
+            <param name="record">Record to create/update</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Postgres.PostgresDbClient.GetSimilarAsync(System.String,Pgvector.Vector,System.Double,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.Int32,System.Int32,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Get a list of records
+            </summary>
+            <param name="tableName">Table containing the records to fetch</param>
+            <param name="target">Source vector to compare for similarity</param>
+            <param name="minSimilarity">Minimum similarity threshold</param>
+            <param name="filterSql">SQL filter to apply</param>
+            <param name="sqlUserValues">List of user values passed with placeholders to avoid SQL injection</param>
+            <param name="limit">Max number of records to retrieve</param>
+            <param name="offset">Records to skip from the top</param>
+            <param name="withEmbeddings">Whether to include embedding vectors</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Postgres.PostgresDbClient.GetListAsync(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Object},System.String,System.Int32,System.Int32,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Get a list of records
+            </summary>
+            <param name="tableName">Table containing the records to fetch</param>
+            <param name="filterSql">SQL filter to apply</param>
+            <param name="sqlUserValues">List of user values passed with placeholders to avoid SQL injection</param>
+            <param name="orderBySql">SQL to order the records</param>
+            <param name="limit">Max number of records to retrieve</param>
+            <param name="offset">Records to skip from the top</param>
+            <param name="withEmbeddings">Whether to include embedding vectors</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Postgres.PostgresDbClient.DeleteAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Delete an entry
+            </summary>
+            <param name="tableName">The name assigned to a table of entries</param>
+            <param name="id">The key of the entry to delete</param>
+            <param name="cancellationToken">Async task cancellation token</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Postgres.PostgresDbClient.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Postgres.PostgresDbClient.DisposeAsync">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Postgres.PostgresDbClient.ConnectAsync(System.Threading.CancellationToken)">
+            <summary>
+            Try to connect to PG, handling exceptions in case the DB doesn't exist
+            </summary>
+            <param name="cancellationToken"></param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Postgres.PostgresDbClient.WithSchemaAndTableNamePrefix(System.String)">
+            <summary>
+            Get full table name with schema from table name
+            </summary>
+            <param name="tableName"></param>
+            <returns>Valid table name including schema</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Postgres.PostgresDbClient.GenLockId(System.String)">
+            <summary>
+            Generate a consistent lock id for a given resource, reducing the chance of collisions.
+            If a collision happens because two resources have the same lock id, when locks are used
+            these resources will be accessible one at a time, and not concurrently.
+            </summary>
+            <param name="resourceId">Resource Id</param>
+            <returns>A number assigned to the resource</returns>
+        </member>
+        <member name="T:Microsoft.KernelMemory.Postgres.PostgresMemoryRecord">
+            <summary>
+            Postgres record schema
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Postgres.PostgresMemoryRecord.Id">
+            <summary>
+            Record ID
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Postgres.PostgresMemoryRecord.Embedding">
+            <summary>
+            Content embedding vector
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Postgres.PostgresMemoryRecord.Tags">
+            <summary>
+            List of tags
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Postgres.PostgresMemoryRecord.Content">
+            <summary>
+            Memory content
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.Postgres.PostgresMemoryRecord.Payload">
+            <summary>
+            Additional payload, not searchable
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Postgres.PostgresMemoryRecord.ToMemoryRecord(Microsoft.KernelMemory.Postgres.PostgresMemoryRecord)">
+            <summary>
+            Convert a Postgres record to a memory record instance
+            </summary>
+            <param name="pgRecord">Postgres record data</param>
+            <returns>Memory record data</returns>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Postgres.PostgresMemoryRecord.FromMemoryRecord(Microsoft.KernelMemory.MemoryStorage.MemoryRecord)">
+            <summary>
+            Convert a memory record to a Postgres record instance
+            </summary>
+            <param name="record">Memory record</param>
+            <returns>Postgres record data</returns>
+        </member>
+        <member name="T:Microsoft.KernelMemory.Postgres.PostgresException">
+            <summary>
+            Base exception for all the exceptions thrown by the Postgres connector for KernelMemory
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Postgres.PostgresException.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.Postgres.PostgresException.#ctor(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.Postgres.PostgresException.#ctor(System.String,System.Exception)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.KernelMemory.Postgres.PostgresMemory">
+            <summary>
+            Postgres connector for Kernel Memory.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Postgres.PostgresMemory.#ctor(Microsoft.KernelMemory.PostgresConfig,Microsoft.KernelMemory.AI.ITextEmbeddingGenerator,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Create a new instance of Postgres KM connector
+            </summary>
+            <param name="config">Postgres configuration</param>
+            <param name="embeddingGenerator">Text embedding generator</param>
+            <param name="loggerFactory">Application logger factory</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Postgres.PostgresMemory.CreateIndexAsync(System.String,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.Postgres.PostgresMemory.GetIndexesAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.Postgres.PostgresMemory.DeleteIndexAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.Postgres.PostgresMemory.UpsertAsync(System.String,Microsoft.KernelMemory.MemoryStorage.MemoryRecord,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.Postgres.PostgresMemory.GetSimilarListAsync(System.String,System.String,System.Collections.Generic.ICollection{Microsoft.KernelMemory.MemoryFilter},System.Double,System.Int32,System.Boolean,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.Postgres.PostgresMemory.GetListAsync(System.String,System.Collections.Generic.ICollection{Microsoft.KernelMemory.MemoryFilter},System.Int32,System.Boolean,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.Postgres.PostgresMemory.DeleteAsync(System.String,Microsoft.KernelMemory.MemoryStorage.MemoryRecord,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.Postgres.PostgresMemory.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.KernelMemory.Postgres.PostgresMemory.DisposeAsync">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.KernelMemory.Postgres.PostgresMemoryFilter">
+            <summary>
+            Extended filtering options available when using Postgres
+            </summary>
+        </member>
+        <member name="T:Microsoft.KernelMemory.PostgresConfig">
+            <summary>
+            Postgres configuration
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.PostgresConfig.ColumnId">
+            <summary>
+            Key for the Columns dictionary
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.PostgresConfig.ColumnEmbedding">
+            <summary>
+            Key for the Columns dictionary
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.PostgresConfig.ColumnTags">
+            <summary>
+            Key for the Columns dictionary
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.PostgresConfig.ColumnContent">
+            <summary>
+            Key for the Columns dictionary
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.PostgresConfig.ColumnPayload">
+            <summary>
+            Key for the Columns dictionary
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.PostgresConfig.DefaultSchema">
+            <summary>
+            Name of the default schema
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.PostgresConfig.DefaultTableNamePrefix">
+            <summary>
+            Default prefix used for table names
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.PostgresConfig.ConnectionString">
+            <summary>
+            Connection string required to connect to Postgres
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.PostgresConfig.Schema">
+            <summary>
+            Name of the schema where to read and write records.
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.PostgresConfig.TableNamePrefix">
+            <summary>
+            Mandatory prefix to add to tables created by KM.
+            This is used to distinguish KM tables from others in the same schema.
+            </summary>
+            <remarks>Default value is set to "km-" but can be override when creating a config.</remarks>
+        </member>
+        <member name="P:Microsoft.KernelMemory.PostgresConfig.Columns">
+            <summary>
+            Configurable column names used with Postgres
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.PostgresConfig.SqlPlaceholdersTableName">
+            <summary>
+            Mandatory placeholder required in CreateTableSql
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.PostgresConfig.SqlPlaceholdersVectorSize">
+            <summary>
+            Mandatory placeholder required in CreateTableSql
+            </summary>
+        </member>
+        <member name="F:Microsoft.KernelMemory.PostgresConfig.SqlPlaceholdersLockId">
+            <summary>
+            Optional placeholder required in CreateTableSql
+            </summary>
+        </member>
+        <member name="P:Microsoft.KernelMemory.PostgresConfig.CreateTableSql">
+            <summary>
+            Optional, custom SQL statements for creating new tables, in case
+            you need to add custom columns, indexing, etc.
+            The SQL must contain two placeholders: %%table_name%% and %%vector_size%%.
+            You can put the SQL in one line or split it over multiple lines for
+            readability. Lines are automatically merged with a new line char.
+            Example:
+              BEGIN;
+              "SELECT pg_advisory_xact_lock(%%lock_id%%);
+              CREATE TABLE IF NOT EXISTS %%table_name%% (
+                id           TEXT NOT NULL PRIMARY KEY,
+                embedding    vector(%%vector_size%%),
+                tags         TEXT[] DEFAULT '{}'::TEXT[] NOT NULL,
+                content      TEXT DEFAULT '' NOT NULL,
+                payload      JSONB DEFAULT '{}'::JSONB NOT NULL,
+                some_text    TEXT DEFAULT '',
+                last_update  TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL
+              );
+              CREATE INDEX IF NOT EXISTS idx_tags ON %%table_name%% USING GIN(tags);
+              COMMIT;
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.PostgresConfig.#ctor">
+            <summary>
+            Create a new instance of the configuration
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.PostgresConfig.Validate">
+            <summary>
+            Verify that the current state is valid.
+            </summary>
+        </member>
+    </members>
+</doc>

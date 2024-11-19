@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "203-dotnet-using-KM-nuget": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:50226;http://localhost:50227"
+    }
+  }
+}

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.KernelMemory.InteractiveSetup</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.KernelMemory.InteractiveSetup.AppSettings">
+            <summary>
+            Handle settings stored in appsettings.development.json
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.InteractiveSetup.AppSettings.GetCurrentConfig">
+            <summary>
+            Load current configuration from current folder, merging appsettings.json (if present) with appsettings.development.json
+            Note: the code reads from the current folder, which is usually service/Service. Using ConfigurationBuilder would read from
+                  bin/Debug/net7.0/, causing problems because GetGlobalConfig doesn't.
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.InteractiveSetup.SetupException.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.InteractiveSetup.SetupException.#ctor(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.InteractiveSetup.SetupException.#ctor(System.String,System.Exception)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.KernelMemory.InteractiveSetup.UI.BoundedBoolean">
+            <summary>
+            A boolean that can "change" to True only a limited number of times
+            </summary>
+        </member>
+    </members>
+</doc>

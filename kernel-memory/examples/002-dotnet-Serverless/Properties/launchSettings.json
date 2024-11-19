@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "002-dotnet-Serverless": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:50199;http://localhost:50202"
+    }
+  }
+}

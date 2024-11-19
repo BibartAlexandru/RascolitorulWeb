@@ -1,0 +1,599 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Faculta\\WebTechnology\\FinalProject\\kernel-memory\\extensions\\AzureOpenAI\\AzureOpenAI.csproj": {}
+  },
+  "projects": {
+    "C:\\Faculta\\WebTechnology\\FinalProject\\kernel-memory\\extensions\\AzureOpenAI\\AzureOpenAI.csproj": {
+      "version": "0.90.0",
+      "restore": {
+        "projectUniqueName": "C:\\Faculta\\WebTechnology\\FinalProject\\kernel-memory\\extensions\\AzureOpenAI\\AzureOpenAI.csproj",
+        "projectName": "Microsoft.KernelMemory.AI.AzureOpenAI",
+        "projectPath": "C:\\Faculta\\WebTechnology\\FinalProject\\kernel-memory\\extensions\\AzureOpenAI\\AzureOpenAI.csproj",
+        "packagesPath": "C:\\Users\\vaisp\\.nuget\\packages\\",
+        "outputPath": "C:\\Faculta\\WebTechnology\\FinalProject\\kernel-memory\\extensions\\AzureOpenAI\\obj\\",
+        "projectStyle": "PackageReference",
+        "centralPackageVersionsManagementEnabled": true,
+        "configFilePaths": [
+          "C:\\Faculta\\WebTechnology\\FinalProject\\kernel-memory\\NuGet.Config",
+          "C:\\Users\\vaisp\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Faculta\\WebTechnology\\FinalProject\\kernel-memory\\extensions\\OpenAI\\OpenAI\\OpenAI.csproj": {
+                "projectPath": "C:\\Faculta\\WebTechnology\\FinalProject\\kernel-memory\\extensions\\OpenAI\\OpenAI\\OpenAI.csproj"
+              },
+              "C:\\Faculta\\WebTechnology\\FinalProject\\kernel-memory\\service\\Abstractions\\Abstractions.csproj": {
+                "projectPath": "C:\\Faculta\\WebTechnology\\FinalProject\\kernel-memory\\service\\Abstractions\\Abstractions.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Azure.Identity": {
+              "target": "Package",
+              "version": "[1.13.0, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.CodeAnalysis.Analyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.11.0, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.CodeAnalysis.CSharp.CodeStyle": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[4.11.0, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.CodeAnalysis.NetAnalyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.0, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.SemanticKernel.Connectors.AzureOpenAI": {
+              "target": "Package",
+              "version": "[1.24.1, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.VisualStudio.Threading.Analyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[17.11.20, )",
+              "versionCentrallyManaged": true
+            },
+            "Roslynator.CodeAnalysis.Analyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[4.12.8, )",
+              "versionCentrallyManaged": true
+            },
+            "Roslynator.Formatting.Analyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[4.12.8, )",
+              "versionCentrallyManaged": true
+            }
+          },
+          "centralPackageVersions": {
+            "Aspire.Npgsql.EntityFrameworkCore.PostgreSQL": "[8.2.1, )",
+            "AWSSDK.S3": "[3.7.405, )",
+            "Azure.AI.ContentSafety": "[1.0.0, )",
+            "Azure.AI.FormRecognizer": "[4.1.0, )",
+            "Azure.Identity": "[1.13.0, )",
+            "Azure.Search.Documents": "[11.6.0, )",
+            "Azure.Storage.Blobs": "[12.22.2, )",
+            "Azure.Storage.Queues": "[12.20.1, )",
+            "ClosedXML": "[0.104.1, )",
+            "coverlet.collector": "[6.0.2, )",
+            "Discord.Net": "[3.16.0, )",
+            "DocumentFormat.OpenXml": "[3.1.1, )",
+            "Elastic.Clients.Elasticsearch": "[8.12.1, )",
+            "HtmlAgilityPack": "[1.11.67, )",
+            "LLamaSharp": "[0.16.0, )",
+            "LLamaSharp.Backend.Cpu": "[0.16.0, )",
+            "LLamaSharp.Backend.Cuda11": "[0.12.0, )",
+            "LLamaSharp.Backend.Cuda12": "[0.12.0, )",
+            "LLamaSharp.Backend.OpenCL": "[0.12.0, )",
+            "Microsoft.ApplicationInsights.AspNetCore": "[2.22.0, )",
+            "Microsoft.CodeAnalysis.Analyzers": "[3.11.0, )",
+            "Microsoft.CodeAnalysis.CSharp.CodeStyle": "[4.11.0, )",
+            "Microsoft.CodeAnalysis.NetAnalyzers": "[8.0.0, )",
+            "Microsoft.Data.SqlClient": "[5.2.2, )",
+            "Microsoft.Extensions.Configuration": "[8.0.0, )",
+            "Microsoft.Extensions.Configuration.Json": "[8.0.1, )",
+            "Microsoft.Extensions.DependencyInjection": "[8.0.1, )",
+            "Microsoft.Extensions.DependencyInjection.Abstractions": "[8.0.2, )",
+            "Microsoft.Extensions.Hosting": "[8.0.1, )",
+            "Microsoft.Extensions.Hosting.Abstractions": "[8.0.1, )",
+            "Microsoft.Extensions.Http": "[8.0.1, )",
+            "Microsoft.Extensions.Logging": "[8.0.0, )",
+            "Microsoft.Extensions.Logging.Abstractions": "[8.0.2, )",
+            "Microsoft.KernelMemory.Core": "[0.80.241017.2, )",
+            "Microsoft.KernelMemory.Service.AspNetCore": "[0.80.241017.2, )",
+            "Microsoft.ML.OnnxRuntimeGenAI": "[0.4.0, )",
+            "Microsoft.ML.Tokenizers": "[0.22.0-preview.24378.1, )",
+            "Microsoft.NET.Test.Sdk": "[17.11.1, )",
+            "Microsoft.SemanticKernel": "[1.24.1, )",
+            "Microsoft.SemanticKernel.Abstractions": "[1.24.1, )",
+            "Microsoft.SemanticKernel.Connectors.AzureOpenAI": "[1.24.1, )",
+            "Microsoft.SemanticKernel.Connectors.OpenAI": "[1.24.1, )",
+            "Microsoft.SourceLink.GitHub": "[8.0.0, )",
+            "Microsoft.VisualStudio.Threading.Analyzers": "[17.11.20, )",
+            "MongoDB.Driver.GridFS": "[2.30.0, )",
+            "Moq": "[4.20.72, )",
+            "Newtonsoft.Json": "[13.0.3, )",
+            "NRedisStack": "[0.13.0, )",
+            "OllamaSharp": "[3.0.14, )",
+            "PdfPig": "[0.1.9, )",
+            "Pgvector": "[0.3.0, )",
+            "Polly.Core": "[8.4.2, )",
+            "RabbitMQ.Client": "[6.8.1, )",
+            "ReadLine": "[2.0.1, )",
+            "Roslynator.CodeAnalysis.Analyzers": "[4.12.8, )",
+            "Roslynator.Formatting.Analyzers": "[4.12.8, )",
+            "Swashbuckle.AspNetCore": "[6.9.0, )",
+            "System.Linq.Async": "[6.0.1, )",
+            "System.Memory.Data": "[8.0.1, )",
+            "System.Numerics.Tensors": "[8.0.0, )",
+            "System.Runtime.Caching": "[8.0.1, )",
+            "xunit": "[2.9.2, )",
+            "xunit.abstractions": "[2.0.3, )",
+            "Xunit.DependencyInjection": "[9.5.0, )",
+            "Xunit.DependencyInjection.Logging": "[9.0.0, )",
+            "xunit.extensibility.core": "[2.7.1, )",
+            "xunit.runner.visualstudio": "[2.8.2, )"
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Faculta\\WebTechnology\\FinalProject\\kernel-memory\\extensions\\OpenAI\\OpenAI\\OpenAI.csproj": {
+      "version": "0.90.0",
+      "restore": {
+        "projectUniqueName": "C:\\Faculta\\WebTechnology\\FinalProject\\kernel-memory\\extensions\\OpenAI\\OpenAI\\OpenAI.csproj",
+        "projectName": "Microsoft.KernelMemory.AI.OpenAI",
+        "projectPath": "C:\\Faculta\\WebTechnology\\FinalProject\\kernel-memory\\extensions\\OpenAI\\OpenAI\\OpenAI.csproj",
+        "packagesPath": "C:\\Users\\vaisp\\.nuget\\packages\\",
+        "outputPath": "C:\\Faculta\\WebTechnology\\FinalProject\\kernel-memory\\extensions\\OpenAI\\OpenAI\\obj\\",
+        "projectStyle": "PackageReference",
+        "centralPackageVersionsManagementEnabled": true,
+        "configFilePaths": [
+          "C:\\Faculta\\WebTechnology\\FinalProject\\kernel-memory\\NuGet.Config",
+          "C:\\Users\\vaisp\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Faculta\\WebTechnology\\FinalProject\\kernel-memory\\service\\Abstractions\\Abstractions.csproj": {
+                "projectPath": "C:\\Faculta\\WebTechnology\\FinalProject\\kernel-memory\\service\\Abstractions\\Abstractions.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU5104"
+          ],
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.CodeAnalysis.Analyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.11.0, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.CodeAnalysis.CSharp.CodeStyle": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[4.11.0, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.CodeAnalysis.NetAnalyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.0, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.ML.Tokenizers": {
+              "target": "Package",
+              "version": "[0.22.0-preview.24378.1, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.SemanticKernel.Connectors.OpenAI": {
+              "target": "Package",
+              "version": "[1.24.1, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.VisualStudio.Threading.Analyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[17.11.20, )",
+              "versionCentrallyManaged": true
+            },
+            "Roslynator.CodeAnalysis.Analyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[4.12.8, )",
+              "versionCentrallyManaged": true
+            },
+            "Roslynator.Formatting.Analyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[4.12.8, )",
+              "versionCentrallyManaged": true
+            }
+          },
+          "centralPackageVersions": {
+            "Aspire.Npgsql.EntityFrameworkCore.PostgreSQL": "[8.2.1, )",
+            "AWSSDK.S3": "[3.7.405, )",
+            "Azure.AI.ContentSafety": "[1.0.0, )",
+            "Azure.AI.FormRecognizer": "[4.1.0, )",
+            "Azure.Identity": "[1.13.0, )",
+            "Azure.Search.Documents": "[11.6.0, )",
+            "Azure.Storage.Blobs": "[12.22.2, )",
+            "Azure.Storage.Queues": "[12.20.1, )",
+            "ClosedXML": "[0.104.1, )",
+            "coverlet.collector": "[6.0.2, )",
+            "Discord.Net": "[3.16.0, )",
+            "DocumentFormat.OpenXml": "[3.1.1, )",
+            "Elastic.Clients.Elasticsearch": "[8.12.1, )",
+            "HtmlAgilityPack": "[1.11.67, )",
+            "LLamaSharp": "[0.16.0, )",
+            "LLamaSharp.Backend.Cpu": "[0.16.0, )",
+            "LLamaSharp.Backend.Cuda11": "[0.12.0, )",
+            "LLamaSharp.Backend.Cuda12": "[0.12.0, )",
+            "LLamaSharp.Backend.OpenCL": "[0.12.0, )",
+            "Microsoft.ApplicationInsights.AspNetCore": "[2.22.0, )",
+            "Microsoft.CodeAnalysis.Analyzers": "[3.11.0, )",
+            "Microsoft.CodeAnalysis.CSharp.CodeStyle": "[4.11.0, )",
+            "Microsoft.CodeAnalysis.NetAnalyzers": "[8.0.0, )",
+            "Microsoft.Data.SqlClient": "[5.2.2, )",
+            "Microsoft.Extensions.Configuration": "[8.0.0, )",
+            "Microsoft.Extensions.Configuration.Json": "[8.0.1, )",
+            "Microsoft.Extensions.DependencyInjection": "[8.0.1, )",
+            "Microsoft.Extensions.DependencyInjection.Abstractions": "[8.0.2, )",
+            "Microsoft.Extensions.Hosting": "[8.0.1, )",
+            "Microsoft.Extensions.Hosting.Abstractions": "[8.0.1, )",
+            "Microsoft.Extensions.Http": "[8.0.1, )",
+            "Microsoft.Extensions.Logging": "[8.0.0, )",
+            "Microsoft.Extensions.Logging.Abstractions": "[8.0.2, )",
+            "Microsoft.KernelMemory.Core": "[0.80.241017.2, )",
+            "Microsoft.KernelMemory.Service.AspNetCore": "[0.80.241017.2, )",
+            "Microsoft.ML.OnnxRuntimeGenAI": "[0.4.0, )",
+            "Microsoft.ML.Tokenizers": "[0.22.0-preview.24378.1, )",
+            "Microsoft.NET.Test.Sdk": "[17.11.1, )",
+            "Microsoft.SemanticKernel": "[1.24.1, )",
+            "Microsoft.SemanticKernel.Abstractions": "[1.24.1, )",
+            "Microsoft.SemanticKernel.Connectors.AzureOpenAI": "[1.24.1, )",
+            "Microsoft.SemanticKernel.Connectors.OpenAI": "[1.24.1, )",
+            "Microsoft.SourceLink.GitHub": "[8.0.0, )",
+            "Microsoft.VisualStudio.Threading.Analyzers": "[17.11.20, )",
+            "MongoDB.Driver.GridFS": "[2.30.0, )",
+            "Moq": "[4.20.72, )",
+            "Newtonsoft.Json": "[13.0.3, )",
+            "NRedisStack": "[0.13.0, )",
+            "OllamaSharp": "[3.0.14, )",
+            "PdfPig": "[0.1.9, )",
+            "Pgvector": "[0.3.0, )",
+            "Polly.Core": "[8.4.2, )",
+            "RabbitMQ.Client": "[6.8.1, )",
+            "ReadLine": "[2.0.1, )",
+            "Roslynator.CodeAnalysis.Analyzers": "[4.12.8, )",
+            "Roslynator.Formatting.Analyzers": "[4.12.8, )",
+            "Swashbuckle.AspNetCore": "[6.9.0, )",
+            "System.Linq.Async": "[6.0.1, )",
+            "System.Memory.Data": "[8.0.1, )",
+            "System.Numerics.Tensors": "[8.0.0, )",
+            "System.Runtime.Caching": "[8.0.1, )",
+            "xunit": "[2.9.2, )",
+            "xunit.abstractions": "[2.0.3, )",
+            "Xunit.DependencyInjection": "[9.5.0, )",
+            "Xunit.DependencyInjection.Logging": "[9.0.0, )",
+            "xunit.extensibility.core": "[2.7.1, )",
+            "xunit.runner.visualstudio": "[2.8.2, )"
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Faculta\\WebTechnology\\FinalProject\\kernel-memory\\service\\Abstractions\\Abstractions.csproj": {
+      "version": "0.90.0",
+      "restore": {
+        "projectUniqueName": "C:\\Faculta\\WebTechnology\\FinalProject\\kernel-memory\\service\\Abstractions\\Abstractions.csproj",
+        "projectName": "Microsoft.KernelMemory.Abstractions",
+        "projectPath": "C:\\Faculta\\WebTechnology\\FinalProject\\kernel-memory\\service\\Abstractions\\Abstractions.csproj",
+        "packagesPath": "C:\\Users\\vaisp\\.nuget\\packages\\",
+        "outputPath": "C:\\Faculta\\WebTechnology\\FinalProject\\kernel-memory\\service\\Abstractions\\obj\\",
+        "projectStyle": "PackageReference",
+        "centralPackageVersionsManagementEnabled": true,
+        "configFilePaths": [
+          "C:\\Faculta\\WebTechnology\\FinalProject\\kernel-memory\\NuGet.Config",
+          "C:\\Users\\vaisp\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.CodeAnalysis.Analyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.11.0, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.CodeAnalysis.CSharp.CodeStyle": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[4.11.0, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.CodeAnalysis.NetAnalyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.0, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[8.0.0, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[8.0.1, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.Extensions.Hosting": {
+              "target": "Package",
+              "version": "[8.0.1, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.Extensions.Logging.Abstractions": {
+              "target": "Package",
+              "version": "[8.0.2, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.SemanticKernel.Abstractions": {
+              "target": "Package",
+              "version": "[1.24.1, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.VisualStudio.Threading.Analyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[17.11.20, )",
+              "versionCentrallyManaged": true
+            },
+            "Roslynator.CodeAnalysis.Analyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[4.12.8, )",
+              "versionCentrallyManaged": true
+            },
+            "Roslynator.Formatting.Analyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[4.12.8, )",
+              "versionCentrallyManaged": true
+            },
+            "System.Memory.Data": {
+              "target": "Package",
+              "version": "[8.0.1, )",
+              "versionCentrallyManaged": true
+            },
+            "System.Numerics.Tensors": {
+              "target": "Package",
+              "version": "[8.0.0, )",
+              "versionCentrallyManaged": true
+            }
+          },
+          "centralPackageVersions": {
+            "Aspire.Npgsql.EntityFrameworkCore.PostgreSQL": "[8.2.1, )",
+            "AWSSDK.S3": "[3.7.405, )",
+            "Azure.AI.ContentSafety": "[1.0.0, )",
+            "Azure.AI.FormRecognizer": "[4.1.0, )",
+            "Azure.Identity": "[1.13.0, )",
+            "Azure.Search.Documents": "[11.6.0, )",
+            "Azure.Storage.Blobs": "[12.22.2, )",
+            "Azure.Storage.Queues": "[12.20.1, )",
+            "ClosedXML": "[0.104.1, )",
+            "coverlet.collector": "[6.0.2, )",
+            "Discord.Net": "[3.16.0, )",
+            "DocumentFormat.OpenXml": "[3.1.1, )",
+            "Elastic.Clients.Elasticsearch": "[8.12.1, )",
+            "HtmlAgilityPack": "[1.11.67, )",
+            "LLamaSharp": "[0.16.0, )",
+            "LLamaSharp.Backend.Cpu": "[0.16.0, )",
+            "LLamaSharp.Backend.Cuda11": "[0.12.0, )",
+            "LLamaSharp.Backend.Cuda12": "[0.12.0, )",
+            "LLamaSharp.Backend.OpenCL": "[0.12.0, )",
+            "Microsoft.ApplicationInsights.AspNetCore": "[2.22.0, )",
+            "Microsoft.CodeAnalysis.Analyzers": "[3.11.0, )",
+            "Microsoft.CodeAnalysis.CSharp.CodeStyle": "[4.11.0, )",
+            "Microsoft.CodeAnalysis.NetAnalyzers": "[8.0.0, )",
+            "Microsoft.Data.SqlClient": "[5.2.2, )",
+            "Microsoft.Extensions.Configuration": "[8.0.0, )",
+            "Microsoft.Extensions.Configuration.Json": "[8.0.1, )",
+            "Microsoft.Extensions.DependencyInjection": "[8.0.1, )",
+            "Microsoft.Extensions.DependencyInjection.Abstractions": "[8.0.2, )",
+            "Microsoft.Extensions.Hosting": "[8.0.1, )",
+            "Microsoft.Extensions.Hosting.Abstractions": "[8.0.1, )",
+            "Microsoft.Extensions.Http": "[8.0.1, )",
+            "Microsoft.Extensions.Logging": "[8.0.0, )",
+            "Microsoft.Extensions.Logging.Abstractions": "[8.0.2, )",
+            "Microsoft.KernelMemory.Core": "[0.80.241017.2, )",
+            "Microsoft.KernelMemory.Service.AspNetCore": "[0.80.241017.2, )",
+            "Microsoft.ML.OnnxRuntimeGenAI": "[0.4.0, )",
+            "Microsoft.ML.Tokenizers": "[0.22.0-preview.24378.1, )",
+            "Microsoft.NET.Test.Sdk": "[17.11.1, )",
+            "Microsoft.SemanticKernel": "[1.24.1, )",
+            "Microsoft.SemanticKernel.Abstractions": "[1.24.1, )",
+            "Microsoft.SemanticKernel.Connectors.AzureOpenAI": "[1.24.1, )",
+            "Microsoft.SemanticKernel.Connectors.OpenAI": "[1.24.1, )",
+            "Microsoft.SourceLink.GitHub": "[8.0.0, )",
+            "Microsoft.VisualStudio.Threading.Analyzers": "[17.11.20, )",
+            "MongoDB.Driver.GridFS": "[2.30.0, )",
+            "Moq": "[4.20.72, )",
+            "Newtonsoft.Json": "[13.0.3, )",
+            "NRedisStack": "[0.13.0, )",
+            "OllamaSharp": "[3.0.14, )",
+            "PdfPig": "[0.1.9, )",
+            "Pgvector": "[0.3.0, )",
+            "Polly.Core": "[8.4.2, )",
+            "RabbitMQ.Client": "[6.8.1, )",
+            "ReadLine": "[2.0.1, )",
+            "Roslynator.CodeAnalysis.Analyzers": "[4.12.8, )",
+            "Roslynator.Formatting.Analyzers": "[4.12.8, )",
+            "Swashbuckle.AspNetCore": "[6.9.0, )",
+            "System.Linq.Async": "[6.0.1, )",
+            "System.Memory.Data": "[8.0.1, )",
+            "System.Numerics.Tensors": "[8.0.0, )",
+            "System.Runtime.Caching": "[8.0.1, )",
+            "xunit": "[2.9.2, )",
+            "xunit.abstractions": "[2.0.3, )",
+            "Xunit.DependencyInjection": "[9.5.0, )",
+            "Xunit.DependencyInjection.Logging": "[9.0.0, )",
+            "xunit.extensibility.core": "[2.7.1, )",
+            "xunit.runner.visualstudio": "[2.8.2, )"
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\Microsoft.KernelMemory.ServiceAssembly.props" />
+</Project>

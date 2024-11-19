@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "106-dotnet-retrieve-synthetics": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:50224;http://localhost:50225"
+    }
+  }
+}

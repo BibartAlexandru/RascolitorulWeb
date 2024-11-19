@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "109-dotnet-custom-webscraper": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:50261;http://localhost:50262"
+    }
+  }
+}

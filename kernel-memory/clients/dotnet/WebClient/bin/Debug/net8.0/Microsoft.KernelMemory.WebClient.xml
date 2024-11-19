@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.KernelMemory.WebClient</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.KernelMemory.MemoryWebClient">
+            <summary>
+            Kernel Memory web service client
+            </summary>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryWebClient.#ctor(System.String,System.String,System.String)">
+            <summary>
+            New instance of web client to use Kernel Memory web service
+            </summary>
+            <param name="endpoint">Kernel Memory web service endpoint</param>
+            <param name="apiKey">Kernel Memory web service API Key (if configured)</param>
+            <param name="apiKeyHeader">Name of HTTP header to use to send API Key</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryWebClient.#ctor(System.String,System.Net.Http.HttpClient,System.String,System.String)">
+            <summary>
+            New instance of web client to use Kernel Memory web service
+            </summary>
+            <param name="endpoint">Kernel Memory web service endpoint</param>
+            <param name="client">Custom HTTP Client to use (note: BaseAddress is overwritten)</param>
+            <param name="apiKey">Kernel Memory web service API Key (if configured)</param>
+            <param name="apiKeyHeader">Name of HTTP header to use to send API Key</param>
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryWebClient.ImportDocumentAsync(Microsoft.KernelMemory.Document,System.String,System.Collections.Generic.IEnumerable{System.String},Microsoft.KernelMemory.Context.IContext,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryWebClient.ImportDocumentAsync(System.String,System.String,Microsoft.KernelMemory.TagCollection,System.String,System.Collections.Generic.IEnumerable{System.String},Microsoft.KernelMemory.Context.IContext,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryWebClient.ImportDocumentAsync(Microsoft.KernelMemory.DocumentUploadRequest,Microsoft.KernelMemory.Context.IContext,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryWebClient.ImportDocumentAsync(System.IO.Stream,System.String,System.String,Microsoft.KernelMemory.TagCollection,System.String,System.Collections.Generic.IEnumerable{System.String},Microsoft.KernelMemory.Context.IContext,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryWebClient.ImportTextAsync(System.String,System.String,Microsoft.KernelMemory.TagCollection,System.String,System.Collections.Generic.IEnumerable{System.String},Microsoft.KernelMemory.Context.IContext,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryWebClient.ImportWebPageAsync(System.String,System.String,Microsoft.KernelMemory.TagCollection,System.String,System.Collections.Generic.IEnumerable{System.String},Microsoft.KernelMemory.Context.IContext,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryWebClient.ListIndexesAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryWebClient.DeleteIndexAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryWebClient.DeleteDocumentAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryWebClient.IsDocumentReadyAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryWebClient.GetDocumentStatusAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryWebClient.ExportFileAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryWebClient.SearchAsync(System.String,System.String,Microsoft.KernelMemory.MemoryFilter,System.Collections.Generic.ICollection{Microsoft.KernelMemory.MemoryFilter},System.Double,System.Int32,Microsoft.KernelMemory.Context.IContext,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryWebClient.AskAsync(System.String,System.String,Microsoft.KernelMemory.MemoryFilter,System.Collections.Generic.ICollection{Microsoft.KernelMemory.MemoryFilter},System.Double,Microsoft.KernelMemory.Context.IContext,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.KernelMemory.MemoryWebClient.ImportInternalAsync(System.String,Microsoft.KernelMemory.DocumentUploadRequest,Microsoft.KernelMemory.Context.IContext,System.Threading.CancellationToken)">
+            <returns>Document ID</returns>
+        </member>
+    </members>
+</doc>
