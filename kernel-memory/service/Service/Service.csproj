@@ -1,0 +1,56 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <OutputType>Exe</OutputType>
+        <!-- Avoid using the ".Service" file extension, which would cause the app to hang on macOS, and use ".ServiceAssembly" instead -->
+        <AssemblyName>Microsoft.KernelMemory.ServiceAssembly</AssemblyName>
+        <RootNamespace>Microsoft.KernelMemory.Service</RootNamespace>
+        <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+        <IsPackable>false</IsPackable>
+        <NoWarn>$(NoWarn);CA2007;CA1724;CA2254;CA1031;CA1861;CA1303;SKEXP0001;KMEXP05;</NoWarn>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Service.AspNetCore\Service.AspNetCore.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" />
+        <PackageReference Include="Swashbuckle.AspNetCore" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- If you plan on using LLamaSharp, you will need to enable one of these backends,
+             which depend on the hardware hosting Kernel Memory code. -->
+
+        <!-- <PackageReference Include="LLamaSharp.Backend.Cpu" />      -->
+        <!-- <PackageReference Include="LLamaSharp.Backend.Cuda11" />   -->
+        <!-- <PackageReference Include="LLamaSharp.Backend.Cuda12" />   -->
+    </ItemGroup>
+
+    <!--
+    This dependency is needed only to generate appsetting.development.json via
+
+    "dotnet run setup"
+
+
+    You can safely remove this reference, removing also this code from Program.cs:
+
+        if (new[] { "setup", "-setup" }.Contains(args.FirstOrDefault(), StringComparer.OrdinalIgnoreCase))
+        {
+            Main.InteractiveSetup(cfgService: true);
+        }
+    -->
+    <ItemGroup>
+        <ProjectReference Include="..\..\tools\InteractiveSetup\InteractiveSetup.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Remove="setup.sh" />
+        <Content Include="setup.sh">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
+</Project>

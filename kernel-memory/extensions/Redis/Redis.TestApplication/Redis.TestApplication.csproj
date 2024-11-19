@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <AssemblyName>Microsoft.Redis.TestApplication</AssemblyName>
+        <RootNamespace>Microsoft.Redis.TestApplication</RootNamespace>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <RollForward>LatestMajor</RollForward>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <IsPackable>false</IsPackable>
+        <NoWarn>$(NoWarn);KMEXP01;KMEXP03;</NoWarn>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\OpenAI\OpenAI\OpenAI.csproj" />
+        <ProjectReference Include="..\Redis\Redis.csproj" />
+    </ItemGroup>
+
+</Project>
