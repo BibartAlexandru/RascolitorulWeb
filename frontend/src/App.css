@@ -4,9 +4,46 @@
   margin: 0;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.header {
+    margin: 50px auto 0px;
+    color: white;
+    background: #5F9EA0;
+    text-align: center;
+    border: 1px solid #B0C4DE;
+    border-bottom: none;
+    border-radius: 10px 10px 0px 0px;
+    padding: 20px;
+
+
+}
+
+header nav {
+  display: flex;
+  gap: 1rem;
+}
+
 #root {
-  text-align: center;
   width: 100%;
+}
+
+.search-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .search-input {
@@ -18,16 +55,6 @@
   outline: 0;
   border: var(--BORDER-NORMAL);
   padding: 0 1rem;
-}
-
-.search-section {
-}
-
-.input-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
 }
 
 h1 {
