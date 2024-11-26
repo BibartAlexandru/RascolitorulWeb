@@ -2,7 +2,6 @@ from flask import Flask, request, render_template, redirect, url_for, flash, jso
 import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_cors import CORS
-
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 # pentru toate rutele cu /prajitura/ceva -> poate din uri u ala sa-l acceseze. musai rutele cu /prajitura
@@ -35,12 +34,14 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/prajitura/signup', methods=['GET', 'POST'])
+@app.route('/prajitura/signup', methods=['GET','POST'])
 def signup():
     if request.method == 'POST':
-        username = request.form['username']
-        email = request.form['email']
-        password = request.form['password']
+        print(request.get_json())
+        request_body = request.get_json()
+        username = request_body['username']
+        email = request_body['email']
+        password = request_body['password']
         hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
 
         conn = sqlite3.connect('signup.db')
@@ -53,14 +54,14 @@ def signup():
             return redirect(url_for('signup'))
 
         cursor.execute('INSERT INTO users (username, email, password) VALUES (?, ?, ?)',
-                       (username, email, hashed_password))
+                        (username, email, hashed_password))
         conn.commit()
         conn.close()
 
-        flash('User registered successfully!', 'success')
-        return redirect(url_for('index'))
+        # flash('User registered successfully!', 'success')
 
-    return render_template('signup.html')
+        return "Nice password, bro",200
+    return redirect(url_for('index'))
 
 
 @app.route('/prajitura/login', methods=['GET', 'POST'])
