@@ -1,9 +1,12 @@
 from flask import Flask, request, render_template, redirect, url_for, flash, jsonify, session
 import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_cors import CORS
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
+# pentru toate rutele cu /prajitura/ceva -> poate din uri u ala sa-l acceseze. musai rutele cu /prajitura
+CORS(app, resources={r"/prajitura/*": {"origins": "http://localhost:5173"}})
 
 
 def init_db():
