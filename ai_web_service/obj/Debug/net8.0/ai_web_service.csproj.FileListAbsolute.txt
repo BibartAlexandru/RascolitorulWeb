@@ -243,7 +243,6 @@ C:\Faculta\WebTechnology\FinalProject\kernel-memory\ai_web_service\bin\Debug\net
 C:\Faculta\WebTechnology\FinalProject\kernel-memory\ai_web_service\bin\Debug\net8.0\Microsoft.KernelMemory.WebClient.xml
 C:\Faculta\WebTechnology\FinalProject\kernel-memory\ai_web_service\obj\Debug\net8.0\ai_web_service.csproj.AssemblyReference.cache
 C:\Faculta\WebTechnology\FinalProject\kernel-memory\ai_web_service\obj\Debug\net8.0\ai_web_s.8431DDDE.Up2Date
-C:\Faculta\WebTechnology\FinalProject\ai_web_service\bin\Debug\net8.0\appsettings.Development.json
 C:\Faculta\WebTechnology\FinalProject\ai_web_service\bin\Debug\net8.0\appsettings.json
 C:\Faculta\WebTechnology\FinalProject\ai_web_service\bin\Debug\net8.0\ai_web_service.exe
 C:\Faculta\WebTechnology\FinalProject\ai_web_service\bin\Debug\net8.0\ai_web_service.deps.json
