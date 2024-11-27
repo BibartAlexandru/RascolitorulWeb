@@ -26,3 +26,12 @@
 .search-section h1 {
   font-size: calc(0.9rem + 1.35vw) !important;
 }
+
+.search-section form {
+  width: max-content;
+  max-width: none;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+}

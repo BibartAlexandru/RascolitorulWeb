@@ -3,6 +3,12 @@ import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_cors import CORS
 from pydantic import BaseModel
+import requests
+
+# pt env variables
+from dotenv import load_dotenv
+import os
+
 app = Flask(__name__)
 
 # app.secret_key = 'your_secret_key'
@@ -94,9 +100,15 @@ def logout():
     session.pop('username', None)
     return jsonify({"message": "You have been logged out."}), 200
 
+# REQ BODY: text/plain
 @app.route('/prajitura/search', methods =["POST"])
 def search():
-    pass
+    # data is byte arr
+    request_body = request.get_data().decode()
+    print(os.getenv('GOOGLE_SEARCH_API_KEY'))
+    print(os.getenv('GOOGLE_SEARCH_ENGINE_ID'))
+    # https://www.youtube.com/watch?v=D4tWHX2nCzQ&ab_channel=JieJenn
+    return jsonify({"msg": "k"}),200
 
 if __name__ == '__main__':
     init_db()
