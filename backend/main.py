@@ -29,40 +29,34 @@ def say_hi():
     return jsonify({"message": "HI!"}), 200
 
 
-@app.route('/prajitura/index', methods=['GET'])
-def index():
-    return render_template('index.html')
+# @app.route('/prajitura/index', methods=['GET'])
+# def index():
+#     return render_template('index.html')
 
 
-@app.route('/prajitura/signup', methods=['GET','POST'])
+@app.route('/prajitura/signup', methods=['POST'])
 def signup():
-    if request.method == 'POST':
-        print(request.get_json())
-        request_body = request.get_json()
-        username = request_body['username']
-        email = request_body['email']
-        password = request_body['password']
-        hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
+    print(request.get_json())
+    request_body = request.get_json()
+    username = request_body['username']
+    email = request_body['email']
+    password = request_body['password']
+    hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
 
-        conn = sqlite3.connect('signup.db')
-        cursor = conn.cursor()
-        cursor.execute('SELECT * FROM users WHERE username = ? OR email = ?', (username, email))
-        user = cursor.fetchone()
+    conn = sqlite3.connect('signup.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM users WHERE username = ? OR email = ?', (username, email))
+    user = cursor.fetchone()
 
-        if user:
-            flash('Username or Email already exists!', 'error')
-            return redirect(url_for('signup'))
+    if user:
+        return jsonify({"msg": "Error. Username or Email already exists"}), 406
 
-        cursor.execute('INSERT INTO users (username, email, password) VALUES (?, ?, ?)',
-                        (username, email, hashed_password))
-        conn.commit()
-        conn.close()
+    cursor.execute('INSERT INTO users (username, email, password) VALUES (?, ?, ?)',
+                    (username, email, hashed_password))
+    conn.commit()
+    conn.close()
 
-        # flash('User registered successfully!', 'success')
-
-        return "Nice password, bro",200
-    return redirect(url_for('index'))
-
+    return jsonify({"msg": "Nice pass"}) ,200
 
 @app.route('/prajitura/login', methods=['GET', 'POST'])
 def login():

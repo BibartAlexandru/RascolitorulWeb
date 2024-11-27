@@ -25,7 +25,7 @@ const Signup: React.FC<SignupProps> = ({ setIsAuthenticated }) => {
     });
 
     const data = await response.json();
-
+    console.log(data);
     if (response.ok) {
       localStorage.setItem("isAuthenticated", "true");
       setIsAuthenticated(true);
