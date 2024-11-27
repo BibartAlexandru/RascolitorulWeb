@@ -14,7 +14,7 @@ const SearchSection = () => {
       },
     });
     if (resp.ok) {
-      console.log("OK RESP");
+      console.log(await resp.json());
     } else {
       console.log("NOT OK");
     }
