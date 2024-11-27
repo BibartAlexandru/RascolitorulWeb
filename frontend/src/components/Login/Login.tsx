@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 
 interface LoginProps {
@@ -28,7 +28,7 @@ const Login: React.FC<LoginProps> = ({ setIsAuthenticated }) => {
     if (response.ok) {
       localStorage.setItem("isAuthenticated", "true");
       setIsAuthenticated(true);
-      navigate("/prajitura/index");
+      navigate("/index");
     } else {
       setMessage(data.message);
     }
@@ -62,7 +62,7 @@ const Login: React.FC<LoginProps> = ({ setIsAuthenticated }) => {
       </form>
       {message && <p className="error">{message}</p>}
       <p>
-        Not yet a member? <Link to="/prajitura/signup">Sign up</Link>
+        Not yet a member? <Link to="/signup">Sign up</Link>
       </p>
     </div>
   );

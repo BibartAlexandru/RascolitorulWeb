@@ -1,0 +1,28 @@
+.search-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.search-section .input-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.search-section .search-input {
+  height: 3rem;
+  width: 40rem;
+  font-size: 1.2rem;
+  background-color: white;
+  color: black;
+  outline: 0;
+  border: var(--BORDER-NORMAL);
+  padding: 0 1rem;
+}
+
+.search-section h1 {
+  font-size: calc(0.9rem + 1.35vw) !important;
+}

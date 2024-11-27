@@ -1,17 +1,17 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Faculta\\WebTechnology\\FinalProject\\ai_web_service\\",
+  "WorkspaceRootPath": "C:\\Users\\vaisp\\OneDrive\\Desktop\\RascolitorulWeb\\ai_web_service\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BCA16C64-C139-439F-9388-09F79BEE8199}|ai_web_service.csproj|c:\\faculta\\webtechnology\\finalproject\\ai_web_service\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{BCA16C64-C139-439F-9388-09F79BEE8199}|ai_web_service.csproj|c:\\users\\vaisp\\onedrive\\desktop\\rascolitorulweb\\ai_web_service\\ai_web_service.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{BCA16C64-C139-439F-9388-09F79BEE8199}|ai_web_service.csproj|solutionrelative:ai_web_service.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BCA16C64-C139-439F-9388-09F79BEE8199}|ai_web_service.csproj|c:\\users\\vaisp\\onedrive\\desktop\\rascolitorulweb\\ai_web_service\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BCA16C64-C139-439F-9388-09F79BEE8199}|ai_web_service.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{117A8F29-5A33-4483-823B-2BF4EDEAB784}|..\\kernel-memory\\extensions\\KM\\KernelMemory\\KernelMemory.csproj|c:\\faculta\\webtechnology\\finalproject\\kernel-memory\\extensions\\km\\kernelmemory\\kernelmemory.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BCA16C64-C139-439F-9388-09F79BEE8199}|ai_web_service.csproj|c:\\faculta\\webtechnology\\finalproject\\ai_web_service\\ai_web_service.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{BCA16C64-C139-439F-9388-09F79BEE8199}|ai_web_service.csproj|solutionrelative:ai_web_service.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{117A8F29-5A33-4483-823B-2BF4EDEAB784}|..\\kernel-memory\\extensions\\KM\\KernelMemory\\KernelMemory.csproj|c:\\users\\vaisp\\onedrive\\desktop\\rascolitorulweb\\kernel-memory\\extensions\\km\\kernelmemory\\kernelmemory.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -21,43 +21,43 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "KernelMemory",
-              "DocumentMoniker": "C:\\Faculta\\WebTechnology\\FinalProject\\kernel-memory\\extensions\\KM\\KernelMemory\\KernelMemory.csproj",
-              "RelativeDocumentMoniker": "..\\kernel-memory\\extensions\\KM\\KernelMemory\\KernelMemory.csproj",
-              "ToolTip": "C:\\Faculta\\WebTechnology\\FinalProject\\kernel-memory\\extensions\\KM\\KernelMemory\\KernelMemory.csproj",
-              "RelativeToolTip": "..\\kernel-memory\\extensions\\KM\\KernelMemory\\KernelMemory.csproj",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-11-19T13:18:24.927Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "ai_web_service.csproj",
-              "DocumentMoniker": "C:\\Faculta\\WebTechnology\\FinalProject\\ai_web_service\\ai_web_service.csproj",
-              "RelativeDocumentMoniker": "ai_web_service.csproj",
-              "ToolTip": "C:\\Faculta\\WebTechnology\\FinalProject\\ai_web_service\\ai_web_service.csproj",
-              "RelativeToolTip": "ai_web_service.csproj",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAfAAAA",
+              "Title": "KernelMemory",
+              "DocumentMoniker": "C:\\Users\\vaisp\\OneDrive\\Desktop\\RascolitorulWeb\\kernel-memory\\extensions\\KM\\KernelMemory\\KernelMemory.csproj",
+              "RelativeDocumentMoniker": "..\\kernel-memory\\extensions\\KM\\KernelMemory\\KernelMemory.csproj",
+              "ToolTip": "C:\\Users\\vaisp\\OneDrive\\Desktop\\RascolitorulWeb\\kernel-memory\\extensions\\KM\\KernelMemory\\KernelMemory.csproj",
+              "RelativeToolTip": "..\\kernel-memory\\extensions\\KM\\KernelMemory\\KernelMemory.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-11-19T12:57:06.507Z",
+              "WhenOpened": "2024-11-27T09:26:56.154Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "ai_web_service",
+              "DocumentMoniker": "C:\\Users\\vaisp\\OneDrive\\Desktop\\RascolitorulWeb\\ai_web_service\\ai_web_service.csproj",
+              "RelativeDocumentMoniker": "ai_web_service.csproj",
+              "ToolTip": "C:\\Users\\vaisp\\OneDrive\\Desktop\\RascolitorulWeb\\ai_web_service\\ai_web_service.csproj",
+              "RelativeToolTip": "ai_web_service.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-11-27T09:27:34.164Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Faculta\\WebTechnology\\FinalProject\\ai_web_service\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\vaisp\\OneDrive\\Desktop\\RascolitorulWeb\\ai_web_service\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Faculta\\WebTechnology\\FinalProject\\ai_web_service\\Program.cs",
+              "ToolTip": "C:\\Users\\vaisp\\OneDrive\\Desktop\\RascolitorulWeb\\ai_web_service\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAADwAAAAAAAAAAAAAAEkAAAANAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-29T08:08:32.551Z",
               "EditorCaption": ""

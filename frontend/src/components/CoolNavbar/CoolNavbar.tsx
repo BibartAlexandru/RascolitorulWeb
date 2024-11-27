@@ -1,12 +1,12 @@
 //import React from "react";
 import "./CoolNavbar.css";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
-
+import { Link } from "react-router-dom";
 const CoolNavbar = () => {
   return (
     <Navbar id="cool-navbar">
       <Container>
-        <Navbar.Brand href="/home">
+        <Navbar.Brand as={Link} to={"/index"}>
           <img
             alt="Web Crawler logo"
             src="/Web Crawler.jpg"
@@ -18,8 +18,12 @@ const CoolNavbar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/home">Home</Nav.Link>
-            <Nav.Link href="/link">Link</Nav.Link>
+            <Nav.Link as={Link} to={"/index"}>
+              Home
+            </Nav.Link>
+            <Nav.Link as={Link} to={"/signup"}>
+              Signup
+            </Nav.Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="/action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="/action/3.2">

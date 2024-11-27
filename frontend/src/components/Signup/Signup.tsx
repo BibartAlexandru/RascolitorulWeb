@@ -29,7 +29,7 @@ const Signup: React.FC<SignupProps> = ({ setIsAuthenticated }) => {
     if (response.ok) {
       localStorage.setItem("isAuthenticated", "true");
       setIsAuthenticated(true);
-      navigate("/prajitura/index");
+      navigate("/index");
     } else {
       setMessage(data.message);
     }
@@ -73,7 +73,7 @@ const Signup: React.FC<SignupProps> = ({ setIsAuthenticated }) => {
       </form>
       {message && <p className="error">{message}</p>}
       <p>
-        Already a member? <Link to="/prajitura/login">Login</Link>
+        Already a member? <Link to="/login">Login</Link>
       </p>
     </div>
   );

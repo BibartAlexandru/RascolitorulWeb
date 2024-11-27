@@ -11,16 +11,14 @@ body {
 }
 
 .header {
-    margin: 50px auto 0px;
-    color: white;
-    background: #5F9EA0;
-    text-align: center;
-    border: 1px solid #B0C4DE;
-    border-bottom: none;
-    border-radius: 10px 10px 0px 0px;
-    padding: 20px;
-
-
+  margin: 50px auto 0px;
+  color: white;
+  background: #5f9ea0;
+  text-align: center;
+  border: 1px solid #b0c4de;
+  border-bottom: none;
+  border-radius: 10px 10px 0px 0px;
+  padding: 20px;
 }
 
 header nav {
@@ -30,33 +28,4 @@ header nav {
 
 #root {
   width: 100%;
-}
-
-.search-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 2rem;
-}
-
-.input-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.search-input {
-  height: 3rem;
-  width: 40rem;
-  font-size: 1.2rem;
-  background-color: white;
-  color: black;
-  outline: 0;
-  border: var(--BORDER-NORMAL);
-  padding: 0 1rem;
-}
-
-h1 {
-  font-size: calc(0.9rem + 1.35vw) !important;
 }
