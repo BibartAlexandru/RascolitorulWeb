@@ -11,7 +11,10 @@ from bs4 import BeautifulSoup
 # pt env variables
 from dotenv import load_dotenv
 import os
+
 from typeguard import typechecked
+from urllib.parse import urljoin
+
 
 app = Flask(__name__)
 load_dotenv()
@@ -130,12 +133,14 @@ def search():
     # if response.status_code != 200:
     #     return jsonify({"msg:":"Error, Extracting keywords from user query failed."}),416
     
-    crawled_site_info = []
-    for uri in uris[:1]:
-        try:
-            crawled_site_info.append(get_site_crawled_info(uri,user_query_keywords))
-        except Exception as e:
-            print(f"Error at accessing uri:{uri}.\n{e}")
+    crawled_site_data = []
+    for uri in uris:
+        crawled_site_data += get_spread_crawl_data(uri,user_query_keywords,3)
+
+    for data in crawled_site_data:
+        print(f"\nsite {data.site_uri}")
+        for line in data.data:
+            print(line)
 
     # TODO FA ENDPOINTU PT AI
     # payload = {
@@ -151,21 +156,57 @@ def search():
         return response.json(),200
     else:
         return jsonify({"msg:":"Error, Custom Search Call Failed"}),403
+    
+class SiteCrawledData(BaseModel):
+    data: List[str]
+    site_uri: str
 
 @typechecked
-def get_site_crawled_info(site_uri: str, query_keywords: List[str]) -> List[str]:
-    res = requests.get(site_uri)
-    if res.status_code != 200:
-        raise Exception("Get request to site returned error status code")
-    parser = BeautifulSoup(res.content,'html.parser')
+def get_spread_crawl_data(site_uri: str, query_keywords: List[str], nr_uris_to_crawl: int = 10) -> List[SiteCrawledData]:
+    @typechecked
+    def get_relevant_text(site_uri: str) -> SiteCrawledData:
+        res = requests.get(site_uri)
+        if res.status_code != 200:
+            raise Exception(f"Get request to {site_uri} returned status code {res.status_code}")
+        parser = BeautifulSoup(res.content,'html.parser')
+        elements = parser.find_all('p') + parser.find_all('h1') + \
+                parser.find_all('h2') + parser.find_all('h3') +\
+                parser.find_all('h4') + parser.find_all('h5') + parser.find_all('h6')
+        relevant_text = [element.get_text() for element in elements if any(q in element.get_text().lower() for q in query_keywords)]
+        return SiteCrawledData(data=relevant_text,site_uri=site_uri)
+    
+    @typechecked
+    def get_relevant_links(site_uri: str) -> List[str]:
+        res = requests.get(site_uri)
+        if res.status_code != 200:
+            raise Exception(f"Get request to {site_uri} returned status code {res.status_code}")
+        parser = BeautifulSoup(res.content,'html.parser')
+        # sa nu inceapa linku cu # ca atunci e doar un element de pe aceasi pagina
+        # relevante is daca au in ele un keyword. eventual putem schimba asta
+        links = [a['href'] for a in parser.find_all('a',href = True) if a['href'][0] != '#']
 
-    elements = parser.find_all('p') + parser.find_all('h1') + \
-            parser.find_all('h2') + parser.find_all('h3') +\
-            parser.find_all('h4') + parser.find_all('h5') + parser.find_all('h6')
-    text = [element.get_text() for element in elements if any(q in element.get_text().lower() for q in query_keywords)]
-    for t in text:
-        print(t)
-    return text
+        # poate linku e /cart/product in loc de https://emag.ro/cart/product, urljoin lipeste urlu de baza cu ala relativ daca e relativ
+        relevant_links = [urljoin(site_uri,l) for l in links if any(keyword in l for keyword in query_keywords)]
+        return relevant_links
+
+    data = []
+    uris_crawled = set()
+    uris_to_crawl = [site_uri]
+    while nr_uris_to_crawl > 0 and len(uris_to_crawl) > 0:
+        current_site = uris_to_crawl.pop(0)
+        uris_crawled.add(current_site)
+        nr_uris_to_crawl -= 1
+        # print(f'Crawling {current_site}')
+        try:
+            data.append(get_relevant_text(current_site))
+            relevant_links = get_relevant_links(current_site)
+            for link in relevant_links:
+                if link not in uris_crawled:
+                    uris_to_crawl.append(link)
+        except Exception as e:
+            print(e)
+
+    return data
 
 if __name__ == '__main__':
     init_db()
