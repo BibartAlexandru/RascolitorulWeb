@@ -3628,22 +3628,21 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\vaisp\\.nuget\\packages\\": {}
+    "/home/alex/.nuget/packages/": {}
   },
   "project": {
     "version": "0.90.0",
     "restore": {
-      "projectUniqueName": "C:\\Faculta\\WebTechnology\\FinalProject\\kernel-memory\\extensions\\AWS\\S3\\S3.csproj",
+      "projectUniqueName": "/home/alex/Faculta/RascolitorulWeb/kernel-memory/extensions/AWS/S3/S3.csproj",
       "projectName": "Microsoft.KernelMemory.DocumentStorage.AWSS3",
-      "projectPath": "C:\\Faculta\\WebTechnology\\FinalProject\\kernel-memory\\extensions\\AWS\\S3\\S3.csproj",
-      "packagesPath": "C:\\Users\\vaisp\\.nuget\\packages\\",
-      "outputPath": "C:\\Faculta\\WebTechnology\\FinalProject\\kernel-memory\\extensions\\AWS\\S3\\obj\\",
+      "projectPath": "/home/alex/Faculta/RascolitorulWeb/kernel-memory/extensions/AWS/S3/S3.csproj",
+      "packagesPath": "/home/alex/.nuget/packages/",
+      "outputPath": "/home/alex/Faculta/RascolitorulWeb/kernel-memory/extensions/AWS/S3/obj/",
       "projectStyle": "PackageReference",
       "centralPackageVersionsManagementEnabled": true,
       "configFilePaths": [
-        "C:\\Faculta\\WebTechnology\\FinalProject\\kernel-memory\\NuGet.Config",
-        "C:\\Users\\vaisp\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/home/alex/Faculta/RascolitorulWeb/kernel-memory/nuget.config",
+        "/home/alex/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -3655,8 +3654,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Faculta\\WebTechnology\\FinalProject\\kernel-memory\\service\\Abstractions\\Abstractions.csproj": {
-              "projectPath": "C:\\Faculta\\WebTechnology\\FinalProject\\kernel-memory\\service\\Abstractions\\Abstractions.csproj"
+            "/home/alex/Faculta/RascolitorulWeb/kernel-memory/service/Abstractions/Abstractions.csproj": {
+              "projectPath": "/home/alex/Faculta/RascolitorulWeb/kernel-memory/service/Abstractions/Abstractions.csproj"
             }
           }
         }
@@ -3669,8 +3668,9 @@
       "restoreAuditProperties": {
         "enableAudit": "true",
         "auditLevel": "low",
-        "auditMode": "direct"
-      }
+        "auditMode": "all"
+      },
+      "SdkAnalysisLevel": "9.0.100"
     },
     "frameworks": {
       "net8.0": {
@@ -3809,7 +3809,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/home/alex/.dotnet/sdk/9.0.100/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

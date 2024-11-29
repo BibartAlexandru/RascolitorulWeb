@@ -1,4 +1,5 @@
-﻿using Azure;
+﻿using System.Text;
+using Azure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -13,7 +14,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 var app = builder.Build();
 app.UseRouting();
-IKernelMemory memory = null;
+IKernelMemory? memory = null;
 
 using var loggerFactory = LoggerFactory.Create(builder =>
 {
@@ -65,15 +66,26 @@ app.MapPost("/upload", async (HttpContext context) =>
     IFormFile[] files = context.Request.Form.Files.ToArray<IFormFile>();
     foreach(IFormFile file in files)
         logger.LogInformation("The file uploaded is: " + file.FileName);
+
+    //TODO: For each search, a diff tag such that we delete all files from that serach
+    string tag = "search_nr_" + DateTime.Now.Ticks;
+    
+    var tagCollection = new TagCollection();
+    tagCollection.Add(tag);
+
     foreach (IFormFile file in files)
         try
         {
-            MemoryStream memStream = new MemoryStream();
-            file.CopyTo(memStream);
-            await memory.ImportDocumentAsync(new Document
-            {
-                Content = memStream.ToArray()
-            },null);
+            if(memory == null)
+                return Results.StatusCode(500);
+            var str_builder = new StringBuilder();
+            using (var reader = new StreamReader(file.OpenReadStream())){
+                while (reader.Peek() >= 0)
+                    str_builder.AppendLine(reader.ReadLine());
+            }
+            string text = str_builder.ToString();
+            // logger.LogInformation("The text is" + text);
+            await memory.ImportTextAsync(text, file.FileName, tagCollection);
         }
         catch(Exception ex)
         {

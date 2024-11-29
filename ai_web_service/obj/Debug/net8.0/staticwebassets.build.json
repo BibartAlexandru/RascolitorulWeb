@@ -1,11 +1,12 @@
 {
   "Version": 1,
-  "Hash": "tB5RooirnlB6FFVjMQ4beZTYVkPLrsCNJJqGvlSPimI=",
+  "Hash": "9ZhkYio8tP8+n8a8VxIyf3aApEt9S8gbZAQmmvA9E5k=",
   "Source": "ai_web_service",
   "BasePath": "_content/ai_web_service",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }

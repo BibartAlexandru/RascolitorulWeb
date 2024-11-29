@@ -13,11 +13,11 @@ using System.Reflection;
 [assembly: System.CLSCompliantAttribute(false)]
 [assembly: System.Reflection.AssemblyCompanyAttribute("Microsoft.KernelMemory.SemanticKernelPlugin")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
-[assembly: System.Reflection.AssemblyDescriptionAttribute("Kernel Memory Plugin allows to use Kernel Memory Service as a Semantic Kernel plu" +
+[assembly: System.Reflection.AssemblyDescriptionAttribute(("Kernel Memory Plugin allows to use Kernel Memory Service as a Semantic Kernel plu" +
     "gin, to index and query any data and documents, using LLM and natural language, " +
-    "tracking sources and showing citations.")]
+    "tracking sources and showing citations."))]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("0.90.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.90.0+a65e7eaecd3c242f5785ae7367852fd2717d1b56")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.90.0+f5d61720ba6efd2baeb8a03c3c0a3e7340c775c2")]
 [assembly: System.Reflection.AssemblyProductAttribute("Memory Plugin for Semantic Kernel")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Microsoft.KernelMemory.SemanticKernelPlugin")]
 [assembly: System.Reflection.AssemblyVersionAttribute("0.90.0.0")]

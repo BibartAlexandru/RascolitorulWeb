@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute(@"Kernel Memory is a Copilot/Semantic Kernel Plugin and Memory Web Service to index and query any data and documents, using LLM and natural language, tracking sources and showing citations. The package contains the interfaces and models shared by all Kernel Memory packages.")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("0.90.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.90.0+a65e7eaecd3c242f5785ae7367852fd2717d1b56")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.90.0+f5d61720ba6efd2baeb8a03c3c0a3e7340c775c2")]
 [assembly: System.Reflection.AssemblyProductAttribute("Kernel Memory Interfaces and Modules")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Microsoft.KernelMemory.Abstractions")]
 [assembly: System.Reflection.AssemblyVersionAttribute("0.90.0.0")]

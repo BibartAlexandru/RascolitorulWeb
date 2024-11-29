@@ -386,22 +386,22 @@
           "runtimes/win-arm/native/Microsoft.Data.SqlClient.SNI.dll": {
             "rid": "win-arm",
             "assetType": "native",
-            "fileVersion": "5.2.0.0"
+            "fileVersion": "0.0.0.0"
           },
           "runtimes/win-arm64/native/Microsoft.Data.SqlClient.SNI.dll": {
             "rid": "win-arm64",
             "assetType": "native",
-            "fileVersion": "5.2.0.0"
+            "fileVersion": "0.0.0.0"
           },
           "runtimes/win-x64/native/Microsoft.Data.SqlClient.SNI.dll": {
             "rid": "win-x64",
             "assetType": "native",
-            "fileVersion": "5.2.0.0"
+            "fileVersion": "0.0.0.0"
           },
           "runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.dll": {
             "rid": "win-x86",
             "assetType": "native",
-            "fileVersion": "5.2.0.0"
+            "fileVersion": "0.0.0.0"
           }
         }
       },
@@ -874,7 +874,7 @@
           "runtimes/win-arm64/native/onnxruntime.dll": {
             "rid": "win-arm64",
             "assetType": "native",
-            "fileVersion": "1.19.24.820"
+            "fileVersion": "0.0.0.0"
           },
           "runtimes/win-arm64/native/onnxruntime.lib": {
             "rid": "win-arm64",
@@ -884,7 +884,7 @@
           "runtimes/win-arm64/native/onnxruntime_providers_shared.dll": {
             "rid": "win-arm64",
             "assetType": "native",
-            "fileVersion": "1.19.24.820"
+            "fileVersion": "0.0.0.0"
           },
           "runtimes/win-arm64/native/onnxruntime_providers_shared.lib": {
             "rid": "win-arm64",
@@ -894,7 +894,7 @@
           "runtimes/win-x64/native/onnxruntime.dll": {
             "rid": "win-x64",
             "assetType": "native",
-            "fileVersion": "1.19.24.820"
+            "fileVersion": "0.0.0.0"
           },
           "runtimes/win-x64/native/onnxruntime.lib": {
             "rid": "win-x64",
@@ -904,7 +904,7 @@
           "runtimes/win-x64/native/onnxruntime_providers_shared.dll": {
             "rid": "win-x64",
             "assetType": "native",
-            "fileVersion": "1.19.24.820"
+            "fileVersion": "0.0.0.0"
           },
           "runtimes/win-x64/native/onnxruntime_providers_shared.lib": {
             "rid": "win-x64",
@@ -914,7 +914,7 @@
           "runtimes/win-x86/native/onnxruntime.dll": {
             "rid": "win-x86",
             "assetType": "native",
-            "fileVersion": "1.19.24.820"
+            "fileVersion": "0.0.0.0"
           },
           "runtimes/win-x86/native/onnxruntime.lib": {
             "rid": "win-x86",
@@ -924,7 +924,7 @@
           "runtimes/win-x86/native/onnxruntime_providers_shared.dll": {
             "rid": "win-x86",
             "assetType": "native",
-            "fileVersion": "1.19.24.820"
+            "fileVersion": "0.0.0.0"
           },
           "runtimes/win-x86/native/onnxruntime_providers_shared.lib": {
             "rid": "win-x86",
@@ -958,7 +958,7 @@
           "runtimes/win-arm64/native/onnxruntime-genai.dll": {
             "rid": "win-arm64",
             "assetType": "native",
-            "fileVersion": "0.4.0.0"
+            "fileVersion": "0.0.0.0"
           },
           "runtimes/win-arm64/native/onnxruntime-genai.lib": {
             "rid": "win-arm64",
@@ -968,7 +968,7 @@
           "runtimes/win-x64/native/onnxruntime-genai.dll": {
             "rid": "win-x64",
             "assetType": "native",
-            "fileVersion": "0.4.0.0"
+            "fileVersion": "0.0.0.0"
           },
           "runtimes/win-x64/native/onnxruntime-genai.lib": {
             "rid": "win-x64",
@@ -1362,6 +1362,12 @@
           }
         },
         "runtimeTargets": {
+          "runtimes/win/lib/net8.0/System.Diagnostics.EventLog.Messages.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.1024.46610"
+          },
           "runtimes/win/lib/net8.0/System.Diagnostics.EventLog.dll": {
             "rid": "win",
             "assetType": "runtime",

@@ -13,10 +13,10 @@ using System.Reflection;
 [assembly: System.CLSCompliantAttribute(false)]
 [assembly: System.Reflection.AssemblyCompanyAttribute("Microsoft.KernelMemory.Orchestration.AzureQueues")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
-[assembly: System.Reflection.AssemblyDescriptionAttribute("Azure Queue Storage connector for Microsoft Kernel Memory, to run asynchronous pi" +
-    "pelines via Azure Queue Storage queues.")]
+[assembly: System.Reflection.AssemblyDescriptionAttribute(("Azure Queue Storage connector for Microsoft Kernel Memory, to run asynchronous pi" +
+    "pelines via Azure Queue Storage queues."))]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("0.90.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.90.0+a65e7eaecd3c242f5785ae7367852fd2717d1b56")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.90.0+f5d61720ba6efd2baeb8a03c3c0a3e7340c775c2")]
 [assembly: System.Reflection.AssemblyProductAttribute("Azure Queue Storage connector for Kernel Memory pipelines")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Microsoft.KernelMemory.Orchestration.AzureQueues")]
 [assembly: System.Reflection.AssemblyVersionAttribute("0.90.0.0")]
