@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("Add Azure AI Content Safety to Kernel Memory to moderate user content.")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("0.90.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.90.0+f5d61720ba6efd2baeb8a03c3c0a3e7340c775c2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.90.0+a29cae6a0a2e34f8e545db49ac0d6e007ea16113")]
 [assembly: System.Reflection.AssemblyProductAttribute("Azure AI Content Safety for Kernel Memory")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Microsoft.KernelMemory.Safety.AzureAIContentSafety")]
 [assembly: System.Reflection.AssemblyVersionAttribute("0.90.0.0")]

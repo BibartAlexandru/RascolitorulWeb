@@ -18,6 +18,7 @@ from urllib.parse import urljoin
 
 app = Flask(__name__)
 load_dotenv()
+AI_WEB_SERVICE_URL = os.getenv("AI_WEB_SERVICE_URL")
 
 # app.secret_key = 'your_secret_key'
 # pentru toate rutele cu /prajitura/ceva -> poate din uri u ala sa-l acceseze. musai rutele cu /prajitura
@@ -128,11 +129,20 @@ def search():
         return jsonify({"msg:":"Error, Custom Search call failed"}),416
 
     # Extragem keyword-uri din ce cauta userul ca dupa sa putem filtra informatiile crawluite
-    user_query_keywords = ['cat']
-    # user_query_keywords = requests.post("https://ai_web_service/extract_search_keywords",data=user_query)
-    # if response.status_code != 200:
-    #     return jsonify({"msg:":"Error, Extracting keywords from user query failed."}),416
+    user_query_keywords = [user_query]
     
+    resp = requests.post(f"{AI_WEB_SERVICE_URL}/extract_search_keywords",
+                                        data=user_query,
+                                        headers={
+                                            'Content-Type':'text/plain'
+                                            })
+    if resp.status_code != 200:
+        print(f"Error at extracting keywords from user query:{resp} ")
+    else:
+        user_query_keywords += resp.json()
+    
+    # print(user_query_keywords)
+
     crawled_site_data = []
     for uri in uris:
         crawled_site_data += get_spread_crawl_data(uri,user_query_keywords,3)
@@ -144,9 +154,9 @@ def search():
 
     # TODO FA ENDPOINTU PT AI
     # payload = {
-    #     "crawled_site_info": crawled_site_info
+    #     "crawled_site_info": crawled_site_data
     # }
-    # response = requests.post("https://ai_web_service/most_commono_facts",data=payload)
+    # response = requests.post("https://ai_web_service/most_common_facts",data=payload)
     # if response.status_code != 200:
     #     return jsonify({"msg:":"Error, AI web service call failed"}),416
 
