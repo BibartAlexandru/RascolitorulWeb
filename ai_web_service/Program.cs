@@ -148,8 +148,29 @@ app.MapPost("/extract_search_keywords", async (HttpContext context) => {
     }
 });
 
+app.MapPost("/test", async (HttpContext context) => {
+    using var reader = new StreamReader(context.Request.Body);
+    String? body = await reader.ReadToEndAsync();
+    return Results.Ok(body);
+});
+
 app.MapPost("/most_common_facts",async (HttpContext context) => {
-    // receive crawled data
+    using var reader = new StreamReader(context.Request.Body);
+    String? body = await reader.ReadToEndAsync();
+    if (String.IsNullOrEmpty(body))
+        return Results.BadRequest("Missing/empty body in the request");
+    SiteDataArray? siteDataArr = null;
+    try{
+        logger.LogInformation("The body is: " + body);
+        siteDataArr = JsonSerializer.Deserialize<SiteDataArray>(body);
+    }
+    catch(Exception e){
+        logger.LogError("Error:" + e.Message);
+        return Results.BadRequest("Request does not have a valid SiteData object");
+    }
+    
+    return Results.Ok(siteDataArr);
+
     // list 5 most common facts
     // go through all the sites and ask if the fact is found
     // return facts and sites+ whether they have the facts + percentage of sites that have the fact

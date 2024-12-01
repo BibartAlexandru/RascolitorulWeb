@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("Provide access to OpenAI LLM models in Kernel Memory to generate text")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("0.90.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.90.0+a29cae6a0a2e34f8e545db49ac0d6e007ea16113")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.90.0+a1c17c42092ed5d942ee89ef11d5b7502acab8f5")]
 [assembly: System.Reflection.AssemblyProductAttribute("LLama models connector for Kernel Memory")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Microsoft.KernelMemory.AI.LlamaSharp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("0.90.0.0")]

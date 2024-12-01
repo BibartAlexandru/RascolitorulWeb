@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyDescriptionAttribute(("Postgres(with pgvector extension) connector for Microsoft Kernel Memory, to store" +
     " and search memory using Postgres vector indexing and Postgres features."))]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("0.90.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.90.0+a29cae6a0a2e34f8e545db49ac0d6e007ea16113")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.90.0+a1c17c42092ed5d942ee89ef11d5b7502acab8f5")]
 [assembly: System.Reflection.AssemblyProductAttribute("Kernel Memory extension for Postgres")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Microsoft.KernelMemory.Postgres")]
 [assembly: System.Reflection.AssemblyVersionAttribute("0.90.0.0")]

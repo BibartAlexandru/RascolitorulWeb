@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyDescriptionAttribute(("Redis connector for Microsoft Kernel Memory, to store and search memory using Red" +
     "is vector search and other Redis features."))]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("0.90.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.90.0+a29cae6a0a2e34f8e545db49ac0d6e007ea16113")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.90.0+a1c17c42092ed5d942ee89ef11d5b7502acab8f5")]
 [assembly: System.Reflection.AssemblyProductAttribute("Redis connector for Kernel Memory")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Microsoft.KernelMemory.MemoryDb.Redis")]
 [assembly: System.Reflection.AssemblyVersionAttribute("0.90.0.0")]
