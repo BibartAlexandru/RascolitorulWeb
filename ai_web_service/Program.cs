@@ -15,6 +15,14 @@ using Microsoft.KernelMemory.Diagnostics;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "AllowOrigins",
+    policy =>
+    {
+        policy.WithOrigins("http://localhost:5173");
+    });
+});
 var app = builder.Build();
 app.UseRouting();
 
@@ -37,8 +45,8 @@ const String OLLAMA_ENDPOINT = "http://localhost:11434"; // asta e defaultu
 var config = new OllamaConfig
 {
     Endpoint = OLLAMA_ENDPOINT,
-    TextModel = new OllamaModelConfig(TEXT_MODEL_NAME), 
-    EmbeddingModel = new OllamaModelConfig(EMBEDDING_MODEL_NAME) 
+    TextModel = new OllamaModelConfig(TEXT_MODEL_NAME),
+    EmbeddingModel = new OllamaModelConfig(EMBEDDING_MODEL_NAME)
 };
 
 IKernelMemory memory = new KernelMemoryBuilder()
@@ -69,23 +77,24 @@ app.MapPost("/upload", async (HttpContext context) =>
         return Results.BadRequest("No file uploaded or incorrect form field name.");
     }
     IFormFile[] files = context.Request.Form.Files.ToArray<IFormFile>();
-    foreach(IFormFile file in files)
+    foreach (IFormFile file in files)
         logger.LogInformation("The file uploaded is: " + file.FileName);
 
     //TODO: For each search, a diff tag such that we delete all files from that serach
     string tag = "search_nr_" + DateTime.Now.Ticks;
-    
+
     var tagCollection = new TagCollection();
     tagCollection.Add(tag);
 
-    if(memory == null)
+    if (memory == null)
         return Results.StatusCode(550);
 
     foreach (IFormFile file in files)
         try
         {
             var str_builder = new StringBuilder();
-            using (var reader = new StreamReader(file.OpenReadStream())){
+            using (var reader = new StreamReader(file.OpenReadStream()))
+            {
                 while (reader.Peek() >= 0)
                     str_builder.AppendLine(reader.ReadLine());
             }
@@ -93,28 +102,32 @@ app.MapPost("/upload", async (HttpContext context) =>
             // logger.LogInformation("The text is" + text);
             await memory.ImportTextAsync(text, file.FileName, tagCollection);
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
+            logger.LogError(ex.ToString());
             return Results.StatusCode(501);
         }
     return Results.Ok();
 }).DisableAntiforgery();
 
-app.MapGet("/", async () => {
+app.MapGet("/", () =>
+{
     return "Hello!, everything is working fine! 😁👌🚀🚀🔥🔥";
 });
 
-app.MapPost("/extract_search_keywords", async (HttpContext context) => {
+app.MapPost("/extract_search_keywords", async (HttpContext context) =>
+{
     //TODO: Make error status codes clearer
     using var reader = new StreamReader(context.Request.Body);
     String? body = await reader.ReadToEndAsync();
     if (body == null)
         return Results.BadRequest("Missing body in the request");
-    try{
+    try
+    {
         HttpClient httpClient = new HttpClient();
         var data = new Dictionary<string, object>{
             {"model", TEXT_MODEL_NAME},
-            {"prompt", 
+            {"prompt",
                 "You are an AI that generates search keywords.\n"+
                 "You are given TEXT and your task is to generate phrases that can be used to search for this text on the web.\n" +
                 "The keywords MUST be separated by a new line.\n"+
@@ -122,7 +135,7 @@ app.MapPost("/extract_search_keywords", async (HttpContext context) => {
                 "The output MUST look like this:\n"+
                 "keyword1\n"+
                 "keyword2\n"+
-                "keyword3\n\n"+ 
+                "keyword3\n\n"+
                 "TEXT:\n"+
                 body
             },
@@ -131,44 +144,48 @@ app.MapPost("/extract_search_keywords", async (HttpContext context) => {
         var content = new StringContent(JsonSerializer.Serialize(data), Encoding.UTF8, "application/json");
         var response = await httpClient.PostAsync(OLLAMA_ENDPOINT + "/api/generate", content);
 
-        if(response.StatusCode != HttpStatusCode.OK)
+        if (response.StatusCode != HttpStatusCode.OK)
             return Results.StatusCode(500);
 
         var responseContent = await response.Content.ReadAsStringAsync();
-        Dictionary<string,object> responseDict = JsonSerializer.Deserialize<Dictionary<string,object>>(responseContent);
+        Dictionary<string, object> responseDict = JsonSerializer.Deserialize<Dictionary<string, object>>(responseContent);
         String ai_response = responseDict["response"].ToString();
-        if(ai_response == null)
+        if (ai_response == null)
             return Results.StatusCode(509);
         return Results.Ok(ai_response.Split("\n"));
     }
-    catch(Exception ex)
+    catch (Exception ex)
     {
         logger.LogError("Error:" + ex.Message);
         return Results.StatusCode(501);
     }
 });
 
-app.MapPost("/test", async (HttpContext context) => {
+app.MapPost("/test", async (HttpContext context) =>
+{
     using var reader = new StreamReader(context.Request.Body);
     String? body = await reader.ReadToEndAsync();
     return Results.Ok(body);
 });
 
-app.MapPost("/most_common_facts",async (HttpContext context) => {
+app.MapPost("/most_common_facts", async (HttpContext context) =>
+{
     using var reader = new StreamReader(context.Request.Body);
     String? body = await reader.ReadToEndAsync();
     if (String.IsNullOrEmpty(body))
         return Results.BadRequest("Missing/empty body in the request");
     SiteDataArray? siteDataArr = null;
-    try{
+    try
+    {
         logger.LogInformation("The body is: " + body);
         siteDataArr = JsonSerializer.Deserialize<SiteDataArray>(body);
     }
-    catch(Exception e){
+    catch (Exception e)
+    {
         logger.LogError("Error:" + e.Message);
         return Results.BadRequest("Request does not have a valid SiteData object");
     }
-    
+
     return Results.Ok(siteDataArr);
 
     // list 5 most common facts
@@ -177,4 +194,5 @@ app.MapPost("/most_common_facts",async (HttpContext context) => {
 });
 
 // initialize();
+app.UseCors("AllowOrigins");
 app.Run();

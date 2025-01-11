@@ -12,6 +12,7 @@ import "./App.css";
 import SearchSection from "./components/SearchSection/SearchSection";
 
 export const py_backend_uri = "http://localhost:5000/prajitura";
+export const ai_web_service_uri = "http://localhost:5251";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
     localStorage.getItem("isAuthenticated") === "true"

@@ -87,3 +87,26 @@ button:focus-visible {
   height: 1.7rem;
   display: inline-block;
 }
+
+.large-icon {
+  object-fit: contain;
+  height: 5rem;
+  display: inline-block;
+}
+
+/*bootstrap */
+.btn-close:hover {
+  background-color: transparent !important;
+}
+
+.no-btn {
+  padding: 0;
+  background-color: transparent;
+  color: black;
+  margin: 0;
+}
+
+.no-btn:hover {
+  background-color: transparent;
+  color: #4e4e4e;
+}
