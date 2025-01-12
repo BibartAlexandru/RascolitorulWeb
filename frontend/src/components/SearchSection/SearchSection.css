@@ -73,12 +73,9 @@
   padding: 1rem;
 }
 
-.google-websites-col h4 {
+.google-websites-col h4,
+.search-section h3 {
   margin: 0;
-}
-
-.google-websites-col .not-btn {
-  border-bottom: var(--BORDER-NORMAL) !important;
 }
 
 .google-websites-col hr {
@@ -115,4 +112,12 @@
   transform: translateY(0rem);
   transition-duration: 600ms;
   opacity: 1;
+}
+
+.error-container {
+  border: var(--BORDER-NORMAL);
+  width: 80%;
+  padding: 1rem !important;
+  margin-bottom: 1rem;
+  color: black;
 }

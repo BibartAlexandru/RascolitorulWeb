@@ -11,6 +11,7 @@ enum SearchState {
   SEARCHING_WEB,
   CRAWLING_SITE,
   PARSING_SITE_DATA,
+  FINISHED,
 }
 
 const SearchSection = () => {
@@ -28,6 +29,12 @@ const SearchSection = () => {
   const [keywords, setKeyWords] = useState<string[]>([]);
   const [searchSites, setSearchSites] = useState<[string, string][]>([]);
   const [searchSitesVisible, setSearchSitesVisible] = useState(false);
+  const [sitesDataArray, setSitesDataArray] = useState<any>([]);
+  const [mainIdeas, setMainIdeas] = useState<string[]>([]);
+  /**
+   * An identifier for the search.
+   */
+  const [searchToken, setSearchToken] = useState("");
 
   async function resetSearch() {
     // await setcurrCrawlSiteIndex("");
@@ -44,8 +51,7 @@ const SearchSection = () => {
       body: searchText,
     });
     if (resp.status !== 200) {
-      console.error("Extracting keywords failed!");
-      await setSearchState(SearchState.ERROR);
+      throw new Error("Extracting keywords failed!");
       return;
     }
     const keywords: string[] = await resp.json();
@@ -61,14 +67,15 @@ const SearchSection = () => {
       body: searchText,
     });
     if (resp.status !== 200) {
-      console.error("Google Search API failed!");
-      setSearchState(SearchState.ERROR);
-      return;
+      throw new Error("Google Search API failed!");
     }
     const googleSearchWebsites: [string, string][] = await resp.json();
     setSearchSites(googleSearchWebsites);
   }
 
+  /**
+   * Crawls subPageUri. Puts SiteData Object inside sitesDataArray
+   */
   async function crawlSite(subPageUri: string, siteUri: string) {
     const crawlResult = await fetch(`${py_backend_uri}/crawl`, {
       method: "POST",
@@ -85,22 +92,48 @@ const SearchSection = () => {
       console.error(`Crawling ${subPageUri} failed.`);
       return;
     }
-    console.log(await crawlResult.json());
+    const siteData = await crawlResult.json();
+    console.log(siteData);
+    const newSitesDataArray = [...sitesDataArray];
+    newSitesDataArray.push(siteData);
+    await setSitesDataArray(newSitesDataArray);
+  }
+
+  async function getMainIdeas() {
+    const resp = await fetch(
+      `${ai_web_service_uri}/main_ideas/${searchToken}`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          array: sitesDataArray,
+        }),
+      }
+    );
   }
 
   useEffect(() => {
     switch (searchState) {
       case SearchState.GETTING_KEYWORDS:
         (async () => {
-          await getAndSetKeywords();
-          setSearchState(SearchState.SEARCHING_WEB);
+          try {
+            await getAndSetKeywords();
+            setSearchState(SearchState.SEARCHING_WEB);
+          } catch (e) {
+            setSearchState(SearchState.ERROR);
+            console.error(e);
+          }
         })();
         break;
       case SearchState.SEARCHING_WEB:
         (async () => {
-          await getAndSetSearchSites();
-          await setcurrCrawlSiteIndex(0);
-          setSearchState(SearchState.CRAWLING_SITE);
+          try {
+            await getAndSetSearchSites();
+            await setcurrCrawlSiteIndex(0);
+            setSearchState(SearchState.CRAWLING_SITE);
+          } catch (e) {
+            setSearchState(SearchState.ERROR);
+            console.error(e);
+          }
         })();
         break;
       case SearchState.CRAWLING_SITE:
@@ -108,12 +141,24 @@ const SearchSection = () => {
           for (let i = 0; i < searchSites.length; i++) {
             const [subPageUri, siteUri] = searchSites[i];
             await setcurrCrawlSiteIndex(i);
-            await crawlSite(subPageUri, siteUri);
+            try {
+              await crawlSite(subPageUri, siteUri);
+            } catch (e) {
+              console.error(e);
+            }
           }
           setSearchState(SearchState.PARSING_SITE_DATA);
         })();
         break;
       case SearchState.PARSING_SITE_DATA:
+        (async () => {
+          try {
+            await getMainIdeas();
+            setSearchState(SearchState.FINISHED);
+          } catch (e) {
+            console.error(e);
+          }
+        })();
         break;
     }
   }, [searchState]);
@@ -168,6 +213,12 @@ const SearchSection = () => {
         </div>
       </form>
 
+      {searchState === SearchState.ERROR && (
+        <button className="error-container btn btn-danger" disabled={true}>
+          <h3>Something went wrong. Please try again.</h3>
+        </button>
+      )}
+
       <div className={currentActivityClass}>
         {searchState === SearchState.CRAWLING_SITE ? (
           <h4 className="state-text">
@@ -183,6 +234,7 @@ const SearchSection = () => {
         )}
         <div className="google-websites-col">
           <button
+            disabled={searchSites.length === 0}
             className="no-btn"
             onClick={() => {
               setSearchSitesVisible(!searchSitesVisible);
@@ -207,12 +259,6 @@ const SearchSection = () => {
           )}
         </div>
       </div>
-
-      {searchState === SearchState.ERROR && (
-        <div>
-          <h3>Something went wrong. Please try again.</h3>
-        </div>
-      )}
     </section>
   );
 };

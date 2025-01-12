@@ -6,11 +6,13 @@ using Elastic.Transport.Products.Elasticsearch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.KernelMemory;
 using Microsoft.KernelMemory.AI.Ollama;
 using Microsoft.KernelMemory.AI.OpenAI;
 using Microsoft.KernelMemory.Context;
 using Microsoft.KernelMemory.Diagnostics;
+using MongoDB.Bson;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
@@ -168,8 +170,10 @@ app.MapPost("/test", async (HttpContext context) =>
     return Results.Ok(body);
 });
 
-app.MapPost("/most_common_facts", async (HttpContext context) =>
+app.MapPost("/main_ideas/{searchToken}", async (HttpContext context) =>
 {
+    string? searchToken = context.Request.RouteValues["searchToken"] as string;
+
     using var reader = new StreamReader(context.Request.Body);
     String? body = await reader.ReadToEndAsync();
     if (String.IsNullOrEmpty(body))
@@ -177,8 +181,8 @@ app.MapPost("/most_common_facts", async (HttpContext context) =>
     SiteDataArray? siteDataArr = null;
     try
     {
-        logger.LogInformation("The body is: " + body);
         siteDataArr = JsonSerializer.Deserialize<SiteDataArray>(body);
+        // logger.LogInformation("The body is: " + JsonSerializer.Serialize<SiteDataArray>(siteDataArr));
     }
     catch (Exception e)
     {
@@ -186,7 +190,62 @@ app.MapPost("/most_common_facts", async (HttpContext context) =>
         return Results.BadRequest("Request does not have a valid SiteData object");
     }
 
-    return Results.Ok(siteDataArr);
+    var tagCollection = new TagCollection();
+    if (searchToken != null)
+        tagCollection.Add("searchToken", searchToken);
+    // siteDataArr never null here
+    MemoryFilter filter = new MemoryFilter();
+    await memory.ImportTextAsync(JsonSerializer.Serialize<SiteDataArray>(siteDataArr), null, tagCollection);
+    MemoryAnswer answer = await memory.AskAsync(
+    "You receive JSON of data from multiple sites.\n" +
+    "You will return the main ideas related to a TOPIC ONLY USING EXACT INFORMATION FROM THE WEBSITES, even if the ideas make no sense.\n" +
+    "The output MUST ONLY contain each idea separated by a new line\n" +
+    "DON'T SAY ANYTHING ELSE, EXCEPT THE OUTPUT" +
+    "The TOPIC is '" + siteDataArr.initial_search_string + "'", filter: MemoryFilters.ByTag("searchToken", searchToken)
+    );
+
+    String[] ideaStrings = answer.Result
+        .Split('\n')
+        .Select(str => str.Trim())
+        .Where(str => !string.IsNullOrEmpty(str)).ToArray();
+
+    logger.LogInformation("idStrings are: " + JsonSerializer.Serialize<String[]>(ideaStrings));
+
+    List<Idea> ideas = new List<Idea>();
+    for (int i = 0; i < ideaStrings.Length; i++)
+        ideas.Add(new Idea());
+    for (int i = 0; i < ideaStrings.Length; i++)
+        ideas[i].text = ideaStrings[i];
+
+    for (int i = 0; i < ideas.Count; i++)
+        foreach (SiteData siteData in siteDataArr.array)
+        {
+            bool wasOnSite = false;
+            foreach (SubPageData subData in siteData.sub_pages_data)
+            {
+                //TODO: Need to upload text from each subpage separately & tag it by subPage & site & searchtoken
+                //Next, do this ask based on the tag so it has less things to search through.
+                bool wasOnSubPage = false;
+                MemoryAnswer ans = await memory.AskAsync(
+                    "According to the JSON, does the sub_page_uri:" + subData.sub_page_uri +
+                    " contain or agree with the statement: " + ideaStrings[i] + " ?\n" +
+                    "ANSWER with the exact words 'true' OR 'false'!"
+                    , filter: MemoryFilters.ByTag("searchToken", searchToken));
+                logger.LogInformation(ans.Result);
+                if (ans.Result.Contains('t'))
+                    wasOnSubPage = true;
+
+                if (wasOnSubPage)
+                {
+                    ideas[i].origin_sub_page_uris.Add(subData.sub_page_uri);
+                    wasOnSite = true;
+                }
+            }
+            if (wasOnSite)
+                ideas[i].origin_site_uris.Add(siteData.site_uri);
+        }
+
+    return Results.Ok(ideas);
 
     // list 5 most common facts
     // go through all the sites and ask if the fact is found

@@ -15,6 +15,7 @@ class SiteData(BaseModel):
 
 class SiteDataArray(BaseModel):
     array: List[SiteData]
+    initial_search_string: str
 
 
 @typechecked
