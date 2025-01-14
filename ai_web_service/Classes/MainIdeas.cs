@@ -17,6 +17,13 @@ public class Idea
         origin_site_uris = new List<string>();
         origin_sub_page_uris = new List<string>();
     }
+
+    public Idea(String text)
+    {
+        origin_site_uris = new List<string>();
+        origin_sub_page_uris = new List<string>();
+        this.text = text;
+    }
 }
 
 public class MainIdeas
