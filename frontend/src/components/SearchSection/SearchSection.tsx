@@ -3,6 +3,9 @@ import "./SearchSection.css";
 import { ai_web_service_uri, py_backend_uri } from "../../App";
 import CloseButton from "react-bootstrap/CloseButton";
 import clsx from "clsx";
+import { sha256 } from "js-sha256";
+import { Idea as IdeaC } from "../../classes/MainIdeas";
+import Idea from "../Idea/Idea";
 
 enum SearchState {
   ERROR,
@@ -19,6 +22,11 @@ const SearchSection = () => {
     event.preventDefault();
     if (searchText.length == 0) return;
     await resetSearch();
+    const hasher = sha256.create();
+    hasher.update(searchText);
+    const newSearchToken = Date.now().toString() + hasher.hex();
+    await setSearchToken(newSearchToken);
+    console.log(`Search Token is : ${newSearchToken}`);
     setSearchState(SearchState.GETTING_KEYWORDS);
     return;
   }
@@ -30,7 +38,42 @@ const SearchSection = () => {
   const [searchSites, setSearchSites] = useState<[string, string][]>([]);
   const [searchSitesVisible, setSearchSitesVisible] = useState(false);
   const [sitesDataArray, setSitesDataArray] = useState<any>([]);
-  const [mainIdeas, setMainIdeas] = useState<string[]>([]);
+
+  const [mainIdeas, setMainIdeas] = useState<IdeaC[]>(
+    //   {
+    //   ideas: [
+    //     {
+    //       text: "The sky is blue",
+    //       origin_sub_page_uris: [
+    //         "www.google.com/subpage1",
+    //         "www.google.com/subpage1",
+    //         "www.google.com/subpage1",
+    //         "www.reddit.com/hi",
+    //       ],
+    //       origin_site_uris: ["www.google.com", "www.reddit.com"],
+    //     },
+    //     {
+    //       text: "The sky is blue",
+    //       origin_sub_page_uris: [
+    //         "www.reddit.com/subpage1",
+    //         "www.reddit.com/subpage1",
+    //         "www.reddit.com/subpage1",
+    //       ],
+    //       origin_site_uris: ["www.reddit.com"],
+    //     },
+    //     {
+    //       text: "The sky is blue loremasdajgdlaskfk;sf ksadkfasklfasklfashfasjdfahflahs fasdk fajskfashflasdfadfdhlasdfjldsfjlkdsf",
+    //       origin_sub_page_uris: [
+    //         "www.wikipedia.com/subpage1",
+    //         "www.wikipedia.com/subpage1",
+    //         "www.wikipedia.com/subpage1",
+    //       ],
+    //       origin_site_uris: ["www.wikipedia.com"],
+    //     },
+    //   ],
+    // }
+    []
+  );
   /**
    * An identifier for the search.
    */
@@ -40,6 +83,7 @@ const SearchSection = () => {
     // await setcurrCrawlSiteIndex("");
     // await setKeyWords([]);
     await setSearchSites([]);
+    await setMainIdeas([]);
   }
 
   async function getAndSetKeywords() {
@@ -99,7 +143,7 @@ const SearchSection = () => {
     await setSitesDataArray(newSitesDataArray);
   }
 
-  async function getMainIdeas() {
+  async function getAndSetMainIdeas() {
     const resp = await fetch(
       `${ai_web_service_uri}/main_ideas/${searchToken}`,
       {
@@ -109,6 +153,9 @@ const SearchSection = () => {
         }),
       }
     );
+    const mainIdeas: IdeaC[] = await resp.json();
+    await setMainIdeas(mainIdeas);
+    console.log("NAIN IDEAS: " + mainIdeas);
   }
 
   useEffect(() => {
@@ -153,7 +200,7 @@ const SearchSection = () => {
       case SearchState.PARSING_SITE_DATA:
         (async () => {
           try {
-            await getMainIdeas();
+            await getAndSetMainIdeas();
             setSearchState(SearchState.FINISHED);
           } catch (e) {
             console.error(e);
@@ -173,6 +220,8 @@ const SearchSection = () => {
         return "Crawling ";
       case SearchState.PARSING_SITE_DATA:
         return "Parsing the data...";
+      case SearchState.FINISHED:
+        return "Finished!";
     }
     return "Unknown State";
   }
@@ -207,9 +256,10 @@ const SearchSection = () => {
               setSearchState(SearchState.IDLE);
             }}
           />
-          {searchState !== SearchState.IDLE && (
-            <img className="large-icon" src="/loading-anim.gif" />
-          )}
+          {searchState !== SearchState.IDLE &&
+            searchState != SearchState.FINISHED && (
+              <img className="large-icon" src="/loading-anim.gif" />
+            )}
         </div>
       </form>
 
@@ -258,6 +308,19 @@ const SearchSection = () => {
             </div>
           )}
         </div>
+      </div>
+
+      <hr />
+      <div
+        className={clsx({
+          "main-ideas": true,
+          "main-ideas-hidden": mainIdeas.length === 0,
+          "main-ideas-visible": mainIdeas.length !== 0,
+        })}
+      >
+        {mainIdeas.map((idea, index) => (
+          <Idea idea={idea} key={`idea${index}`} />
+        ))}
       </div>
     </section>
   );

@@ -1,0 +1,19 @@
+.url-dropdown {
+  opacity: 0.7;
+  border: var(--BORDER-NORMAL);
+  padding: 0.25rem 1rem;
+  width: 19rem;
+  height: fit-content;
+}
+
+.sub-urls-col a {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.url-dropdown hr {
+  margin: 0;
+  width: 100%;
+}

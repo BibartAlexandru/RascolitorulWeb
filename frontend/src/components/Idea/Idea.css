@@ -1,0 +1,22 @@
+.idea {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.agreeing-sites-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.idea h5 {
+  margin: 0;
+}

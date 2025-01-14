@@ -100,13 +100,15 @@
   margin-left: 1rem;
 }
 
-.search-section .current-activity.hidden {
+.search-section .current-activity.hidden,
+.main-activity-hidden {
   height: 0;
   transform: translateY(-4rem);
   opacity: 0;
 }
 
-.search-section .current-activity.displayed {
+.search-section .current-activity.displayed,
+.main-activity-displayed {
   height: fit-content;
   transition-property: transform;
   transform: translateY(0rem);
@@ -120,4 +122,20 @@
   padding: 1rem !important;
   margin-bottom: 1rem;
   color: black;
+}
+
+.main-ideas {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 80%;
+  color: rgb(74, 74, 74);
+}
+
+.search-section hr {
+  margin: 0;
+  /* height: 2px;
+  color: black; */
+  width: 80%;
+  margin: 1rem 0rem;
 }

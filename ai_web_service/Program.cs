@@ -250,7 +250,7 @@ app.MapPost("/main_ideas/{searchToken}", async (HttpContext context) =>
             + "Grass is green\n"
             + "...",
              filter: MemoryFilters.ByTag("searchToken", searchToken).ByTag("subPageUri", subPage.sub_page_uri)));
-            List<String> mainIdeas = ans.Result.Split('\n').Select(l => l.Trim()).Where(l => l.Length != 0 && !l.Equals("INFO NOT FOUND")).ToList();
+            List<String> mainIdeas = ans.Result.Split('\n').Select(l => l.Trim()).Where(l => l.Length != 0 && !l.Contains("INFO NOT FOUND")).ToList();
             if (!ans.NoResult)
                 foreach (String ideaString in mainIdeas)
                 {
@@ -271,8 +271,15 @@ app.MapPost("/main_ideas/{searchToken}", async (HttpContext context) =>
 
     if (ideas.Count > 10)
     {
-        ReduceMainIdeas(ideas);
-        AddAgreeingSiteUris(ideas, siteDataArr, searchToken);
+        try
+        {
+            ReduceMainIdeas(ideas);
+            AddAgreeingSiteUris(ideas, siteDataArr, searchToken);
+        }
+        catch (Exception e)
+        {
+            logger.LogError("Error at reducing ideas." + e);
+        }
     }
     return Results.Ok(ideas);
 
@@ -283,14 +290,19 @@ app.MapPost("/main_ideas/{searchToken}", async (HttpContext context) =>
 
 async void ReduceMainIdeas(List<Idea> ideas)
 {
-    try
-    {
-        List<Idea> newIdeas = (await askOllama("Give my ideas ")).Split("\n").Select(s => new Idea(s)).ToList();
-    }
-    catch (Exception e)
-    {
 
-    }
+    List<Idea> newIdeas = (await askOllama(
+    "You are a bot and will follow these rules\n" +
+    "You are given initial ideas on separate lines and will give me a list of less then 10 resulting ideas from those initial ones\n"
+    + "You obtain the resulting ideas by generalising the initial ones as little as possible\n"
+    + "You ARE ONLY ALLOWED to use the information in the ideas themselves\n"
+    + "The output MUST contain the ideas separated by a new line\n"
+    + "The output MUST look like the following example:\n\n"
+    + "The grass is green\n"
+    + "The sky is blue\n"
+    + "...\n"
+    + "IDEAS: " + String.Join("\n", ideas.Select(i => i.text).ToArray()))).Split("\n").Select(s => new Idea(s)).ToList();
+    ideas = newIdeas;
 }
 
 async void AddAgreeingSiteUris(List<Idea> ideas, SiteDataArray siteDataArr, String searchToken)

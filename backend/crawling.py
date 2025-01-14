@@ -51,6 +51,7 @@ def get_site_data(site_uri: str,site_base_uri:str ,query_keywords: List[str], nr
     uris_crawled = set()
     uris_to_crawl = [site_uri]
     while nr_uris_to_crawl > 0 and len(uris_to_crawl) > 0:
+        print(len(uris_to_crawl))
         current_sub_page = uris_to_crawl.pop(0)
         uris_crawled.add(current_sub_page)
         nr_uris_to_crawl -= 1
