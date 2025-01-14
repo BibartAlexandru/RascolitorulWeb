@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile</title>
+    <style>
+        body {
+            font-size: 16px;
+            background-color: whitesmoke;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #5F9EA0;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px 10px 0 0;
+        }
+        .content {
+            margin: 20px auto;
+            width: 50%;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h3, h4, h5 {
+            color: #333;
+        }
+        .section {
+            margin-top: 20px;
+        }
+        ul {
+            padding: 0;
+            list-style-type: none;
+        }
+        li {
+            padding: 10px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        input[type="url"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+        button {
+            padding: 10px;
+            border: none;
+            background-color: #5F9EA0;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4a837a;
+        }
+        .message {
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h2>Profile</h2>
+    </div>
+    <div class="content">
+        <h3>Welcome, {{ username }}!</h3>
+        <div class="section">
+            <h4>Search History:</h4>
+            {% if searches %}
+                <ul>
+                    {% for search in searches %}
+                        <li><strong>{{ search.text }}</strong> (searched on {{ search.timestamp }})</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="message">No search history found.</p>
+            {% endif %}
+        </div>
+
+        <div class="section">
+            <h4>Blocked Websites:</h4>
+            <form method="post" action="/prajitura/profile/block-site">
+                <input type="url" id="blocked-site" name="blocked_site" placeholder="Enter website URL (e.g., https://example.com)" required>
+                <button type="submit">Block</button>
+            </form>
+            <div class="site-list">
+                <h5>Blocked Websites List:</h5>
+                {% if blocked_sites %}
+                    <ul>
+                        {% for site in blocked_sites %}
+                            <li>{{ site }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="message">No websites are blocked yet.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
