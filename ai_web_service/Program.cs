@@ -119,7 +119,10 @@ app.MapGet("/", () =>
 
 async Task<String> askOllama(String prompt)
 {
-    HttpClient httpClient = new HttpClient();
+    HttpClient httpClient = new HttpClient
+    {
+        Timeout = TimeSpan.FromMinutes(10)
+    };
     var data = new Dictionary<string, object>{
             {"model", TEXT_MODEL_NAME},
             {"prompt",prompt},
@@ -195,7 +198,7 @@ app.MapPost("/test", async (HttpContext context) =>
 app.MapPost("/main_ideas/{searchToken}", async (HttpContext context) =>
 {
     string? searchToken = context.Request.RouteValues["searchToken"] as string;
-
+    logger.LogInformation("SeachToken:" + searchToken);
     using var reader = new StreamReader(context.Request.Body);
     String? body = await reader.ReadToEndAsync();
     if (String.IsNullOrEmpty(body))
@@ -274,13 +277,14 @@ app.MapPost("/main_ideas/{searchToken}", async (HttpContext context) =>
         try
         {
             ReduceMainIdeas(ideas);
-            AddAgreeingSiteUris(ideas, siteDataArr, searchToken);
         }
         catch (Exception e)
         {
             logger.LogError("Error at reducing ideas." + e);
         }
     }
+    AddAgreeingSiteUris(ideas, siteDataArr, searchToken);
+    //TODO: Order facts by Frequency
     return Results.Ok(ideas);
 
     // list 5 most common facts
@@ -295,6 +299,7 @@ async void ReduceMainIdeas(List<Idea> ideas)
     "You are a bot and will follow these rules\n" +
     "You are given initial ideas on separate lines and will give me a list of less then 10 resulting ideas from those initial ones\n"
     + "You obtain the resulting ideas by generalising the initial ones as little as possible\n"
+    + "If you can't combine more ideas into one, you can alternatively discard them until you have 10\n"
     + "You ARE ONLY ALLOWED to use the information in the ideas themselves\n"
     + "The output MUST contain the ideas separated by a new line\n"
     + "The output MUST look like the following example:\n\n"
@@ -318,11 +323,11 @@ async void AddAgreeingSiteUris(List<Idea> ideas, SiteDataArray siteDataArr, Stri
                 bool wasOnSubPage = false;
                 MemoryAnswer ans = await memory.AskAsync(
                     "You will obey rules 1) and 2)\n." +
-                    "1) ANSWER with the exact words 'true' OR 'false' if the information I give you is valid.\n" +
+                    "1) ANSWER with the exact words 'true' OR 'false' if the information I give you is valid or is present\n" +
                     "2) If the INFORMATION contains a question, do NOT answer it. Instead answer to rule 1).\n" +
                     "INFORMATION: " + ideas[i].text + "\n"
                     , filter: MemoryFilters.ByTag("searchToken", searchToken).ByTag("subPageUri", subPage.sub_page_uri));
-                logger.LogInformation(ideas[i].text + " | " + ans.Result);
+                // logger.LogInformation(ideas[i].text + " | " + ans.Result);
                 if (ans.Result.ToLower().Contains('t'))
                     wasOnSubPage = true;
 

@@ -45,7 +45,7 @@ def search_results():
     """
     # data is byte arr
     user_query = request.get_data().decode()
-    NUM_RESULTS = 10
+    NUM_RESULTS = 5 # TODO: CHANGE
 
     google_api_req_params = {
         "key": os.getenv("GOOGLE_SEARCH_API_KEY"),
@@ -91,7 +91,7 @@ def crawl_sub_page():
     site_uri = req_body['site_uri']
     sub_page_uri = req_body['sub_page_uri']
     query_keywords = req_body['query_keywords']
-    res = get_site_data(sub_page_uri, site_uri, query_keywords,10)
+    res = get_site_data(sub_page_uri, site_uri, query_keywords,1)
     return res.model_dump_json(),200
 
 # REQ BODY: text/plain
@@ -99,7 +99,7 @@ def crawl_sub_page():
 def search():
     # data is byte arr
     user_query = request.get_data().decode()
-    NUM_RESULTS = 10
+    NUM_RESULTS = 5 # max 10 TODO: modifica, baga param
 
     google_api_req_params = {
         "key": os.getenv("GOOGLE_SEARCH_API_KEY"),

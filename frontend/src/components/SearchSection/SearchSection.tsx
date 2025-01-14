@@ -7,6 +7,8 @@ import { sha256 } from "js-sha256";
 import { Idea as IdeaC } from "../../classes/MainIdeas";
 import Idea from "../Idea/Idea";
 
+//Perhaps display Sites and their ideas instead of ideas and which sites agree
+//TODO: Add bottom bar
 enum SearchState {
   ERROR,
   IDLE,
@@ -138,12 +140,15 @@ const SearchSection = () => {
     }
     const siteData = await crawlResult.json();
     console.log(siteData);
-    const newSitesDataArray = [...sitesDataArray];
-    newSitesDataArray.push(siteData);
-    await setSitesDataArray(newSitesDataArray);
+    await setSitesDataArray((prevSites) => [...prevSites, siteData]);
   }
 
   async function getAndSetMainIdeas() {
+    console.log(
+      JSON.stringify({
+        array: sitesDataArray,
+      })
+    );
     const resp = await fetch(
       `${ai_web_service_uri}/main_ideas/${searchToken}`,
       {
