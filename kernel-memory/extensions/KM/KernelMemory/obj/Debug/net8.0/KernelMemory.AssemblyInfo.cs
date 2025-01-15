@@ -17,7 +17,7 @@ using System.Reflection;
     " and query any data and documents, using LLM and natural language, tracking sour" +
     "ces and showing citations."))]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("0.90.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.90.0+a1c17c42092ed5d942ee89ef11d5b7502acab8f5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.90.0+98ff0721b27fa8a9d77dcc36200fdb348a255192")]
 [assembly: System.Reflection.AssemblyProductAttribute("Kernel Memory library, including all extensions")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Microsoft.KernelMemory.All")]
 [assembly: System.Reflection.AssemblyVersionAttribute("0.90.0.0")]

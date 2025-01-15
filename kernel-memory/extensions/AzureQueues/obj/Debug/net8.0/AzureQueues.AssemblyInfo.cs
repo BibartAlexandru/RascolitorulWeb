@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyDescriptionAttribute(("Azure Queue Storage connector for Microsoft Kernel Memory, to run asynchronous pi" +
     "pelines via Azure Queue Storage queues."))]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("0.90.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.90.0+a1c17c42092ed5d942ee89ef11d5b7502acab8f5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.90.0+8392d95564c38bb47aa470fb33493fe2a51bb50a")]
 [assembly: System.Reflection.AssemblyProductAttribute("Azure Queue Storage connector for Kernel Memory pipelines")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Microsoft.KernelMemory.Orchestration.AzureQueues")]
 [assembly: System.Reflection.AssemblyVersionAttribute("0.90.0.0")]

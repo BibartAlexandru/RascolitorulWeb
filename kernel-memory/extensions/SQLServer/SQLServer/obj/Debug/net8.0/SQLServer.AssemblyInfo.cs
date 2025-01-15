@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyDescriptionAttribute(("MS SQLServer connector for Microsoft Kernel Memory, to store and search memory us" +
     "ing MSSQL."))]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("0.90.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.90.0+a1c17c42092ed5d942ee89ef11d5b7502acab8f5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.90.0+8392d95564c38bb47aa470fb33493fe2a51bb50a")]
 [assembly: System.Reflection.AssemblyProductAttribute("MS SQLServer connector for Kernel Memory")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Microsoft.KernelMemory.MemoryDb.SQLServer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("0.90.0.0")]

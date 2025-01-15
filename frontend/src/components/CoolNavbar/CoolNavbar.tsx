@@ -21,8 +21,8 @@ const CoolNavbar = () => {
             <Nav.Link as={Link} to={"/index"}>
               Home
             </Nav.Link>
-            <Nav.Link as={Link} to={"/signup"}>
-              Signup
+            <Nav.Link as={Link} to={"/profile"}>
+              Profile
             </Nav.Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="/action/3.1">Action</NavDropdown.Item>

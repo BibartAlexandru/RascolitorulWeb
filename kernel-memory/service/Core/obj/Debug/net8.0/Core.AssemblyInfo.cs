@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyDescriptionAttribute(("The package contains the the core logic and abstractions of Kernel Memory, not in" +
     "cluding extensions."))]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("0.90.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.90.0+a1c17c42092ed5d942ee89ef11d5b7502acab8f5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.90.0+8392d95564c38bb47aa470fb33493fe2a51bb50a")]
 [assembly: System.Reflection.AssemblyProductAttribute("Kernel Memory core library")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Microsoft.KernelMemory.Core")]
 [assembly: System.Reflection.AssemblyVersionAttribute("0.90.0.0")]

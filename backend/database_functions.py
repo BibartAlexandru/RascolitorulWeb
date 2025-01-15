@@ -1,6 +1,7 @@
 import sqlite3
 
 def init_db():
+    print('Initializing database...')
     conn = sqlite3.connect('signup.db')
     cursor = conn.cursor()
     cursor.execute('''CREATE TABLE IF NOT EXISTS users 
@@ -28,3 +29,11 @@ def init_db():
 
     conn.commit()
     conn.close()
+
+def get_db():
+    conn = sqlite3.connect('signup.db')
+    conn.row_factory = sqlite3.Row
+    return conn
+
+if __name__ == "__main__":
+    init_db()

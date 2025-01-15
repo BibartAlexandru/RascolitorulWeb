@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyDescriptionAttribute(("Azure Blob Storage adapter allowing Kernel Memory to upload documents and maintai" +
     "n their state in Azure Blobs"))]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("0.90.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.90.0+a1c17c42092ed5d942ee89ef11d5b7502acab8f5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.90.0+8392d95564c38bb47aa470fb33493fe2a51bb50a")]
 [assembly: System.Reflection.AssemblyProductAttribute("Azure Blob Storage for Kernel Memory document storage")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Microsoft.KernelMemory.DocumentStorage.AzureBlobs")]
 [assembly: System.Reflection.AssemblyVersionAttribute("0.90.0.0")]

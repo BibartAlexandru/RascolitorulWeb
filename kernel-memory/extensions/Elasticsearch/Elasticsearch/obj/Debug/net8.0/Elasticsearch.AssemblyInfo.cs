@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyDescriptionAttribute(("Elasticsearch connector for Microsoft Kernel Memory, to store and search memory u" +
     "sing Elasticsearch vector search and other Elasticsearch features."))]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("0.90.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.90.0+a1c17c42092ed5d942ee89ef11d5b7502acab8f5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.90.0+8392d95564c38bb47aa470fb33493fe2a51bb50a")]
 [assembly: System.Reflection.AssemblyProductAttribute("Elasticsearch connector for Kernel Memory")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Microsoft.KernelMemory.MemoryDb.Elasticsearch")]
 [assembly: System.Reflection.AssemblyVersionAttribute("0.90.0.0")]

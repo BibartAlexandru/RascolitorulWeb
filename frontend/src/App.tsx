@@ -10,6 +10,7 @@ import CoolNavbar from "./components/CoolNavbar/CoolNavbar";
 import Signup from "./components/Signup/Signup";
 import "./App.css";
 import SearchSection from "./components/SearchSection/SearchSection";
+import Profile from "./components/Profile/Profile";
 
 export const py_backend_uri = "http://localhost:5000/prajitura";
 export const ai_web_service_uri = "http://localhost:5251";
@@ -29,6 +30,7 @@ function App() {
           path="/signup"
           element={<Signup setIsAuthenticated={setIsAuthenticated} />}
         />
+        <Route path="/profile" element={<Profile />} />
         <Route
           path="/index"
           element={

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import './Profile.css';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./Profile.css";
 
 interface SearchHistory {
   search_text: string;
@@ -12,27 +12,32 @@ interface BlockedSite {
 }
 
 const Profile: React.FC = () => {
-  const [userName, setUserName] = useState<string>('');
+  const [userName, setUserName] = useState<string>("");
   const [searchHistory, setSearchHistory] = useState<SearchHistory[]>([]);
   const [blockedSites, setBlockedSites] = useState<BlockedSite[]>([]);
-  const [newBlockedSite, setNewBlockedSite] = useState<string>('');
-  const [error, setError] = useState<string>('');
+  const [newBlockedSite, setNewBlockedSite] = useState<string>("");
+  const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true); // Loading state
 
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        const [userResponse, historyResponse, blockedSitesResponse] = await Promise.all([
-          axios.get('/prajitura/profile'),
-          axios.get('/prajitura/profile/search-history'),
-          axios.get('/prajitura/profile/blocked-sites') // Request blocked sites data
+        const [
+          userResponse,
+          historyResponse,
+          // ,blockedSitesResponse
+        ] = await Promise.all([
+          axios.get("/prajitura/profile"),
+          axios.get("/prajitura/profile/search-history"),
+          // axios.get("/prajitura/profile/blocked-sites"), // TODO: ENPOINTU ASTA LIPSESTE!
         ]);
 
+        console.log(historyResponse); // Raspunsu e ceva ciudat
         setUserName(userResponse.data.username);
-        setSearchHistory(historyResponse.data);
-        setBlockedSites(blockedSitesResponse.data);
+        // setSearchHistory(historyResponse.data);
+        // setBlockedSites(blockedSitesResponse.data);
       } catch (err) {
-        setError('Failed to fetch profile data');
+        setError("Failed to fetch profile data");
         console.error(err);
       } finally {
         setLoading(false); // Stop loading once data is fetched
@@ -42,14 +47,18 @@ const Profile: React.FC = () => {
     fetchProfileData();
   }, []);
 
+  useEffect(() => {
+    console.log(searchHistory);
+  }, [searchHistory]);
+
   const handleBlockSite = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-      await axios.post('/prajitura/profile/block-site', { site_url: newBlockedSite });
-      setBlockedSites((prev) => [...prev, { site_url: newBlockedSite }]);
-      setNewBlockedSite('');
-
-
+    await axios.post("/prajitura/profile/block-site", {
+      site_url: newBlockedSite,
+    });
+    setBlockedSites((prev) => [...prev, { site_url: newBlockedSite }]);
+    setNewBlockedSite("");
   };
 
   if (loading) {
@@ -73,7 +82,7 @@ const Profile: React.FC = () => {
           <ul>
             {searchHistory.map((search, index) => (
               <li key={index}>
-                <strong>{search.search_text}</strong> (searched on{' '}
+                <strong>{search.search_text}</strong> (searched on{" "}
                 {new Date(search.timestamp).toLocaleString()})
               </li>
             ))}
