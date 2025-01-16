@@ -40,6 +40,8 @@ const SearchSection = () => {
   const [searchSites, setSearchSites] = useState<[string, string][]>([]);
   const [searchSitesVisible, setSearchSitesVisible] = useState(false);
   const [sitesDataArray, setSitesDataArray] = useState<any>([]);
+  const [nrUrisPerCrawl, setNrUrisPerCrawl] = useState(1);
+  const [nrGoogleSearchResults, setNrGoogleSearchResults] = useState(5);
 
   const [mainIdeas, setMainIdeas] = useState<IdeaC[]>(
     //   {
@@ -108,10 +110,13 @@ const SearchSection = () => {
   }
 
   async function getAndSetSearchSites() {
-    const resp = await fetch(`${py_backend_uri}/google_search_websites`, {
-      method: "POST",
-      body: searchText,
-    });
+    const resp = await fetch(
+      `${py_backend_uri}/google_search_websites/${nrGoogleSearchResults}`,
+      {
+        method: "POST",
+        body: searchText,
+      }
+    );
     if (resp.status !== 200) {
       throw new Error("Google Search API failed!");
     }
@@ -123,24 +128,27 @@ const SearchSection = () => {
    * Crawls subPageUri. Puts SiteData Object inside sitesDataArray
    */
   async function crawlSite(subPageUri: string, siteUri: string) {
-    const crawlResult = await fetch(`${py_backend_uri}/crawl`, {
-      method: "POST",
-      body: JSON.stringify({
-        site_uri: siteUri,
-        sub_page_uri: subPageUri,
-        query_keywords: keywords,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const crawlResult = await fetch(
+      `${py_backend_uri}/crawl/${nrUrisPerCrawl}`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          site_uri: siteUri,
+          sub_page_uri: subPageUri,
+          query_keywords: keywords,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     if (crawlResult.status !== 200) {
       console.error(`Crawling ${subPageUri} failed.`);
       return;
     }
     const siteData = await crawlResult.json();
     console.log(siteData);
-    await setSitesDataArray((prevSites) => [...prevSites, siteData]);
+    await setSitesDataArray((prevSites) => [...prevSites, ...siteData]);
   }
 
   async function getAndSetMainIdeas() {
@@ -267,6 +275,34 @@ const SearchSection = () => {
             )}
         </div>
       </form>
+      <div className="settings-col">
+        <div className="input-row">
+          <h5>No. of Google Results</h5>
+          <input
+            min={1}
+            max={10}
+            name="nr-google-results"
+            type="number"
+            value={nrGoogleSearchResults}
+            onChange={(event) => {
+              setNrGoogleSearchResults(Number(event.currentTarget.value));
+            }}
+          />
+        </div>
+        <div className="input-row">
+          <h5>No. of URIs per site</h5>
+          <input
+            min={1}
+            max={100}
+            name="nr-uris-input"
+            type="number"
+            value={nrUrisPerCrawl}
+            onChange={(event) => {
+              setNrUrisPerCrawl(Number(event.currentTarget.value));
+            }}
+          />
+        </div>
+      </div>
 
       {searchState === SearchState.ERROR && (
         <button className="error-container btn btn-danger" disabled={true}>
