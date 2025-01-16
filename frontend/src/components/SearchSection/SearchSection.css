@@ -176,3 +176,18 @@
 .settings-col input:focus {
   outline: 0;
 }
+
+.settings-col fieldset {
+  display: flex;
+  flex-direction: column;
+}
+
+.settings-col fieldset .input-row {
+  justify-content: left;
+  width: fit-content;
+  height: fit-content;
+}
+
+.settings-col fieldset input {
+  width: fit-content;
+}

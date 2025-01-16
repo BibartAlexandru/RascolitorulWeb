@@ -1,8 +1,9 @@
 from typing import List
-from urllib.parse import urljoin
+from urllib.parse import urljoin,urlsplit
 from bs4 import BeautifulSoup
 from pydantic import BaseModel
 from typeguard import typechecked
+from functional import seq
 import requests
 
 class SubPageData(BaseModel):
@@ -17,10 +18,18 @@ class SiteDataArray(BaseModel):
     array: List[SiteData]
     initial_search_string: str
 
+@typechecked
+def base_url(url: str) -> str:
+    split = urlsplit(url)
+    return split.scheme + "://" + split.netloc
 
 @typechecked
-def get_site_data(site_uri: str,site_base_uri:str ,query_keywords: List[str], nr_uris_to_crawl: int = 10) -> SiteData:
-    
+def get_site_data(sub_page_uri: str, site_uri:str ,query_keywords: List[str], max_uris_left: int = 10) -> List[SiteData]:
+    """
+    Returns a list of SiteData. Each SiteData for a different site, in case there are urls to another site. Otherwise, 
+    an array with 1 SiteData object.
+    """
+
     @typechecked
     def get_relevant_text(sub_page_uri: str) -> SubPageData:
         res = requests.get(sub_page_uri)
@@ -47,22 +56,38 @@ def get_site_data(site_uri: str,site_base_uri:str ,query_keywords: List[str], nr
         relevant_links = [urljoin(site_uri,l) for l in links if any(keyword in l for keyword in query_keywords)]
         return relevant_links
 
-    data: List[SubPageData] = []
+    sub_pages_data: List[SubPageData] = []
     uris_crawled = set()
-    uris_to_crawl = [site_uri]
-    while nr_uris_to_crawl > 0 and len(uris_to_crawl) > 0:
+    uris_to_crawl = [sub_page_uri]
+    while max_uris_left > 0 and len(uris_to_crawl) > 0:
         print(len(uris_to_crawl))
         current_sub_page = uris_to_crawl.pop(0)
         uris_crawled.add(current_sub_page)
-        nr_uris_to_crawl -= 1
+        max_uris_left -= 1
         # print(f'Crawling {current_site}')
         try:
-            data.append(get_relevant_text(current_sub_page))
+            sub_pages_data.append(get_relevant_text(current_sub_page))
             relevant_links = get_relevant_links(current_sub_page)
             for link in relevant_links:
                 if link not in uris_crawled:
                     uris_to_crawl.append(link)
         except Exception as e:
             print(e)
+    
+    # Gasesc base_urlurile siteurilor vizitate 
 
-    return SiteData(sub_pages_data=data,site_uri=site_base_uri)
+    sub_pages = seq(sub_pages_data).map(lambda obj : obj.sub_page_uri).to_list()
+    site_uris = set()
+    for sub_page in sub_pages:
+        if base_url(sub_page) not in site_uris:
+            site_uris.add(base_url(sub_page))
+    
+    for site_uri in site_uris:
+        print(site_uri)
+
+    site_datas = [
+        SiteData(sub_pages_data=[sp for sp in sub_pages_data if base_url(sp.sub_page_uri) == site],site_uri=site)
+        for site in site_uris
+    ]
+
+    return site_datas

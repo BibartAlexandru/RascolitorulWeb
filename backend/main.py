@@ -41,10 +41,10 @@ def say_hi():
     return jsonify({"message": "HI!"}), 200
 
 # REQ BODY: text/plain
-@app.post('/prajitura/google_search_websites')
-def search_results():
+@app.post('/prajitura/google_search_websites/<int:nr_results>')
+def search_results(nr_results):
     """
-    Takes text/plain as input.
+    Takes text/plain as input. nr_results is how many websites the google API should return(max 10, min 1)
     Returns a List of Tuples(str,str).
     The result is of the form (sub_page_uri, site_uri) where sub_page_uri is among the results
     from searching the input string on the internet.
@@ -52,13 +52,12 @@ def search_results():
     """
     # data is byte arr
     user_query = request.get_data().decode()
-    NUM_RESULTS = 5 # TODO: CHANGE
 
     google_api_req_params = {
         "key": os.getenv("GOOGLE_SEARCH_API_KEY"),
         "q": user_query,
         "cx": os.getenv('GOOGLE_SEARCH_ENGINE_ID'),
-        "num": NUM_RESULTS
+        "num": nr_results
     }
 
     response = requests.get('https://www.googleapis.com/customsearch/v1', params=google_api_req_params)
@@ -67,8 +66,8 @@ def search_results():
         return jsonify({"msg:":"Error, Custom Search call failed"}),416  
     return jsonify(uris.to_list())
 
-@app.post('/prajitura/crawl')
-def crawl_sub_page():
+@app.post('/prajitura/crawl/<int:nr_total_crawled>')
+def crawl_sub_page(nr_total_crawled):
     """
     Req body:
     {
@@ -77,18 +76,20 @@ def crawl_sub_page():
         query_keywords: List[str]
     }
 
-    Response: 
+    Response: List[SiteData]
+
+    SiteData
     {
         sub_pages_data: List[SubPageData]
         site_uri: str,
     }
-    where:
-        SubPageData{
-            text_lines: List[str]
-            sub_page_uri: str
-        }
 
-    Returns paragraphs, h1-h6s of text from 10 neighbouring websites starting from sub_page_uri.
+    SubPageData{
+        text_lines: List[str]
+        sub_page_uri: str
+    }
+
+    text_lines is paragraphs, h1-h6s of text from neighbouring websites starting from sub_page_uri.
     Only returns paragraphs,.. that contained 1 ore more keywords.
     Neighbouring means a link to them was present on a uri visited prior.
     Websites are traversed in a BFS manner.
@@ -98,8 +99,12 @@ def crawl_sub_page():
     site_uri = req_body['site_uri']
     sub_page_uri = req_body['sub_page_uri']
     query_keywords = req_body['query_keywords']
-    res = get_site_data(sub_page_uri, site_uri, query_keywords,1)
-    return res.model_dump_json(),200
+    res = get_site_data(sub_page_uri, site_uri, query_keywords,nr_total_crawled)
+    json_res = '['
+    for site_data in res:
+        json_res += site_data.model_dump_json()
+    json_res += ']'
+    return json_res,200
 
 # OBSOLETE ENDPOINT
 # # REQ BODY: text/plain

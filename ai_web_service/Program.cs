@@ -272,24 +272,20 @@ app.MapPost("/main_ideas/{searchToken}", async (HttpContext context) =>
     logger.LogInformation("idea Strings are: " + JsonSerializer.Serialize(ideas.Select(i => i.text).ToArray()));
     // AddAgreeingSiteUris(ideas,siteDataArr,searchToken);
 
-    if (ideas.Count > 10)
-    {
-        try
-        {
-            ReduceMainIdeas(ideas);
-        }
-        catch (Exception e)
-        {
-            logger.LogError("Error at reducing ideas." + e);
-        }
-    }
+    // if (ideas.Count > 10)
+    // {
+    //     try
+    //     {
+    //         ReduceMainIdeas(ideas);
+    //     }
+    //     catch (Exception e)
+    //     {
+    //         logger.LogError("Error at reducing ideas." + e);
+    //     }
+    // }
     AddAgreeingSiteUris(ideas, siteDataArr, searchToken);
     //TODO: Order facts by Frequency
     return Results.Ok(ideas);
-
-    // list 5 most common facts
-    // go through all the sites and ask if the fact is found
-    // return facts and sites+ whether they have the facts + percentage of sites that have the fact
 });
 
 async void ReduceMainIdeas(List<Idea> ideas)

@@ -19,6 +19,11 @@ enum SearchState {
   FINISHED,
 }
 
+enum ResultsDisplayMode {
+  IDEAS,
+  SITES,
+}
+
 const SearchSection = () => {
   async function onFormSubmission(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -42,6 +47,9 @@ const SearchSection = () => {
   const [sitesDataArray, setSitesDataArray] = useState<any>([]);
   const [nrUrisPerCrawl, setNrUrisPerCrawl] = useState(1);
   const [nrGoogleSearchResults, setNrGoogleSearchResults] = useState(5);
+  const [resultsDisplayMode, setResultsDisplayMode] = useState(
+    ResultsDisplayMode.SITES
+  );
 
   const [mainIdeas, setMainIdeas] = useState<IdeaC[]>(
     //   {
@@ -82,6 +90,19 @@ const SearchSection = () => {
    * An identifier for the search.
    */
   const [searchToken, setSearchToken] = useState("");
+
+  function onResultDisplayModeChange(e: React.ChangeEvent<HTMLInputElement>) {
+    switch (e.currentTarget.value) {
+      case "sites":
+        setResultsDisplayMode(ResultsDisplayMode.SITES);
+        break;
+      case "ideas":
+        setResultsDisplayMode(ResultsDisplayMode.IDEAS);
+        break;
+      default:
+        break;
+    }
+  }
 
   async function resetSearch() {
     // await setcurrCrawlSiteIndex("");
@@ -301,6 +322,39 @@ const SearchSection = () => {
               setNrUrisPerCrawl(Number(event.currentTarget.value));
             }}
           />
+        </div>
+        <div className="input-row">
+          <h5>Results Display Mode</h5>
+          <fieldset>
+            <div className="form-check">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                value="sites"
+                name="results-display-mode"
+                id="sites"
+                onChange={onResultDisplayModeChange}
+                checked={resultsDisplayMode === ResultsDisplayMode.SITES}
+              />
+              <label htmlFor="sites" className="form-check-label">
+                Sites
+              </label>
+            </div>
+            <div className="form-check">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                value="ideas"
+                id="ideas"
+                name="results-display-mode"
+                onChange={onResultDisplayModeChange}
+                checked={resultsDisplayMode === ResultsDisplayMode.IDEAS}
+              />
+              <label htmlFor="ideas" className="form-check-label">
+                Ideas
+              </label>
+            </div>
+          </fieldset>
         </div>
       </div>
 
