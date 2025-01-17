@@ -1,5 +1,3 @@
-# Rascolitorul Web
-
 ## Scopul apicatiei
 
 - Poti cauta cele mai comune/frecvent intalnite informatii despre un anumit subiect.
@@ -24,7 +22,7 @@
 
  ### Rulare
  - Fork la repo
- Din radacina proiectului.
+ - Din radacina proiectului.
  1. Pentru web service-ul in C#
     - cd ai_web_service/
     - ollama serve
@@ -33,5 +31,5 @@
     - cd backend/
     - flask --app main.py run
  3. Pentru frontend
- 4. - cd frontend/
+    - cd frontend/
     - npm run dev 
