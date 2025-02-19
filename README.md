@@ -1,12 +1,6 @@
 ## Scopul apicatiei
 
 - Poti cauta cele mai comune/frecvent intalnite informatii despre un anumit subiect.
-- Poate bagam si un ranking genul:
-
-        Pentru cautarea "pisici"
-        - 80% din surse afirma ca pisicile sunt animale de companie
-        - 19% din surse afirma ca pisicile sunt animale salbatice
-        - 1% din surse afirma ca pisicile sunt bacterii
 ## Tech Stack-ul folosit
 
 - Frontendul este scris in Typescript + React + ReactBootstrap pentru styling
